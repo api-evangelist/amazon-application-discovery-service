@@ -1,0 +1,33 @@
+{
+  "type": "object",
+  "description": "BatchDeleteAgentsRequest schema from Amazon Application Discovery Service API",
+  "properties": {
+    "deleteAgents": {
+      "type": "array",
+      "description": "The list of agents to delete.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "agentId": {
+            "type": "string",
+            "description": "The ID of the agent you want to delete.",
+            "example": "d-agent-500123"
+          },
+          "force": {
+            "type": "boolean",
+            "description": "You can use the force parameter to delete agents that do not respond to API actions.",
+            "example": false
+          }
+        },
+        "required": [
+          "agentId"
+        ]
+      }
+    }
+  },
+  "required": [
+    "deleteAgents"
+  ],
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-batch-delete-agents-request-structure.json"
+}

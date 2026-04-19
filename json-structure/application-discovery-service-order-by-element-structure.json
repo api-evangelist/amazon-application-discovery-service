@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "description": "OrderByElement schema from Amazon Application Discovery Service API",
+  "properties": {
+    "fieldName": {
+      "type": "string",
+      "description": "The field on which to order.",
+      "example": "hostName"
+    },
+    "sortOrder": {
+      "type": "string",
+      "description": "Ordering direction.",
+      "enum": [
+        "ASC",
+        "DESC"
+      ],
+      "example": "ASC"
+    }
+  },
+  "required": [
+    "fieldName"
+  ],
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-order-by-element-structure.json"
+}

@@ -1,0 +1,53 @@
+{
+  "type": "object",
+  "description": "DescribeTagsResponse schema from Amazon Application Discovery Service API",
+  "properties": {
+    "tags": {
+      "type": "array",
+      "description": "Depending on the input, this is a list of configuration items tagged with a specific tag, or a list of tags for a specific configuration item.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "configurationType": {
+            "type": "string",
+            "description": "A type of IT asset to tag.",
+            "enum": [
+              "SERVER",
+              "PROCESS",
+              "CONNECTION",
+              "APPLICATION"
+            ],
+            "example": "SERVER"
+          },
+          "configurationId": {
+            "type": "string",
+            "description": "The configuration ID for the item to tag.",
+            "example": "d-SERVER-500456"
+          },
+          "key": {
+            "type": "string",
+            "description": "A type of tag on which to filter.",
+            "example": "environment"
+          },
+          "value": {
+            "type": "string",
+            "description": "A value on which to filter.",
+            "example": "production"
+          },
+          "timeOfCreation": {
+            "type": "string",
+            "description": "The time the configuration tag was created in Coordinated Universal Time (UTC).",
+            "example": "2026-04-19T10:00:00Z"
+          }
+        }
+      }
+    },
+    "nextToken": {
+      "type": "string",
+      "description": "The call returns a token. Use this token to get the next set of results.",
+      "example": ""
+    }
+  },
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-describe-tags-response-structure.json"
+}

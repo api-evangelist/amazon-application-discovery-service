@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-describe-tags-response-schema.json",
+  "title": "DescribeTagsResponse",
+  "description": "DescribeTagsResponse schema from Amazon Application Discovery Service API",
+  "type": "object",
+  "properties": {
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "configurationType": {
+            "type": "string",
+            "enum": [
+              "SERVER",
+              "PROCESS",
+              "CONNECTION",
+              "APPLICATION"
+            ],
+            "example": "SERVER",
+            "description": "A type of IT asset to tag."
+          },
+          "configurationId": {
+            "type": "string",
+            "example": "d-SERVER-500456",
+            "description": "The configuration ID for the item to tag."
+          },
+          "key": {
+            "type": "string",
+            "example": "environment",
+            "description": "A type of tag on which to filter."
+          },
+          "value": {
+            "type": "string",
+            "example": "production",
+            "description": "A value on which to filter."
+          },
+          "timeOfCreation": {
+            "type": "string",
+            "example": "2026-04-19T10:00:00Z",
+            "description": "The time the configuration tag was created in Coordinated Universal Time (UTC)."
+          }
+        }
+      },
+      "description": "Depending on the input, this is a list of configuration items tagged with a specific tag, or a list of tags for a specific configuration item."
+    },
+    "nextToken": {
+      "type": "string",
+      "example": "",
+      "description": "The call returns a token. Use this token to get the next set of results."
+    }
+  }
+}

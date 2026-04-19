@@ -1,0 +1,266 @@
+vocabulary:
+  label: Amazon Application Discovery Service Vocabulary
+  description: Core terms, actions, and workflows for the AWS Application Discovery Service API.
+  tags:
+    - Amazon Application Discovery Service
+    - Migration
+    - Discovery
+    - Infrastructure
+    - AWS
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+resources:
+  - name: Agent
+    description: A software component installed on on-premises servers that collects system configuration and usage data.
+    properties:
+      - agentId
+      - agentType
+      - hostName
+      - agentNetworkInfoList
+      - connectorId
+      - version
+      - health
+      - lastHealthPingTime
+      - collectionStatus
+      - registeredTime
+    related:
+      - Collector
+
+  - name: Collector
+    description: An agentless discovery collector that gathers data from VMware vCenter environments.
+    properties:
+      - collectorId
+      - collectorVersion
+      - collectorHealth
+      - collectorName
+      - registeredTimeStamp
+      - lastDataSentTimeStamp
+    related:
+      - Agent
+
+  - name: ConfigurationItem
+    description: A discovered IT asset such as a server, process, connection, or application.
+    properties:
+      - configurationId
+      - configurationType
+      - tags
+    related:
+      - Application
+      - Server
+      - Process
+      - Connection
+
+  - name: Application
+    description: A logical grouping of discovered configuration items for migration planning purposes.
+    properties:
+      - applicationId
+      - name
+      - description
+      - configurationIds
+    related:
+      - ConfigurationItem
+
+  - name: ExportTask
+    description: A background task that exports discovered data to an Amazon S3 bucket in CSV or GraphML format.
+    properties:
+      - exportId
+      - exportStatus
+      - statusMessage
+      - configurationsDownloadUrl
+      - exportRequestTime
+      - isTruncated
+      - requestedStartTime
+      - requestedEndTime
+    related:
+      - ImportTask
+
+  - name: ImportTask
+    description: A background task that imports on-premises server inventory data from a CSV file stored in Amazon S3.
+    properties:
+      - importTaskId
+      - clientRequestToken
+      - name
+      - importUrl
+      - status
+      - importRequestTime
+      - importCompletionTime
+      - importDeletedTime
+      - serverImportSuccess
+      - serverImportFailure
+      - applicationImportSuccess
+      - applicationImportFailure
+    related:
+      - ExportTask
+
+  - name: Tag
+    description: A metadata label applied to configuration items for organization and filtering.
+    properties:
+      - configurationType
+      - key
+      - value
+    related:
+      - ConfigurationItem
+
+actions:
+  - name: DescribeAgents
+    description: Retrieve a list of agents or collectors with their current health and configuration status.
+    resource: Agent
+    method: POST
+    path: /v1/describeAgents
+
+  - name: BatchDeleteAgents
+    description: Delete one or more discovery agents or collectors by ID.
+    resource: Agent
+    method: POST
+    path: /v1/batchDeleteAgents
+
+  - name: StartDataCollectionByAgentIds
+    description: Instruct specified agents to begin collecting server configuration and usage data.
+    resource: Agent
+    method: POST
+    path: /v1/startDataCollectionByAgentIds
+
+  - name: StopDataCollectionByAgentIds
+    description: Instruct specified agents to stop collecting data.
+    resource: Agent
+    method: POST
+    path: /v1/stopDataCollectionByAgentIds
+
+  - name: GetDiscoverySummary
+    description: Retrieve a high-level count of all discovered assets including servers, agents, and applications.
+    resource: ConfigurationItem
+    method: POST
+    path: /v1/getDiscoverySummary
+
+  - name: ListConfigurations
+    description: List discovered configuration items filtered by type (SERVER, PROCESS, CONNECTION, APPLICATION).
+    resource: ConfigurationItem
+    method: POST
+    path: /v1/listConfigurations
+
+  - name: DescribeConfigurations
+    description: Get detailed attributes for a list of configuration item IDs.
+    resource: ConfigurationItem
+    method: POST
+    path: /v1/describeConfigurations
+
+  - name: ListServerNeighbors
+    description: Retrieve servers that are one network hop away from a specified server to map dependencies.
+    resource: ConfigurationItem
+    method: POST
+    path: /v1/listServerNeighbors
+
+  - name: CreateApplication
+    description: Create a new application grouping with a name and description for organizing discovered servers.
+    resource: Application
+    method: POST
+    path: /v1/createApplication
+
+  - name: DeleteApplications
+    description: Delete one or more application groupings and their server associations.
+    resource: Application
+    method: POST
+    path: /v1/deleteApplications
+
+  - name: UpdateApplication
+    description: Update the name or description of an existing application grouping.
+    resource: Application
+    method: POST
+    path: /v1/updateApplication
+
+  - name: AssociateConfigurationItemsToApplication
+    description: Associate discovered servers or other configuration items with an application grouping.
+    resource: Application
+    method: POST
+    path: /v1/associateConfigurationItemsToApplication
+
+  - name: DisassociateConfigurationItemsFromApplication
+    description: Remove the association between configuration items and an application grouping.
+    resource: Application
+    method: POST
+    path: /v1/disassociateConfigurationItemsFromApplication
+
+  - name: StartExportTask
+    description: Begin an export of discovered data to an Amazon S3 bucket in CSV or GraphML format.
+    resource: ExportTask
+    method: POST
+    path: /v1/startExportTask
+
+  - name: DescribeExportTasks
+    description: Retrieve the status and download URL for one or more export tasks.
+    resource: ExportTask
+    method: POST
+    path: /v1/describeExportTasks
+
+  - name: StartImportTask
+    description: Begin an import of server inventory data from a CSV file stored in Amazon S3.
+    resource: ImportTask
+    method: POST
+    path: /v1/startImportTask
+
+  - name: DescribeImportTasks
+    description: Retrieve the status and results for one or more import tasks.
+    resource: ImportTask
+    method: POST
+    path: /v1/describeImportTasks
+
+  - name: CreateTags
+    description: Apply metadata tags to one or more configuration items.
+    resource: Tag
+    method: POST
+    path: /v1/createTags
+
+  - name: DeleteTags
+    description: Remove metadata tags from one or more configuration items.
+    resource: Tag
+    method: POST
+    path: /v1/deleteTags
+
+  - name: DescribeTags
+    description: Retrieve the tags applied to configuration items, optionally filtered by tag key or value.
+    resource: Tag
+    method: POST
+    path: /v1/describeTags
+
+workflows:
+  - name: DiscoverAndPlanMigration
+    description: End-to-end workflow for discovering on-premises infrastructure and creating a migration plan.
+    steps:
+      - action: DescribeAgents
+        description: Verify discovery agents are healthy and collecting data
+      - action: GetDiscoverySummary
+        description: Review the scope of discovered assets
+      - action: ListConfigurations
+        description: Enumerate all discovered servers and processes
+      - action: ListServerNeighbors
+        description: Map network dependencies between servers
+      - action: CreateApplication
+        description: Group related servers into applications
+      - action: StartExportTask
+        description: Export all discovery data to S3 for detailed analysis
+
+personas:
+  - name: Migration Architect
+    description: Designs and oversees migration strategies from on-premises to AWS cloud infrastructure.
+    actions:
+      - GetDiscoverySummary
+      - ListConfigurations
+      - DescribeConfigurations
+      - ListServerNeighbors
+      - CreateApplication
+      - UpdateApplication
+      - StartExportTask
+      - DescribeExportTasks
+
+  - name: Infrastructure Engineer
+    description: Manages the deployment and operation of discovery agents across on-premises data centers.
+    actions:
+      - DescribeAgents
+      - BatchDeleteAgents
+      - StartDataCollectionByAgentIds
+      - StopDataCollectionByAgentIds
+      - StartImportTask
+      - DescribeImportTasks
+      - CreateTags
+      - DescribeTags

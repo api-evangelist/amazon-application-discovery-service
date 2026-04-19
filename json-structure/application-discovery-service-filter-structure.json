@@ -1,0 +1,39 @@
+{
+  "type": "object",
+  "description": "Filter schema from Amazon Application Discovery Service API",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the filter.",
+      "example": "hostName"
+    },
+    "values": {
+      "type": "array",
+      "description": "A string value on which to filter.",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "server-01.example.com"
+      ]
+    },
+    "condition": {
+      "type": "string",
+      "description": "A conditional operator. The following operators are valid \u2014 EQUALS, NOT_EQUALS, CONTAINS, NOT_CONTAINS.",
+      "enum": [
+        "EQUALS",
+        "NOT_EQUALS",
+        "CONTAINS",
+        "NOT_CONTAINS"
+      ],
+      "example": "EQUALS"
+    }
+  },
+  "required": [
+    "name",
+    "values",
+    "condition"
+  ],
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-filter-structure.json"
+}

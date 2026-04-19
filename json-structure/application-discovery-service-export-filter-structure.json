@@ -1,0 +1,33 @@
+{
+  "type": "object",
+  "description": "ExportFilter schema from Amazon Application Discovery Service API",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "A single ExportFilter name. Supported filters \u2014 agentIds.",
+      "example": "agentIds"
+    },
+    "values": {
+      "type": "array",
+      "description": "A single agent ID for a Discovery Agent. An agent ID can be found using the DescribeAgents action.",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "d-agent-500123"
+      ]
+    },
+    "condition": {
+      "type": "string",
+      "description": "Supported condition \u2014 EQUALS.",
+      "example": "EQUALS"
+    }
+  },
+  "required": [
+    "name",
+    "values",
+    "condition"
+  ],
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-export-filter-structure.json"
+}

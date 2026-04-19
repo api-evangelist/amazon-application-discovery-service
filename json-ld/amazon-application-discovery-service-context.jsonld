@@ -1,0 +1,554 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "amzn": "https://amazonaws.com/schema/application-discovery/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "CustomerAgentInfo": "amzn:CustomerAgentInfo",
+    "DescribeTagsResponse": "amzn:DescribeTagsResponse",
+    "DescribeBatchDeleteConfigurationTaskRequest": "amzn:DescribeBatchDeleteConfigurationTaskRequest",
+    "DescribeImportTasksRequest": "amzn:DescribeImportTasksRequest",
+    "CreateApplicationResponse": "amzn:CreateApplicationResponse",
+    "StartBatchDeleteConfigurationTaskRequest": "amzn:StartBatchDeleteConfigurationTaskRequest",
+    "DeleteAgent": "amzn:DeleteAgent",
+    "AgentNetworkInfo": "amzn:AgentNetworkInfo",
+    "GetDiscoverySummaryResponse": "amzn:GetDiscoverySummaryResponse",
+    "StartExportTaskRequest": "amzn:StartExportTaskRequest",
+    "DescribeAgentsRequest": "amzn:DescribeAgentsRequest",
+    "BatchDeleteImportDataRequest": "amzn:BatchDeleteImportDataRequest",
+    "DisassociateConfigurationItemsRequest": "amzn:DisassociateConfigurationItemsRequest",
+    "BatchDeleteAgentsRequest": "amzn:BatchDeleteAgentsRequest",
+    "UpdateApplicationRequest": "amzn:UpdateApplicationRequest",
+    "BatchDeleteAgentsResponse": "amzn:BatchDeleteAgentsResponse",
+    "ImportTask": "amzn:ImportTask",
+    "OrderByElement": "amzn:OrderByElement",
+    "StartDataCollectionByAgentIdsResponse": "amzn:StartDataCollectionByAgentIdsResponse",
+    "DescribeExportTasksRequest": "amzn:DescribeExportTasksRequest",
+    "ListConfigurationsResponse": "amzn:ListConfigurationsResponse",
+    "FailedConfiguration": "amzn:FailedConfiguration",
+    "AgentConfigurationStatus": "amzn:AgentConfigurationStatus",
+    "StartImportTaskRequest": "amzn:StartImportTaskRequest",
+    "DescribeContinuousExportsRequest": "amzn:DescribeContinuousExportsRequest",
+    "DeletionWarning": "amzn:DeletionWarning",
+    "DescribeAgentsResponse": "amzn:DescribeAgentsResponse",
+    "Tag": "amzn:Tag",
+    "DescribeBatchDeleteConfigurationTaskResponse": "amzn:DescribeBatchDeleteConfigurationTaskResponse",
+    "ExportFilter": "amzn:ExportFilter",
+    "DescribeConfigurationsRequest": "amzn:DescribeConfigurationsRequest",
+    "CustomerConnectorInfo": "amzn:CustomerConnectorInfo",
+    "DescribeConfigurationsResponse": "amzn:DescribeConfigurationsResponse",
+    "BatchDeleteImportDataError": "amzn:BatchDeleteImportDataError",
+    "Filter": "amzn:Filter",
+    "DescribeImportTasksResponse": "amzn:DescribeImportTasksResponse",
+    "DeleteApplicationsRequest": "amzn:DeleteApplicationsRequest",
+    "ConfigurationTag": "amzn:ConfigurationTag",
+    "BatchDeleteImportDataResponse": "amzn:BatchDeleteImportDataResponse",
+    "TagFilter": "amzn:TagFilter",
+    "StartExportTaskResponse": "amzn:StartExportTaskResponse",
+    "StartDataCollectionByAgentIdsRequest": "amzn:StartDataCollectionByAgentIdsRequest",
+    "CreateTagsRequest": "amzn:CreateTagsRequest",
+    "DescribeTagsRequest": "amzn:DescribeTagsRequest",
+    "DescribeExportTasksResponse": "amzn:DescribeExportTasksResponse",
+    "AssociateConfigurationItemsRequest": "amzn:AssociateConfigurationItemsRequest",
+    "NeighborConnectionDetail": "amzn:NeighborConnectionDetail",
+    "DeleteTagsRequest": "amzn:DeleteTagsRequest",
+    "ImportTaskFilter": "amzn:ImportTaskFilter",
+    "DescribeContinuousExportsResponse": "amzn:DescribeContinuousExportsResponse",
+    "StopDataCollectionByAgentIdsResponse": "amzn:StopDataCollectionByAgentIdsResponse",
+    "ListConfigurationsRequest": "amzn:ListConfigurationsRequest",
+    "ExportInfo": "amzn:ExportInfo",
+    "BatchDeleteConfigurationTask": "amzn:BatchDeleteConfigurationTask",
+    "StartBatchDeleteConfigurationTaskResponse": "amzn:StartBatchDeleteConfigurationTaskResponse",
+    "StopContinuousExportResponse": "amzn:StopContinuousExportResponse",
+    "StartImportTaskResponse": "amzn:StartImportTaskResponse",
+    "ContinuousExportDescription": "amzn:ContinuousExportDescription",
+    "CreateApplicationRequest": "amzn:CreateApplicationRequest",
+    "ListServerNeighborsResponse": "amzn:ListServerNeighborsResponse",
+    "StopDataCollectionByAgentIdsRequest": "amzn:StopDataCollectionByAgentIdsRequest",
+    "StopContinuousExportRequest": "amzn:StopContinuousExportRequest",
+    "BatchDeleteAgentError": "amzn:BatchDeleteAgentError",
+    "ListServerNeighborsRequest": "amzn:ListServerNeighborsRequest",
+    "StartContinuousExportResponse": "amzn:StartContinuousExportResponse",
+    "AgentInfo": "amzn:AgentInfo",
+    "activeAgents": {
+      "@id": "amzn:active_agents",
+      "@type": "xsd:integer"
+    },
+    "healthyAgents": {
+      "@id": "amzn:healthy_agents",
+      "@type": "xsd:integer"
+    },
+    "blackListedAgents": {
+      "@id": "amzn:black_listed_agents",
+      "@type": "xsd:integer"
+    },
+    "shutdownAgents": {
+      "@id": "amzn:shutdown_agents",
+      "@type": "xsd:integer"
+    },
+    "unhealthyAgents": {
+      "@id": "amzn:unhealthy_agents",
+      "@type": "xsd:integer"
+    },
+    "totalAgents": {
+      "@id": "amzn:total_agents",
+      "@type": "xsd:integer"
+    },
+    "unknownAgents": {
+      "@id": "amzn:unknown_agents",
+      "@type": "xsd:integer"
+    },
+    "tags": {
+      "@id": "amzn:tags",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "nextToken": {
+      "@id": "amzn:next_token",
+      "@type": "xsd:string"
+    },
+    "taskId": {
+      "@id": "amzn:task_id",
+      "@type": "xsd:string"
+    },
+    "filters": {
+      "@id": "amzn:filters",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "maxResults": {
+      "@id": "amzn:max_results",
+      "@type": "xsd:integer"
+    },
+    "configurationId": {
+      "@id": "amzn:configuration_id",
+      "@type": "xsd:string"
+    },
+    "configurationType": {
+      "@id": "amzn:configuration_type",
+      "@type": "xsd:string"
+    },
+    "configurationIds": {
+      "@id": "amzn:configuration_ids",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "agentId": {
+      "@id": "amzn:agent_id",
+      "@type": "xsd:string"
+    },
+    "force": {
+      "@id": "amzn:force",
+      "@type": "xsd:boolean"
+    },
+    "ipAddress": {
+      "@id": "amzn:ip_address",
+      "@type": "xsd:string"
+    },
+    "macAddress": {
+      "@id": "amzn:mac_address",
+      "@type": "xsd:string"
+    },
+    "servers": {
+      "@id": "amzn:servers",
+      "@type": "xsd:integer"
+    },
+    "applications": {
+      "@id": "amzn:applications",
+      "@type": "xsd:integer"
+    },
+    "serversMappedToApplications": {
+      "@id": "amzn:servers_mapped_to_applications",
+      "@type": "xsd:integer"
+    },
+    "serversMappedtoTags": {
+      "@id": "amzn:servers_mappedto_tags",
+      "@type": "xsd:integer"
+    },
+    "mappedServerCount": {
+      "@id": "amzn:mapped_server_count",
+      "@type": "xsd:integer"
+    },
+    "unmappedServerCount": {
+      "@id": "amzn:unmapped_server_count",
+      "@type": "xsd:integer"
+    },
+    "agentSummary": {
+      "@id": "amzn:agent_summary",
+      "@type": "@id"
+    },
+    "connectorSummary": {
+      "@id": "amzn:connector_summary",
+      "@type": "@id"
+    },
+    "activeConnectors": {
+      "@id": "amzn:active_connectors",
+      "@type": "xsd:integer"
+    },
+    "healthyConnectors": {
+      "@id": "amzn:healthy_connectors",
+      "@type": "xsd:integer"
+    },
+    "blackListedConnectors": {
+      "@id": "amzn:black_listed_connectors",
+      "@type": "xsd:integer"
+    },
+    "shutdownConnectors": {
+      "@id": "amzn:shutdown_connectors",
+      "@type": "xsd:integer"
+    },
+    "unhealthyConnectors": {
+      "@id": "amzn:unhealthy_connectors",
+      "@type": "xsd:integer"
+    },
+    "totalConnectors": {
+      "@id": "amzn:total_connectors",
+      "@type": "xsd:integer"
+    },
+    "unknownConnectors": {
+      "@id": "amzn:unknown_connectors",
+      "@type": "xsd:integer"
+    },
+    "exportDataFormat": {
+      "@id": "amzn:export_data_format",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "startTime": {
+      "@id": "amzn:start_time",
+      "@type": "xsd:string"
+    },
+    "endTime": {
+      "@id": "amzn:end_time",
+      "@type": "xsd:string"
+    },
+    "preferences": {
+      "@id": "amzn:preferences",
+      "@type": "@id"
+    },
+    "agentIds": {
+      "@id": "amzn:agent_ids",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "importTaskIds": {
+      "@id": "amzn:import_task_ids",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "deleteHistory": {
+      "@id": "amzn:delete_history",
+      "@type": "xsd:boolean"
+    },
+    "applicationConfigurationId": {
+      "@id": "amzn:application_configuration_id",
+      "@type": "xsd:string"
+    },
+    "deleteAgents": {
+      "@id": "amzn:delete_agents",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "name": "schema:name",
+    "description": "schema:description",
+    "errors": {
+      "@id": "amzn:errors",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "importTaskId": {
+      "@id": "amzn:import_task_id",
+      "@type": "xsd:string"
+    },
+    "clientRequestToken": {
+      "@id": "amzn:client_request_token",
+      "@type": "xsd:string"
+    },
+    "importUrl": {
+      "@id": "amzn:import_url",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "amzn:status",
+      "@type": "xsd:string"
+    },
+    "importRequestTime": {
+      "@id": "amzn:import_request_time",
+      "@type": "xsd:string"
+    },
+    "importCompletionTime": {
+      "@id": "amzn:import_completion_time",
+      "@type": "xsd:string"
+    },
+    "importDeletedTime": {
+      "@id": "amzn:import_deleted_time",
+      "@type": "xsd:string"
+    },
+    "serverImportSuccess": {
+      "@id": "amzn:server_import_success",
+      "@type": "xsd:integer"
+    },
+    "serverImportFailure": {
+      "@id": "amzn:server_import_failure",
+      "@type": "xsd:integer"
+    },
+    "applicationImportSuccess": {
+      "@id": "amzn:application_import_success",
+      "@type": "xsd:integer"
+    },
+    "applicationImportFailure": {
+      "@id": "amzn:application_import_failure",
+      "@type": "xsd:integer"
+    },
+    "errorsAndFailedEntriesZip": {
+      "@id": "amzn:errors_and_failed_entries_zip",
+      "@type": "xsd:string"
+    },
+    "fieldName": {
+      "@id": "amzn:field_name",
+      "@type": "xsd:string"
+    },
+    "sortOrder": {
+      "@id": "amzn:sort_order",
+      "@type": "xsd:string"
+    },
+    "agentsConfigurationStatus": {
+      "@id": "amzn:agents_configuration_status",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "exportIds": {
+      "@id": "amzn:export_ids",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "configurations": {
+      "@id": "amzn:configurations",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "errorStatusCode": {
+      "@id": "amzn:error_status_code",
+      "@type": "xsd:integer"
+    },
+    "errorMessage": {
+      "@id": "amzn:error_message",
+      "@type": "xsd:string"
+    },
+    "operationSucceeded": {
+      "@id": "amzn:operation_succeeded",
+      "@type": "xsd:boolean"
+    },
+    "warningCode": {
+      "@id": "amzn:warning_code",
+      "@type": "xsd:integer"
+    },
+    "warningText": {
+      "@id": "amzn:warning_text",
+      "@type": "xsd:string"
+    },
+    "agentsInfo": {
+      "@id": "amzn:agents_info",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "key": {
+      "@id": "amzn:key",
+      "@type": "xsd:string"
+    },
+    "value": {
+      "@id": "amzn:value",
+      "@type": "xsd:string"
+    },
+    "task": {
+      "@id": "amzn:task",
+      "@type": "@id"
+    },
+    "requestedConfigurations": {
+      "@id": "amzn:requested_configurations",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "deletedConfigurations": {
+      "@id": "amzn:deleted_configurations",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "failedConfigurations": {
+      "@id": "amzn:failed_configurations",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "deletionWarnings": {
+      "@id": "amzn:deletion_warnings",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "values": {
+      "@id": "amzn:values",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "condition": {
+      "@id": "amzn:condition",
+      "@type": "xsd:string"
+    },
+    "errorCode": {
+      "@id": "amzn:error_code",
+      "@type": "xsd:string"
+    },
+    "errorDescription": {
+      "@id": "amzn:error_description",
+      "@type": "xsd:string"
+    },
+    "tasks": {
+      "@id": "amzn:tasks",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "timeOfCreation": {
+      "@id": "amzn:time_of_creation",
+      "@type": "xsd:string"
+    },
+    "exportId": {
+      "@id": "amzn:export_id",
+      "@type": "xsd:string"
+    },
+    "exportsInfo": {
+      "@id": "amzn:exports_info",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "sourceServerId": {
+      "@id": "amzn:source_server_id",
+      "@type": "xsd:string"
+    },
+    "destinationServerId": {
+      "@id": "amzn:destination_server_id",
+      "@type": "xsd:string"
+    },
+    "destinationPort": {
+      "@id": "amzn:destination_port",
+      "@type": "xsd:integer"
+    },
+    "transportProtocol": {
+      "@id": "amzn:transport_protocol",
+      "@type": "xsd:string"
+    },
+    "connectionsCount": {
+      "@id": "amzn:connections_count",
+      "@type": "xsd:integer"
+    },
+    "descriptions": {
+      "@id": "amzn:descriptions",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "orderBy": {
+      "@id": "amzn:order_by",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "exportStatus": {
+      "@id": "amzn:export_status",
+      "@type": "xsd:string"
+    },
+    "statusMessage": {
+      "@id": "amzn:status_message",
+      "@type": "xsd:string"
+    },
+    "configurationsDownloadUrl": {
+      "@id": "amzn:configurations_download_url",
+      "@type": "xsd:string"
+    },
+    "exportRequestTime": {
+      "@id": "amzn:export_request_time",
+      "@type": "xsd:string"
+    },
+    "isTruncated": {
+      "@id": "amzn:is_truncated",
+      "@type": "xsd:boolean"
+    },
+    "requestedStartTime": {
+      "@id": "amzn:requested_start_time",
+      "@type": "xsd:string"
+    },
+    "requestedEndTime": {
+      "@id": "amzn:requested_end_time",
+      "@type": "xsd:string"
+    },
+    "stopTime": {
+      "@id": "amzn:stop_time",
+      "@type": "xsd:string"
+    },
+    "statusDetail": {
+      "@id": "amzn:status_detail",
+      "@type": "xsd:string"
+    },
+    "s3Bucket": {
+      "@id": "amzn:s3_bucket",
+      "@type": "xsd:string"
+    },
+    "dataSource": {
+      "@id": "amzn:data_source",
+      "@type": "xsd:string"
+    },
+    "schemaStorageConfig": {
+      "@id": "amzn:schema_storage_config",
+      "@type": "@id"
+    },
+    "neighbors": {
+      "@id": "amzn:neighbors",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "knownDependencyCount": {
+      "@id": "amzn:known_dependency_count",
+      "@type": "xsd:integer"
+    },
+    "portInformationNeeded": {
+      "@id": "amzn:port_information_needed",
+      "@type": "xsd:boolean"
+    },
+    "neighborConfigurationIds": {
+      "@id": "amzn:neighbor_configuration_ids",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "hostName": {
+      "@id": "amzn:host_name",
+      "@type": "xsd:string"
+    },
+    "agentNetworkInfoList": {
+      "@id": "amzn:agent_network_info_list",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "connectorId": {
+      "@id": "amzn:connector_id",
+      "@type": "xsd:string"
+    },
+    "version": "schema:version",
+    "health": {
+      "@id": "amzn:health",
+      "@type": "xsd:string"
+    },
+    "lastHealthPingTime": {
+      "@id": "amzn:last_health_ping_time",
+      "@type": "xsd:string"
+    },
+    "collectionStatus": {
+      "@id": "amzn:collection_status",
+      "@type": "xsd:string"
+    },
+    "agentType": {
+      "@id": "amzn:agent_type",
+      "@type": "xsd:string"
+    },
+    "registeredTime": {
+      "@id": "amzn:registered_time",
+      "@type": "xsd:string"
+    }
+  }
+}

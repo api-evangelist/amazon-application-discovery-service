@@ -1,0 +1,9 @@
+{
+  "errors": [
+    {
+      "importTaskId": "import-task-500123",
+      "errorCode": "NOT_FOUND",
+      "errorDescription": "Import task not found"
+    }
+  ]
+}

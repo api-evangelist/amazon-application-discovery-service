@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-list-configurations-response-schema.json",
+  "title": "ListConfigurationsResponse",
+  "description": "ListConfigurationsResponse schema from Amazon Application Discovery Service API",
+  "type": "object",
+  "properties": {
+    "configurations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        }
+      },
+      "description": "Returns configuration details, including the configuration ID, attribute names, and attribute values."
+    },
+    "nextToken": {
+      "type": "string",
+      "example": "",
+      "description": "Token to retrieve the next set of results."
+    }
+  }
+}

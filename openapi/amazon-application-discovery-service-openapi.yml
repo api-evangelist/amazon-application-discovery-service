@@ -1,0 +1,2647 @@
+openapi: 3.1.0
+info:
+  title: Amazon Application Discovery Service API
+  description: >-
+    AWS Application Discovery Service helps you plan your migration to AWS by
+    collecting usage and configuration data about your on-premises servers,
+    network infrastructure, and storage. Application Discovery Service enables
+    you to understand the configuration, usage, and behavior of your servers and
+    to develop a migration plan.
+  version: '2015-11-01'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+  x-generated-from: documentation
+  x-last-validated: '2026-04-19'
+servers:
+  - url: https://discovery.us-east-1.amazonaws.com
+    description: AWS Application Discovery Service endpoint
+security:
+  - sigv4: []
+tags:
+  - name: Agents
+    description: Operations for managing discovery agents and collectors
+  - name: Applications
+    description: Operations for managing application groupings
+  - name: Configurations
+    description: Operations for querying discovered configuration items
+  - name: Exports
+    description: Operations for exporting discovered data
+  - name: Imports
+    description: Operations for importing server data
+  - name: Tags
+    description: Operations for managing configuration item tags
+paths:
+  /v1/describeAgents:
+    post:
+      operationId: describeAgents
+      summary: Amazon Application Discovery Service Describe Agents
+      description: Lists agents or collectors as specified by ID or all agents/collectors associated with your user, if you did not specify an ID. The output includes information about each agent/collector, including the agent/collector ID, IP address, media access control (MAC) address, agent/collector version, and so on.
+      tags:
+        - Agents
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeAgentsRequest'
+            examples:
+              DescribeAgentsRequestExample:
+                summary: Default describeAgents request
+                x-microcks-default: true
+                value:
+                  maxResults: 10
+      responses:
+        '200':
+          description: Agents described successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeAgentsResponse'
+              examples:
+                DescribeAgents200Example:
+                  summary: Default describeAgents 200 response
+                  x-microcks-default: true
+                  value:
+                    agentsInfo:
+                      - agentId: d-agent-500123
+                        hostName: server-01.example.com
+                        agentNetworkInfoList:
+                          - ipAddress: 10.0.0.10
+                            macAddress: aa:bb:cc:dd:ee:ff
+                        connectorId: ''
+                        version: '2.0.1'
+                        health: HEALTHY
+                        lastHealthPingTime: '2026-04-19T10:00:00Z'
+                        collectionStatus: START_SCHEDULED
+                        agentType: AWS_DISCOVERY_AGENT
+                        registeredTime: '2026-01-01T00:00:00Z'
+                    nextToken: ''
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/batchDeleteAgents:
+    post:
+      operationId: batchDeleteAgents
+      summary: Amazon Application Discovery Service Batch Delete Agents
+      description: Deletes one or more agents or collectors as specified by ID. Deleting an agent or collector does not delete the previously discovered data. To delete the data collected, use StartBatchDeleteConfigurationTask.
+      tags:
+        - Agents
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchDeleteAgentsRequest'
+            examples:
+              BatchDeleteAgentsRequestExample:
+                summary: Default batchDeleteAgents request
+                x-microcks-default: true
+                value:
+                  deleteAgents:
+                    - agentId: d-agent-500123
+                      force: false
+      responses:
+        '200':
+          description: Agents deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchDeleteAgentsResponse'
+              examples:
+                BatchDeleteAgents200Example:
+                  summary: Default batchDeleteAgents 200 response
+                  x-microcks-default: true
+                  value:
+                    errors: []
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/startDataCollectionByAgentIds:
+    post:
+      operationId: startDataCollectionByAgentIds
+      summary: Amazon Application Discovery Service Start Data Collection by Agent IDs
+      description: Instructs the specified agents to start collecting data.
+      tags:
+        - Agents
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartDataCollectionByAgentIdsRequest'
+            examples:
+              StartDataCollectionByAgentIdsRequestExample:
+                summary: Default startDataCollectionByAgentIds request
+                x-microcks-default: true
+                value:
+                  agentIds:
+                    - d-agent-500123
+                    - d-agent-500124
+      responses:
+        '200':
+          description: Data collection started successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartDataCollectionByAgentIdsResponse'
+              examples:
+                StartDataCollectionByAgentIds200Example:
+                  summary: Default startDataCollectionByAgentIds 200 response
+                  x-microcks-default: true
+                  value:
+                    agentsConfigurationStatus:
+                      - agentId: d-agent-500123
+                        operationSucceeded: true
+                        description: Started data collection
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/stopDataCollectionByAgentIds:
+    post:
+      operationId: stopDataCollectionByAgentIds
+      summary: Amazon Application Discovery Service Stop Data Collection by Agent IDs
+      description: Instructs the specified agents to stop collecting data.
+      tags:
+        - Agents
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopDataCollectionByAgentIdsRequest'
+            examples:
+              StopDataCollectionByAgentIdsRequestExample:
+                summary: Default stopDataCollectionByAgentIds request
+                x-microcks-default: true
+                value:
+                  agentIds:
+                    - d-agent-500123
+      responses:
+        '200':
+          description: Data collection stopped successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopDataCollectionByAgentIdsResponse'
+              examples:
+                StopDataCollectionByAgentIds200Example:
+                  summary: Default stopDataCollectionByAgentIds 200 response
+                  x-microcks-default: true
+                  value:
+                    agentsConfigurationStatus:
+                      - agentId: d-agent-500123
+                        operationSucceeded: true
+                        description: Stopped data collection
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/createApplication:
+    post:
+      operationId: createApplication
+      summary: Amazon Application Discovery Service Create Application
+      description: Creates an application with the given name and description.
+      tags:
+        - Applications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateApplicationRequest'
+            examples:
+              CreateApplicationRequestExample:
+                summary: Default createApplication request
+                x-microcks-default: true
+                value:
+                  name: Production Web Tier
+                  description: Web servers for the production environment
+      responses:
+        '200':
+          description: Application created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateApplicationResponse'
+              examples:
+                CreateApplication200Example:
+                  summary: Default createApplication 200 response
+                  x-microcks-default: true
+                  value:
+                    configurationId: d-APP-500123
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/deleteApplications:
+    post:
+      operationId: deleteApplications
+      summary: Amazon Application Discovery Service Delete Applications
+      description: Deletes a list of applications and their associations with configuration items.
+      tags:
+        - Applications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteApplicationsRequest'
+            examples:
+              DeleteApplicationsRequestExample:
+                summary: Default deleteApplications request
+                x-microcks-default: true
+                value:
+                  configurationIds:
+                    - d-APP-500123
+      responses:
+        '200':
+          description: Applications deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DeleteApplications200Example:
+                  summary: Default deleteApplications 200 response
+                  x-microcks-default: true
+                  value: {}
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/updateApplication:
+    post:
+      operationId: updateApplication
+      summary: Amazon Application Discovery Service Update Application
+      description: Updates metadata about an application.
+      tags:
+        - Applications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateApplicationRequest'
+            examples:
+              UpdateApplicationRequestExample:
+                summary: Default updateApplication request
+                x-microcks-default: true
+                value:
+                  configurationId: d-APP-500123
+                  name: Production Web Tier Updated
+                  description: Updated description for web tier servers
+      responses:
+        '200':
+          description: Application updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                UpdateApplication200Example:
+                  summary: Default updateApplication 200 response
+                  x-microcks-default: true
+                  value: {}
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/associateConfigurationItemsToApplication:
+    post:
+      operationId: associateConfigurationItemsToApplication
+      summary: Amazon Application Discovery Service Associate Configuration Items to Application
+      description: Associates one or more configuration items with an application.
+      tags:
+        - Applications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssociateConfigurationItemsRequest'
+            examples:
+              AssociateConfigurationItemsRequestExample:
+                summary: Default associateConfigurationItemsToApplication request
+                x-microcks-default: true
+                value:
+                  applicationConfigurationId: d-APP-500123
+                  configurationIds:
+                    - d-SERVER-500456
+                    - d-SERVER-500457
+      responses:
+        '200':
+          description: Configuration items associated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                AssociateConfigurationItems200Example:
+                  summary: Default associateConfigurationItemsToApplication 200 response
+                  x-microcks-default: true
+                  value: {}
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/disassociateConfigurationItemsFromApplication:
+    post:
+      operationId: disassociateConfigurationItemsFromApplication
+      summary: Amazon Application Discovery Service Disassociate Configuration Items from Application
+      description: Disassociates one or more configuration items from an application.
+      tags:
+        - Applications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisassociateConfigurationItemsRequest'
+            examples:
+              DisassociateConfigurationItemsRequestExample:
+                summary: Default disassociateConfigurationItemsFromApplication request
+                x-microcks-default: true
+                value:
+                  applicationConfigurationId: d-APP-500123
+                  configurationIds:
+                    - d-SERVER-500456
+      responses:
+        '200':
+          description: Configuration items disassociated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DisassociateConfigurationItems200Example:
+                  summary: Default disassociateConfigurationItemsFromApplication 200 response
+                  x-microcks-default: true
+                  value: {}
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/describeConfigurations:
+    post:
+      operationId: describeConfigurations
+      summary: Amazon Application Discovery Service Describe Configurations
+      description: Retrieves attributes for a list of configuration item IDs. All of the supplied IDs must be for the same asset type from one of the following — server, application, process, or connection. Output fields are specific to the asset type.
+      tags:
+        - Configurations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeConfigurationsRequest'
+            examples:
+              DescribeConfigurationsRequestExample:
+                summary: Default describeConfigurations request
+                x-microcks-default: true
+                value:
+                  configurationIds:
+                    - d-SERVER-500456
+                    - d-SERVER-500457
+      responses:
+        '200':
+          description: Configurations described successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeConfigurationsResponse'
+              examples:
+                DescribeConfigurations200Example:
+                  summary: Default describeConfigurations 200 response
+                  x-microcks-default: true
+                  value:
+                    configurations:
+                      - configurationId: d-SERVER-500456
+                        hostName: server-01.example.com
+                        osName: Linux
+                        osVersion: Ubuntu 20.04
+                        cpuType: Intel Xeon
+                        totalRamInMB: '32768'
+                        totalDiskSizeInGB: '500'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/listConfigurations:
+    post:
+      operationId: listConfigurations
+      summary: Amazon Application Discovery Service List Configurations
+      description: Retrieves a list of configuration items as specified by the value passed to the required parameter configurationType. Optional filtering may be applied to refine search results.
+      tags:
+        - Configurations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListConfigurationsRequest'
+            examples:
+              ListConfigurationsRequestExample:
+                summary: Default listConfigurations request
+                x-microcks-default: true
+                value:
+                  configurationType: SERVER
+                  maxResults: 10
+      responses:
+        '200':
+          description: Configurations listed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListConfigurationsResponse'
+              examples:
+                ListConfigurations200Example:
+                  summary: Default listConfigurations 200 response
+                  x-microcks-default: true
+                  value:
+                    configurations:
+                      - configurationId: d-SERVER-500456
+                        hostName: server-01.example.com
+                        osName: Linux
+                    nextToken: ''
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/getDiscoverySummary:
+    post:
+      operationId: getDiscoverySummary
+      summary: Amazon Application Discovery Service Get Discovery Summary
+      description: Retrieves a short summary of discovered assets. This API operation takes no request parameters and is called as is at the command prompt.
+      tags:
+        - Configurations
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Discovery summary returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDiscoverySummaryResponse'
+              examples:
+                GetDiscoverySummary200Example:
+                  summary: Default getDiscoverySummary 200 response
+                  x-microcks-default: true
+                  value:
+                    servers: 42
+                    mappedServerCount: 15
+                    unmappedServerCount: 27
+                    applications: 5
+                    serversMappedToApplications: 15
+                    serversMappedtoTags: 30
+                    agentSummary:
+                      activeAgents: 3
+                      healthyAgents: 3
+                      blackListedAgents: 0
+                      shutdownAgents: 0
+                      unhealthyAgents: 0
+                      totalAgents: 3
+                      unknownAgents: 0
+                    connectorSummary:
+                      activeConnectors: 0
+                      healthyConnectors: 0
+                      blackListedConnectors: 0
+                      shutdownConnectors: 0
+                      unhealthyConnectors: 0
+                      totalConnectors: 0
+                      unknownConnectors: 0
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/listServerNeighbors:
+    post:
+      operationId: listServerNeighbors
+      summary: Amazon Application Discovery Service List Server Neighbors
+      description: Retrieves a list of servers that are one network hop away from a specified server.
+      tags:
+        - Configurations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListServerNeighborsRequest'
+            examples:
+              ListServerNeighborsRequestExample:
+                summary: Default listServerNeighbors request
+                x-microcks-default: true
+                value:
+                  configurationId: d-SERVER-500456
+                  maxResults: 10
+      responses:
+        '200':
+          description: Server neighbors listed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListServerNeighborsResponse'
+              examples:
+                ListServerNeighbors200Example:
+                  summary: Default listServerNeighbors 200 response
+                  x-microcks-default: true
+                  value:
+                    neighbors:
+                      - sourceServerId: d-SERVER-500456
+                        destinationServerId: d-SERVER-500457
+                        connectionsCount: 125
+                        transportProtocol: TCP
+                        destinationPort: 443
+                    knownDependencyCount: 1
+                    nextToken: ''
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/startBatchDeleteConfigurationTask:
+    post:
+      operationId: startBatchDeleteConfigurationTask
+      summary: Amazon Application Discovery Service Start Batch Delete Configuration Task
+      description: Takes a list of configurationIds as input and starts an asynchronous deletion task to remove the specified configuration items and their relationships.
+      tags:
+        - Configurations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartBatchDeleteConfigurationTaskRequest'
+            examples:
+              StartBatchDeleteConfigurationTaskRequestExample:
+                summary: Default startBatchDeleteConfigurationTask request
+                x-microcks-default: true
+                value:
+                  configurationType: SERVER
+                  configurationIds:
+                    - d-SERVER-500456
+      responses:
+        '200':
+          description: Batch delete task started successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartBatchDeleteConfigurationTaskResponse'
+              examples:
+                StartBatchDeleteConfigurationTask200Example:
+                  summary: Default startBatchDeleteConfigurationTask 200 response
+                  x-microcks-default: true
+                  value:
+                    taskId: task-500123
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/describeBatchDeleteConfigurationTask:
+    post:
+      operationId: describeBatchDeleteConfigurationTask
+      summary: Amazon Application Discovery Service Describe Batch Delete Configuration Task
+      description: Takes a unique deletion task identifier as input and returns metadata about a configuration deletion task.
+      tags:
+        - Configurations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeBatchDeleteConfigurationTaskRequest'
+            examples:
+              DescribeBatchDeleteConfigurationTaskRequestExample:
+                summary: Default describeBatchDeleteConfigurationTask request
+                x-microcks-default: true
+                value:
+                  taskId: task-500123
+      responses:
+        '200':
+          description: Batch delete task described successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeBatchDeleteConfigurationTaskResponse'
+              examples:
+                DescribeBatchDeleteConfigurationTask200Example:
+                  summary: Default describeBatchDeleteConfigurationTask 200 response
+                  x-microcks-default: true
+                  value:
+                    task:
+                      taskId: task-500123
+                      status: COMPLETE
+                      startTime: '2026-04-19T10:00:00Z'
+                      endTime: '2026-04-19T10:05:00Z'
+                      configurationType: SERVER
+                      requestedConfigurations:
+                        - d-SERVER-500456
+                      deletedConfigurations:
+                        - d-SERVER-500456
+                      failedConfigurations: []
+                      deletionWarnings: []
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/startExportTask:
+    post:
+      operationId: startExportTask
+      summary: Amazon Application Discovery Service Start Export Task
+      description: Begins the export of discovered data to an S3 bucket. If you specify agentIds in a filter, the task exports up to 72 hours of detailed data collected by the identified Application Discovery Agent, including network, process, and performance details.
+      tags:
+        - Exports
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartExportTaskRequest'
+            examples:
+              StartExportTaskRequestExample:
+                summary: Default startExportTask request
+                x-microcks-default: true
+                value:
+                  exportDataFormat:
+                    - CSV
+                  startTime: '2026-04-01T00:00:00Z'
+                  endTime: '2026-04-19T23:59:59Z'
+      responses:
+        '200':
+          description: Export task started successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartExportTaskResponse'
+              examples:
+                StartExportTask200Example:
+                  summary: Default startExportTask 200 response
+                  x-microcks-default: true
+                  value:
+                    exportId: export-500123
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/describeExportTasks:
+    post:
+      operationId: describeExportTasks
+      summary: Amazon Application Discovery Service Describe Export Tasks
+      description: Retrieve status of one or more export tasks. You can retrieve the status of up to 100 export tasks.
+      tags:
+        - Exports
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeExportTasksRequest'
+            examples:
+              DescribeExportTasksRequestExample:
+                summary: Default describeExportTasks request
+                x-microcks-default: true
+                value:
+                  exportIds:
+                    - export-500123
+                  maxResults: 10
+      responses:
+        '200':
+          description: Export tasks described successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeExportTasksResponse'
+              examples:
+                DescribeExportTasks200Example:
+                  summary: Default describeExportTasks 200 response
+                  x-microcks-default: true
+                  value:
+                    exportsInfo:
+                      - exportId: export-500123
+                        exportStatus: SUCCEEDED
+                        statusMessage: Export complete
+                        configurationsDownloadUrl: https://s3.amazonaws.com/aws-application-discovery-service-export/500123/export.zip
+                        exportRequestTime: '2026-04-19T10:00:00Z'
+                        isTruncated: false
+                    nextToken: ''
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/startContinuousExport:
+    post:
+      operationId: startContinuousExport
+      summary: Amazon Application Discovery Service Start Continuous Export
+      description: Start the continuous flow of agent's discovered data into Amazon Athena.
+      tags:
+        - Exports
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Continuous export started successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartContinuousExportResponse'
+              examples:
+                StartContinuousExport200Example:
+                  summary: Default startContinuousExport 200 response
+                  x-microcks-default: true
+                  value:
+                    exportId: continuous-export-500123
+                    s3Bucket: aws-application-discovery-service-500123
+                    startTime: '2026-04-19T10:00:00Z'
+                    dataSource: AGENT
+                    schemaStorageConfig:
+                      glueDataCatalog:
+                        databaseName: application_discovery_service_export
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/stopContinuousExport:
+    post:
+      operationId: stopContinuousExport
+      summary: Amazon Application Discovery Service Stop Continuous Export
+      description: Stop the continuous flow of agent's discovered data into Amazon Athena.
+      tags:
+        - Exports
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopContinuousExportRequest'
+            examples:
+              StopContinuousExportRequestExample:
+                summary: Default stopContinuousExport request
+                x-microcks-default: true
+                value:
+                  exportId: continuous-export-500123
+      responses:
+        '200':
+          description: Continuous export stopped successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopContinuousExportResponse'
+              examples:
+                StopContinuousExport200Example:
+                  summary: Default stopContinuousExport 200 response
+                  x-microcks-default: true
+                  value:
+                    startTime: '2026-04-19T10:00:00Z'
+                    stopTime: '2026-04-19T11:00:00Z'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/describeContinuousExports:
+    post:
+      operationId: describeContinuousExports
+      summary: Amazon Application Discovery Service Describe Continuous Exports
+      description: Lists exports as specified by ID. All continuous exports associated with your user can be listed if you call DescribeContinuousExports as is without passing any parameters.
+      tags:
+        - Exports
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeContinuousExportsRequest'
+            examples:
+              DescribeContinuousExportsRequestExample:
+                summary: Default describeContinuousExports request
+                x-microcks-default: true
+                value:
+                  maxResults: 10
+      responses:
+        '200':
+          description: Continuous exports described successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeContinuousExportsResponse'
+              examples:
+                DescribeContinuousExports200Example:
+                  summary: Default describeContinuousExports 200 response
+                  x-microcks-default: true
+                  value:
+                    descriptions:
+                      - exportId: continuous-export-500123
+                        status: ACTIVE
+                        startTime: '2026-04-19T10:00:00Z'
+                        s3Bucket: aws-application-discovery-service-500123
+                        dataSource: AGENT
+                    nextToken: ''
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/startImportTask:
+    post:
+      operationId: startImportTask
+      summary: Amazon Application Discovery Service Start Import Task
+      description: Starts an import task, which allows you to import details of your on-premises environment directly into AWS Migration Hub without having to use the Application Discovery Service (ADS) tools.
+      tags:
+        - Imports
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartImportTaskRequest'
+            examples:
+              StartImportTaskRequestExample:
+                summary: Default startImportTask request
+                x-microcks-default: true
+                value:
+                  clientRequestToken: client-token-500123
+                  name: Server Inventory Import April 2026
+                  importUrl: s3://my-bucket/server-inventory.csv
+      responses:
+        '200':
+          description: Import task started successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartImportTaskResponse'
+              examples:
+                StartImportTask200Example:
+                  summary: Default startImportTask 200 response
+                  x-microcks-default: true
+                  value:
+                    task:
+                      importTaskId: import-task-500123
+                      clientRequestToken: client-token-500123
+                      name: Server Inventory Import April 2026
+                      importUrl: s3://my-bucket/server-inventory.csv
+                      status: IMPORT_IN_PROGRESS
+                      importRequestTime: '2026-04-19T10:00:00Z'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/describeImportTasks:
+    post:
+      operationId: describeImportTasks
+      summary: Amazon Application Discovery Service Describe Import Tasks
+      description: Returns an array of import tasks for your account, including status information, times, IDs, the Amazon S3 Object URL for the import file, and more.
+      tags:
+        - Imports
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeImportTasksRequest'
+            examples:
+              DescribeImportTasksRequestExample:
+                summary: Default describeImportTasks request
+                x-microcks-default: true
+                value:
+                  maxResults: 10
+      responses:
+        '200':
+          description: Import tasks described successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeImportTasksResponse'
+              examples:
+                DescribeImportTasks200Example:
+                  summary: Default describeImportTasks 200 response
+                  x-microcks-default: true
+                  value:
+                    tasks:
+                      - importTaskId: import-task-500123
+                        name: Server Inventory Import April 2026
+                        status: IMPORT_COMPLETE
+                        importUrl: s3://my-bucket/server-inventory.csv
+                        importRequestTime: '2026-04-19T10:00:00Z'
+                        importCompletionTime: '2026-04-19T10:05:00Z'
+                        serverImportSuccess: 42
+                        serverImportFailure: 0
+                    nextToken: ''
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/batchDeleteImportData:
+    post:
+      operationId: batchDeleteImportData
+      summary: Amazon Application Discovery Service Batch Delete Import Data
+      description: Deletes one or more import tasks, each identified by their import ID. Each import task has a number of records that can identify servers or applications.
+      tags:
+        - Imports
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchDeleteImportDataRequest'
+            examples:
+              BatchDeleteImportDataRequestExample:
+                summary: Default batchDeleteImportData request
+                x-microcks-default: true
+                value:
+                  importTaskIds:
+                    - import-task-500123
+      responses:
+        '200':
+          description: Import data deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchDeleteImportDataResponse'
+              examples:
+                BatchDeleteImportData200Example:
+                  summary: Default batchDeleteImportData 200 response
+                  x-microcks-default: true
+                  value:
+                    errors: []
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/createTags:
+    post:
+      operationId: createTags
+      summary: Amazon Application Discovery Service Create Tags
+      description: Creates one or more tags for configuration items. Tags are metadata that help you categorize IT assets.
+      tags:
+        - Tags
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTagsRequest'
+            examples:
+              CreateTagsRequestExample:
+                summary: Default createTags request
+                x-microcks-default: true
+                value:
+                  configurationIds:
+                    - d-SERVER-500456
+                  tags:
+                    - key: environment
+                      value: production
+                    - key: team
+                      value: infrastructure
+      responses:
+        '200':
+          description: Tags created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                CreateTags200Example:
+                  summary: Default createTags 200 response
+                  x-microcks-default: true
+                  value: {}
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/deleteTags:
+    post:
+      operationId: deleteTags
+      summary: Amazon Application Discovery Service Delete Tags
+      description: Deletes the association between configuration items and one or more tags. This API accepts a list of multiple configuration items.
+      tags:
+        - Tags
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteTagsRequest'
+            examples:
+              DeleteTagsRequestExample:
+                summary: Default deleteTags request
+                x-microcks-default: true
+                value:
+                  configurationIds:
+                    - d-SERVER-500456
+                  tags:
+                    - key: environment
+                      value: production
+      responses:
+        '200':
+          description: Tags deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DeleteTags200Example:
+                  summary: Default deleteTags 200 response
+                  x-microcks-default: true
+                  value: {}
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/describeTags:
+    post:
+      operationId: describeTags
+      summary: Amazon Application Discovery Service Describe Tags
+      description: Retrieves a list of configuration items that have tags as specified by the key-value pairs, name and value, passed to the optional parameter filters.
+      tags:
+        - Tags
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeTagsRequest'
+            examples:
+              DescribeTagsRequestExample:
+                summary: Default describeTags request
+                x-microcks-default: true
+                value:
+                  maxResults: 10
+      responses:
+        '200':
+          description: Tags described successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeTagsResponse'
+              examples:
+                DescribeTags200Example:
+                  summary: Default describeTags 200 response
+                  x-microcks-default: true
+                  value:
+                    tags:
+                      - configurationId: d-SERVER-500456
+                        key: environment
+                        value: production
+                        configurationType: SERVER
+                        timeOfCreation: '2026-04-19T10:00:00Z'
+                    nextToken: ''
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication
+  schemas:
+    DescribeAgentsRequest:
+      type: object
+      properties:
+        agentIds:
+          type: array
+          description: The agent or the collector IDs for which you want information. If you specify no IDs, the system returns information about all agents/collectors associated with your AWS user account.
+          items:
+            type: string
+          example:
+            - d-agent-500123
+        filters:
+          type: array
+          description: You can filter the request using various logical operators and a key-value format.
+          items:
+            $ref: '#/components/schemas/Filter'
+        maxResults:
+          type: integer
+          description: The total number of agents/collectors to return in a single page of output.
+          minimum: 0
+          maximum: 900
+          example: 10
+        nextToken:
+          type: string
+          description: Token to retrieve the next set of results.
+          example: ''
+    DescribeAgentsResponse:
+      type: object
+      properties:
+        agentsInfo:
+          type: array
+          description: Lists agents or the collectors with status and configuration.
+          items:
+            $ref: '#/components/schemas/AgentInfo'
+        nextToken:
+          type: string
+          description: Token to retrieve the next set of results.
+          example: ''
+    AgentInfo:
+      type: object
+      properties:
+        agentId:
+          type: string
+          description: The agent or collector ID.
+          example: d-agent-500123
+        hostName:
+          type: string
+          description: The name of the host where the agent or collector resides.
+          example: server-01.example.com
+        agentNetworkInfoList:
+          type: array
+          description: Network details about the host where the agent or collector resides.
+          items:
+            $ref: '#/components/schemas/AgentNetworkInfo'
+        connectorId:
+          type: string
+          description: The ID of the connector.
+          example: ''
+        version:
+          type: string
+          description: The agent or collector version.
+          example: 2.0.1
+        health:
+          type: string
+          description: The health of the agent or collector.
+          enum:
+            - HEALTHY
+            - UNHEALTHY
+            - RUNNING
+            - UNKNOWN
+            - BLACKLISTED
+            - SHUTDOWN
+          example: HEALTHY
+        lastHealthPingTime:
+          type: string
+          description: Time since agent or collector health was reported.
+          example: '2026-04-19T10:00:00Z'
+        collectionStatus:
+          type: string
+          description: Status of the collection process for the agent or collector.
+          example: START_SCHEDULED
+        agentType:
+          type: string
+          description: Type of agent.
+          example: AWS_DISCOVERY_AGENT
+        registeredTime:
+          type: string
+          description: Agent's first registration timestamp in UTC.
+          example: '2026-01-01T00:00:00Z'
+    AgentNetworkInfo:
+      type: object
+      properties:
+        ipAddress:
+          type: string
+          description: The IP address for the host where the agent or collector resides.
+          example: 10.0.0.10
+        macAddress:
+          type: string
+          description: The MAC address for the host where the agent or collector resides.
+          example: aa:bb:cc:dd:ee:ff
+    BatchDeleteAgentsRequest:
+      type: object
+      required:
+        - deleteAgents
+      properties:
+        deleteAgents:
+          type: array
+          description: The list of agents to delete.
+          items:
+            $ref: '#/components/schemas/DeleteAgent'
+    DeleteAgent:
+      type: object
+      required:
+        - agentId
+      properties:
+        agentId:
+          type: string
+          description: The ID of the agent you want to delete.
+          example: d-agent-500123
+        force:
+          type: boolean
+          description: You can use the force parameter to delete agents that do not respond to API actions.
+          example: false
+    BatchDeleteAgentsResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          description: A list of agent IDs that failed to delete along with the cause of the error.
+          items:
+            $ref: '#/components/schemas/BatchDeleteAgentError'
+    BatchDeleteAgentError:
+      type: object
+      properties:
+        agentId:
+          type: string
+          description: The ID of the agent that failed to delete.
+          example: d-agent-500123
+        errorCode:
+          type: string
+          description: The type of error that occurred.
+          example: NOT_FOUND
+        errorMessage:
+          type: string
+          description: The text of the error message.
+          example: Agent not found
+    StartDataCollectionByAgentIdsRequest:
+      type: object
+      required:
+        - agentIds
+      properties:
+        agentIds:
+          type: array
+          description: The IDs of the agents from which to start collecting data. If you send a request to an agent that you do not have permission to contact, according to your AWS account's permission settings, the agent is not included in the list of agents that are started.
+          items:
+            type: string
+          example:
+            - d-agent-500123
+    StartDataCollectionByAgentIdsResponse:
+      type: object
+      properties:
+        agentsConfigurationStatus:
+          type: array
+          description: Information about agents that were instructed to start collecting data. Information includes the agent ID, a description of the operation performed, and whether the agent configuration was updated successfully.
+          items:
+            $ref: '#/components/schemas/AgentConfigurationStatus'
+    AgentConfigurationStatus:
+      type: object
+      properties:
+        agentId:
+          type: string
+          description: The agent ID.
+          example: d-agent-500123
+        operationSucceeded:
+          type: boolean
+          description: Information about the status of the StartDataCollection and StopDataCollection operations.
+          example: true
+        description:
+          type: string
+          description: A description of the operation performed.
+          example: Started data collection
+    StopDataCollectionByAgentIdsRequest:
+      type: object
+      required:
+        - agentIds
+      properties:
+        agentIds:
+          type: array
+          description: The IDs of the agents from which to stop collecting data.
+          items:
+            type: string
+          example:
+            - d-agent-500123
+    StopDataCollectionByAgentIdsResponse:
+      type: object
+      properties:
+        agentsConfigurationStatus:
+          type: array
+          description: Information about the agents that were instructed to stop collecting data.
+          items:
+            $ref: '#/components/schemas/AgentConfigurationStatus'
+    CreateApplicationRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the application to be created.
+          example: Production Web Tier
+        description:
+          type: string
+          description: Description of the application to be created.
+          example: Web servers for the production environment
+    CreateApplicationResponse:
+      type: object
+      properties:
+        configurationId:
+          type: string
+          description: Configuration ID of an application to be created.
+          example: d-APP-500123
+    DeleteApplicationsRequest:
+      type: object
+      required:
+        - configurationIds
+      properties:
+        configurationIds:
+          type: array
+          description: Configuration ID of an application to be deleted.
+          items:
+            type: string
+          example:
+            - d-APP-500123
+    UpdateApplicationRequest:
+      type: object
+      required:
+        - configurationId
+      properties:
+        configurationId:
+          type: string
+          description: Configuration ID of the application to be updated.
+          example: d-APP-500123
+        name:
+          type: string
+          description: New name of the application to be updated.
+          example: Production Web Tier Updated
+        description:
+          type: string
+          description: New description of the application to be updated.
+          example: Updated description for web tier servers
+    AssociateConfigurationItemsRequest:
+      type: object
+      required:
+        - applicationConfigurationId
+        - configurationIds
+      properties:
+        applicationConfigurationId:
+          type: string
+          description: The configuration ID of an application with which items are to be associated.
+          example: d-APP-500123
+        configurationIds:
+          type: array
+          description: The ID of each configuration item to be associated with an application.
+          items:
+            type: string
+          example:
+            - d-SERVER-500456
+    DisassociateConfigurationItemsRequest:
+      type: object
+      required:
+        - applicationConfigurationId
+        - configurationIds
+      properties:
+        applicationConfigurationId:
+          type: string
+          description: Configuration ID of an application from which each item is to be disassociated.
+          example: d-APP-500123
+        configurationIds:
+          type: array
+          description: Configuration ID of each item to be disassociated from an application.
+          items:
+            type: string
+          example:
+            - d-SERVER-500456
+    DescribeConfigurationsRequest:
+      type: object
+      required:
+        - configurationIds
+      properties:
+        configurationIds:
+          type: array
+          description: One or more configuration IDs.
+          items:
+            type: string
+          example:
+            - d-SERVER-500456
+    DescribeConfigurationsResponse:
+      type: object
+      properties:
+        configurations:
+          type: array
+          description: A key in the response map. The value is an array of data.
+          items:
+            type: object
+            additionalProperties:
+              type: string
+    ListConfigurationsRequest:
+      type: object
+      required:
+        - configurationType
+      properties:
+        configurationType:
+          type: string
+          description: A valid configuration identified by Application Discovery Service.
+          enum:
+            - SERVER
+            - PROCESS
+            - CONNECTION
+            - APPLICATION
+          example: SERVER
+        filters:
+          type: array
+          description: You can filter the list using a key-value format.
+          items:
+            $ref: '#/components/schemas/Filter'
+        maxResults:
+          type: integer
+          description: The total number of items to return. The maximum value is 100.
+          minimum: 0
+          maximum: 100
+          example: 10
+        nextToken:
+          type: string
+          description: Token to retrieve the next set of results.
+          example: ''
+        orderBy:
+          type: array
+          description: Certain filter criteria return output that can be sorted in ascending or descending order. For a list of output characteristics for each filter, see Using the ListConfigurations Action in the AWS Application Discovery Service User Guide.
+          items:
+            $ref: '#/components/schemas/OrderByElement'
+    ListConfigurationsResponse:
+      type: object
+      properties:
+        configurations:
+          type: array
+          description: Returns configuration details, including the configuration ID, attribute names, and attribute values.
+          items:
+            type: object
+            additionalProperties:
+              type: string
+        nextToken:
+          type: string
+          description: Token to retrieve the next set of results.
+          example: ''
+    GetDiscoverySummaryResponse:
+      type: object
+      properties:
+        servers:
+          type: integer
+          description: The number of servers discovered.
+          example: 42
+        applications:
+          type: integer
+          description: The number of applications discovered.
+          example: 5
+        serversMappedToApplications:
+          type: integer
+          description: The number of servers mapped to applications.
+          example: 15
+        serversMappedtoTags:
+          type: integer
+          description: The number of servers mapped to tags.
+          example: 30
+        mappedServerCount:
+          type: integer
+          description: The number of servers mapped to applications or tags.
+          example: 15
+        unmappedServerCount:
+          type: integer
+          description: The number of servers not mapped to any application.
+          example: 27
+        agentSummary:
+          $ref: '#/components/schemas/CustomerAgentInfo'
+        connectorSummary:
+          $ref: '#/components/schemas/CustomerConnectorInfo'
+    CustomerAgentInfo:
+      type: object
+      properties:
+        activeAgents:
+          type: integer
+          description: Number of active discovery agents.
+          example: 3
+        healthyAgents:
+          type: integer
+          description: Number of healthy discovery agents.
+          example: 3
+        blackListedAgents:
+          type: integer
+          description: Number of blacklisted discovery agents.
+          example: 0
+        shutdownAgents:
+          type: integer
+          description: Number of discovery agents with status SHUTDOWN.
+          example: 0
+        unhealthyAgents:
+          type: integer
+          description: Number of unhealthy discovery agents.
+          example: 0
+        totalAgents:
+          type: integer
+          description: Total number of discovery agents.
+          example: 3
+        unknownAgents:
+          type: integer
+          description: Number of unknown discovery agents.
+          example: 0
+    CustomerConnectorInfo:
+      type: object
+      properties:
+        activeConnectors:
+          type: integer
+          description: Number of active discovery connectors.
+          example: 0
+        healthyConnectors:
+          type: integer
+          description: Number of healthy discovery connectors.
+          example: 0
+        blackListedConnectors:
+          type: integer
+          description: Number of blacklisted discovery connectors.
+          example: 0
+        shutdownConnectors:
+          type: integer
+          description: Number of discovery connectors with status SHUTDOWN.
+          example: 0
+        unhealthyConnectors:
+          type: integer
+          description: Number of unhealthy discovery connectors.
+          example: 0
+        totalConnectors:
+          type: integer
+          description: Total number of discovery connectors.
+          example: 0
+        unknownConnectors:
+          type: integer
+          description: Number of unknown discovery connectors.
+          example: 0
+    ListServerNeighborsRequest:
+      type: object
+      required:
+        - configurationId
+      properties:
+        configurationId:
+          type: string
+          description: Configuration ID of the server for which neighbors are being listed.
+          example: d-SERVER-500456
+        portInformationNeeded:
+          type: boolean
+          description: Flag to indicate if port and protocol information is needed as part of the response.
+          example: false
+        neighborConfigurationIds:
+          type: array
+          description: List of configuration IDs to test for one-hop-away. Mandatory parameter when PortInformationNeeded is true.
+          items:
+            type: string
+          example:
+            - d-SERVER-500457
+        maxResults:
+          type: integer
+          description: Maximum number of results to return in a single page of output.
+          example: 10
+        nextToken:
+          type: string
+          description: Token to retrieve the next set of results.
+          example: ''
+    ListServerNeighborsResponse:
+      type: object
+      properties:
+        neighbors:
+          type: array
+          description: List of distinct servers that are one hop away from the given server.
+          items:
+            $ref: '#/components/schemas/NeighborConnectionDetail'
+        nextToken:
+          type: string
+          description: Token to retrieve the next set of results.
+          example: ''
+        knownDependencyCount:
+          type: integer
+          description: Count of distinct servers that are one hop away from the given server.
+          example: 1
+    NeighborConnectionDetail:
+      type: object
+      required:
+        - sourceServerId
+        - destinationServerId
+        - connectionsCount
+      properties:
+        sourceServerId:
+          type: string
+          description: The ID of the server that opened the network connection.
+          example: d-SERVER-500456
+        destinationServerId:
+          type: string
+          description: The ID of the server that accepted the network connection.
+          example: d-SERVER-500457
+        destinationPort:
+          type: integer
+          description: The destination network port for the connection.
+          example: 443
+        transportProtocol:
+          type: string
+          description: The network protocol used for the connection.
+          example: TCP
+        connectionsCount:
+          type: integer
+          format: int64
+          description: The number of open network connections with the neighboring server.
+          example: 125
+    StartBatchDeleteConfigurationTaskRequest:
+      type: object
+      required:
+        - configurationType
+        - configurationIds
+      properties:
+        configurationType:
+          type: string
+          description: The type of configuration item to delete. Supported types are SERVER.
+          enum:
+            - SERVER
+          example: SERVER
+        configurationIds:
+          type: array
+          description: The list of configuration IDs that will be deleted by this task.
+          items:
+            type: string
+          example:
+            - d-SERVER-500456
+    StartBatchDeleteConfigurationTaskResponse:
+      type: object
+      properties:
+        taskId:
+          type: string
+          description: The unique ID associated with the task.
+          example: task-500123
+    DescribeBatchDeleteConfigurationTaskRequest:
+      type: object
+      required:
+        - taskId
+      properties:
+        taskId:
+          type: string
+          description: The ID of the task to delete.
+          example: task-500123
+    DescribeBatchDeleteConfigurationTaskResponse:
+      type: object
+      properties:
+        task:
+          $ref: '#/components/schemas/BatchDeleteConfigurationTask'
+    BatchDeleteConfigurationTask:
+      type: object
+      properties:
+        taskId:
+          type: string
+          description: The deletion task's unique identifier.
+          example: task-500123
+        status:
+          type: string
+          description: The current execution status of the deletion task.
+          enum:
+            - INITIALIZING
+            - VALIDATING
+            - DELETING
+            - COMPLETED
+            - FAILED
+          example: COMPLETED
+        startTime:
+          type: string
+          description: An epoch seconds timestamp (Unix) of when the deletion task was started.
+          example: '2026-04-19T10:00:00Z'
+        endTime:
+          type: string
+          description: An epoch seconds timestamp (Unix) of when the deletion task was completed.
+          example: '2026-04-19T10:05:00Z'
+        configurationType:
+          type: string
+          description: The type of configuration item to delete.
+          example: SERVER
+        requestedConfigurations:
+          type: array
+          description: The list of configuration IDs that were originally requested to be deleted by this task.
+          items:
+            type: string
+          example:
+            - d-SERVER-500456
+        deletedConfigurations:
+          type: array
+          description: The list of configuration IDs that were successfully deleted by this task.
+          items:
+            type: string
+          example:
+            - d-SERVER-500456
+        failedConfigurations:
+          type: array
+          description: A list of configuration IDs that produced an associated error.
+          items:
+            $ref: '#/components/schemas/FailedConfiguration'
+        deletionWarnings:
+          type: array
+          description: A list of warnings associated with this deletion task.
+          items:
+            $ref: '#/components/schemas/DeletionWarning'
+    FailedConfiguration:
+      type: object
+      properties:
+        configurationId:
+          type: string
+          description: The configuration ID of the configuration that failed to delete.
+          example: d-SERVER-500456
+        errorStatusCode:
+          type: integer
+          description: The error status code.
+          example: 404
+        errorMessage:
+          type: string
+          description: A descriptive message indicating why the associated configuration failed to delete.
+          example: Configuration item not found
+    DeletionWarning:
+      type: object
+      properties:
+        configurationId:
+          type: string
+          description: The configuration ID of the configuration item associated with the deletion warning.
+          example: d-SERVER-500456
+        warningCode:
+          type: integer
+          description: The integer warning code associated with the warning message.
+          example: 1
+        warningText:
+          type: string
+          description: A descriptive message of the warning the associated configuration item produced.
+          example: Configuration item may have dependencies
+    StartExportTaskRequest:
+      type: object
+      properties:
+        exportDataFormat:
+          type: array
+          description: "The file format for the returned export data. Default(s) are CSV. Note: The GRAPHML option has been deprecated."
+          items:
+            type: string
+            enum:
+              - CSV
+          example:
+            - CSV
+        filters:
+          type: array
+          description: If a filter is present, it selects the single agentId of the Application Discovery Agent for which data is exported.
+          items:
+            $ref: '#/components/schemas/ExportFilter'
+        startTime:
+          type: string
+          description: The start timestamp for exported data from the single Application Discovery Agent selected in the filters.
+          example: '2026-04-01T00:00:00Z'
+        endTime:
+          type: string
+          description: The end timestamp for exported data from the single Application Discovery Agent selected in the filters.
+          example: '2026-04-19T23:59:59Z'
+        preferences:
+          type: object
+          description: Indicates the type of agent export.
+    StartExportTaskResponse:
+      type: object
+      properties:
+        exportId:
+          type: string
+          description: A unique identifier used to query the status of an export request.
+          example: export-500123
+    DescribeExportTasksRequest:
+      type: object
+      properties:
+        exportIds:
+          type: array
+          description: One or more unique identifiers used to query the status of an export request.
+          items:
+            type: string
+          example:
+            - export-500123
+        filters:
+          type: array
+          description: One or more filters.
+          items:
+            $ref: '#/components/schemas/ExportFilter'
+        maxResults:
+          type: integer
+          description: The maximum number of volume results returned by DescribeExportTasks in paginated output.
+          example: 10
+        nextToken:
+          type: string
+          description: The nextToken value returned from a previous paginated DescribeExportTasks request.
+          example: ''
+    DescribeExportTasksResponse:
+      type: object
+      properties:
+        exportsInfo:
+          type: array
+          description: Contains one or more sets of export request details.
+          items:
+            $ref: '#/components/schemas/ExportInfo'
+        nextToken:
+          type: string
+          description: The nextToken value to include in a future DescribeExportTasks request.
+          example: ''
+    ExportInfo:
+      type: object
+      required:
+        - exportId
+        - exportStatus
+        - statusMessage
+        - exportRequestTime
+      properties:
+        exportId:
+          type: string
+          description: A unique identifier used to query the status of an export request.
+          example: export-500123
+        exportStatus:
+          type: string
+          description: The status of the data export job.
+          enum:
+            - FAILED
+            - SUCCEEDED
+            - IN_PROGRESS
+          example: SUCCEEDED
+        statusMessage:
+          type: string
+          description: A status message provided for API callers.
+          example: Export complete
+        configurationsDownloadUrl:
+          type: string
+          description: A URL for an Amazon S3 bucket where you can review the exported data.
+          example: https://s3.amazonaws.com/aws-application-discovery-service-export/500123/export.zip
+        exportRequestTime:
+          type: string
+          description: The time that the data export was initiated.
+          example: '2026-04-19T10:00:00Z'
+        isTruncated:
+          type: boolean
+          description: If true, the export of agent information exceeded the size limit for a single export, and the exported data is incomplete.
+          example: false
+        requestedStartTime:
+          type: string
+          description: The value of startTime parameter in the StartExportTask request.
+          example: '2026-04-01T00:00:00Z'
+        requestedEndTime:
+          type: string
+          description: The endTime used in the StartExportTask request. If no endTime was requested, this result does not appear in ExportInfo.
+          example: '2026-04-19T23:59:59Z'
+    StartContinuousExportResponse:
+      type: object
+      properties:
+        exportId:
+          type: string
+          description: The unique ID assigned to this export.
+          example: continuous-export-500123
+        s3Bucket:
+          type: string
+          description: The name of the s3 bucket where the export data parquet files are stored.
+          example: aws-application-discovery-service-500123
+        startTime:
+          type: string
+          description: The timestamp representing when the continuous export was started.
+          example: '2026-04-19T10:00:00Z'
+        dataSource:
+          type: string
+          description: The type of data collector used to gather this data.
+          example: AGENT
+        schemaStorageConfig:
+          type: object
+          description: A dictionary which describes how the data is stored.
+    StopContinuousExportRequest:
+      type: object
+      required:
+        - exportId
+      properties:
+        exportId:
+          type: string
+          description: The unique ID assigned to this export.
+          example: continuous-export-500123
+    StopContinuousExportResponse:
+      type: object
+      properties:
+        startTime:
+          type: string
+          description: Timestamp that represents when this continuous export started collecting data.
+          example: '2026-04-19T10:00:00Z'
+        stopTime:
+          type: string
+          description: Timestamp that represents when this continuous export was stopped.
+          example: '2026-04-19T11:00:00Z'
+    DescribeContinuousExportsRequest:
+      type: object
+      properties:
+        exportIds:
+          type: array
+          description: The unique IDs assigned to the exports.
+          items:
+            type: string
+          example:
+            - continuous-export-500123
+        maxResults:
+          type: integer
+          description: A number between 1 and 100 specifying the maximum number of continuous export descriptions returned.
+          minimum: 1
+          maximum: 100
+          example: 10
+        nextToken:
+          type: string
+          description: The token from the previous call to DescribeExportTasks.
+          example: ''
+    DescribeContinuousExportsResponse:
+      type: object
+      properties:
+        descriptions:
+          type: array
+          description: A list of continuous export descriptions.
+          items:
+            $ref: '#/components/schemas/ContinuousExportDescription'
+        nextToken:
+          type: string
+          description: The token from the previous call to DescribeExportTasks.
+          example: ''
+    ContinuousExportDescription:
+      type: object
+      properties:
+        exportId:
+          type: string
+          description: The unique ID assigned to this export.
+          example: continuous-export-500123
+        status:
+          type: string
+          description: Describes the status of the export. Can be one of the following values — START_IN_PROGRESS, START_FAILED, ACTIVE, ERROR, STOP_IN_PROGRESS, STOP_FAILED, INACTIVE.
+          enum:
+            - START_IN_PROGRESS
+            - START_FAILED
+            - ACTIVE
+            - ERROR
+            - STOP_IN_PROGRESS
+            - STOP_FAILED
+            - INACTIVE
+          example: ACTIVE
+        statusDetail:
+          type: string
+          description: Contains information about any errors that have occurred.
+          example: ''
+        s3Bucket:
+          type: string
+          description: The name of the s3 bucket where the export data parquet files are stored.
+          example: aws-application-discovery-service-500123
+        startTime:
+          type: string
+          description: The timestamp representing when the continuous export was started.
+          example: '2026-04-19T10:00:00Z'
+        stopTime:
+          type: string
+          description: The timestamp representing when the continuous export was stopped.
+          example: '2026-04-19T11:00:00Z'
+        dataSource:
+          type: string
+          description: The type of data collector used to gather this data.
+          example: AGENT
+        schemaStorageConfig:
+          type: object
+          description: An object which describes how the data is stored.
+    StartImportTaskRequest:
+      type: object
+      required:
+        - name
+        - importUrl
+      properties:
+        clientRequestToken:
+          type: string
+          description: Optional. A unique token that you can provide to prevent the same import request from occurring more than once.
+          example: client-token-500123
+        name:
+          type: string
+          description: A descriptive name for this request. You can use this name to filter future requests related to this import task, such as identifying applications and servers that were included in this import task.
+          maxLength: 255
+          example: Server Inventory Import April 2026
+        importUrl:
+          type: string
+          description: The URL for your import file that you've uploaded to Amazon S3.
+          example: s3://my-bucket/server-inventory.csv
+    StartImportTaskResponse:
+      type: object
+      properties:
+        task:
+          $ref: '#/components/schemas/ImportTask'
+    DescribeImportTasksRequest:
+      type: object
+      properties:
+        filters:
+          type: array
+          description: An array of name-value pairs that you provide to filter the results for the DescribeImportTask request to a specific subset of results.
+          items:
+            $ref: '#/components/schemas/ImportTaskFilter'
+        maxResults:
+          type: integer
+          description: The maximum number of results that you want this request to return.
+          minimum: 1
+          maximum: 100
+          example: 10
+        nextToken:
+          type: string
+          description: The token to request a specific page of results.
+          example: ''
+    DescribeImportTasksResponse:
+      type: object
+      properties:
+        nextToken:
+          type: string
+          description: The token to request the next page of results.
+          example: ''
+        tasks:
+          type: array
+          description: A returned array of import tasks that match any applied filters, up to the specified number of maximum results.
+          items:
+            $ref: '#/components/schemas/ImportTask'
+    ImportTask:
+      type: object
+      properties:
+        importTaskId:
+          type: string
+          description: The unique ID for a specific import task.
+          example: import-task-500123
+        clientRequestToken:
+          type: string
+          description: A unique token used to prevent the same import request from occurring more than once.
+          example: client-token-500123
+        name:
+          type: string
+          description: A descriptive name for an import task.
+          example: Server Inventory Import April 2026
+        importUrl:
+          type: string
+          description: The URL for your import file that you've uploaded to Amazon S3.
+          example: s3://my-bucket/server-inventory.csv
+        status:
+          type: string
+          description: The status of the import task.
+          enum:
+            - IMPORT_IN_PROGRESS
+            - IMPORT_COMPLETE
+            - IMPORT_COMPLETE_WITH_ERRORS
+            - IMPORT_FAILED
+            - IMPORT_FAILED_SERVER_LIMIT_EXCEEDED
+            - IMPORT_FAILED_RECORD_LIMIT_EXCEEDED
+            - DELETE_IN_PROGRESS
+            - DELETE_COMPLETE
+            - DELETE_FAILED
+            - DELETE_FAILED_LIMIT_EXCEEDED
+            - INTERNAL_ERROR
+          example: IMPORT_COMPLETE
+        importRequestTime:
+          type: string
+          description: The time that the import task request was made, presented in the Unix time stamp format.
+          example: '2026-04-19T10:00:00Z'
+        importCompletionTime:
+          type: string
+          description: The time that the import task request finished, presented in the Unix time stamp format.
+          example: '2026-04-19T10:05:00Z'
+        importDeletedTime:
+          type: string
+          description: The time that the import task request was deleted, presented in the Unix time stamp format.
+          example: ''
+        serverImportSuccess:
+          type: integer
+          description: The total number of server records in the import file that were successfully imported.
+          example: 42
+        serverImportFailure:
+          type: integer
+          description: The total number of server records in the import file that failed to be imported.
+          example: 0
+        applicationImportSuccess:
+          type: integer
+          description: The total number of application records in the import file that were successfully imported.
+          example: 5
+        applicationImportFailure:
+          type: integer
+          description: The total number of application records in the import file that failed to be imported.
+          example: 0
+        errorsAndFailedEntriesZip:
+          type: string
+          description: A link to a compressed archive folder (in the ZIP format) of all errors and failed entries that were detected, organized according to the type of error.
+          example: ''
+    BatchDeleteImportDataRequest:
+      type: object
+      required:
+        - importTaskIds
+      properties:
+        importTaskIds:
+          type: array
+          description: The IDs for the import tasks that you want to delete.
+          maxItems: 10
+          items:
+            type: string
+          example:
+            - import-task-500123
+        deleteHistory:
+          type: boolean
+          description: Set to true to remove the deleted import task from Migration Hub.
+          example: false
+    BatchDeleteImportDataResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          description: Error messages returned for each import task that you deleted as a response for this command.
+          items:
+            $ref: '#/components/schemas/BatchDeleteImportDataError'
+    BatchDeleteImportDataError:
+      type: object
+      properties:
+        importTaskId:
+          type: string
+          description: The unique import ID associated with the error that occurred.
+          example: import-task-500123
+        errorCode:
+          type: string
+          description: The type of error that occurred for a specific import task.
+          example: NOT_FOUND
+        errorDescription:
+          type: string
+          description: The description of the error that occurred for a specific import task.
+          example: Import task not found
+    CreateTagsRequest:
+      type: object
+      required:
+        - configurationIds
+        - tags
+      properties:
+        configurationIds:
+          type: array
+          description: A list of configuration items that you want to tag.
+          items:
+            type: string
+          example:
+            - d-SERVER-500456
+        tags:
+          type: array
+          description: Tags that you want to associate with one or more configuration items.
+          items:
+            $ref: '#/components/schemas/Tag'
+    Tag:
+      type: object
+      required:
+        - key
+        - value
+      properties:
+        key:
+          type: string
+          description: The type of tag on which to filter.
+          example: environment
+        value:
+          type: string
+          description: A value for a tag key on which to filter.
+          example: production
+    DeleteTagsRequest:
+      type: object
+      required:
+        - configurationIds
+      properties:
+        configurationIds:
+          type: array
+          description: A list of configuration items with tags that you want to delete.
+          items:
+            type: string
+          example:
+            - d-SERVER-500456
+        tags:
+          type: array
+          description: Tags that you want to delete from one or more configuration items.
+          items:
+            $ref: '#/components/schemas/Tag'
+    DescribeTagsRequest:
+      type: object
+      properties:
+        filters:
+          type: array
+          description: You can filter the list using a key-value format. You can separate these items by using logical operators.
+          items:
+            $ref: '#/components/schemas/TagFilter'
+        maxResults:
+          type: integer
+          description: The total number of items to return in a single page of output.
+          example: 10
+        nextToken:
+          type: string
+          description: A token to start the list. Use this token to get the next set of results.
+          example: ''
+    DescribeTagsResponse:
+      type: object
+      properties:
+        tags:
+          type: array
+          description: Depending on the input, this is a list of configuration items tagged with a specific tag, or a list of tags for a specific configuration item.
+          items:
+            $ref: '#/components/schemas/ConfigurationTag'
+        nextToken:
+          type: string
+          description: The call returns a token. Use this token to get the next set of results.
+          example: ''
+    ConfigurationTag:
+      type: object
+      properties:
+        configurationType:
+          type: string
+          description: A type of IT asset to tag.
+          enum:
+            - SERVER
+            - PROCESS
+            - CONNECTION
+            - APPLICATION
+          example: SERVER
+        configurationId:
+          type: string
+          description: The configuration ID for the item to tag.
+          example: d-SERVER-500456
+        key:
+          type: string
+          description: A type of tag on which to filter.
+          example: environment
+        value:
+          type: string
+          description: A value on which to filter.
+          example: production
+        timeOfCreation:
+          type: string
+          description: The time the configuration tag was created in Coordinated Universal Time (UTC).
+          example: '2026-04-19T10:00:00Z'
+    Filter:
+      type: object
+      required:
+        - name
+        - values
+        - condition
+      properties:
+        name:
+          type: string
+          description: The name of the filter.
+          example: hostName
+        values:
+          type: array
+          description: A string value on which to filter.
+          items:
+            type: string
+          example:
+            - server-01.example.com
+        condition:
+          type: string
+          description: A conditional operator. The following operators are valid — EQUALS, NOT_EQUALS, CONTAINS, NOT_CONTAINS.
+          enum:
+            - EQUALS
+            - NOT_EQUALS
+            - CONTAINS
+            - NOT_CONTAINS
+          example: EQUALS
+    ExportFilter:
+      type: object
+      required:
+        - name
+        - values
+        - condition
+      properties:
+        name:
+          type: string
+          description: A single ExportFilter name. Supported filters — agentIds.
+          example: agentIds
+        values:
+          type: array
+          description: A single agent ID for a Discovery Agent. An agent ID can be found using the DescribeAgents action.
+          items:
+            type: string
+          example:
+            - d-agent-500123
+        condition:
+          type: string
+          description: Supported condition — EQUALS.
+          example: EQUALS
+    TagFilter:
+      type: object
+      required:
+        - name
+        - values
+      properties:
+        name:
+          type: string
+          description: A name of the tag filter.
+          example: tagKey
+        values:
+          type: array
+          description: Values for the tag filter.
+          items:
+            type: string
+          example:
+            - environment
+    ImportTaskFilter:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name, status, or import task ID for a specific import task.
+          enum:
+            - IMPORT_TASK_ID
+            - STATUS
+            - NAME
+          example: STATUS
+        values:
+          type: array
+          description: An array of strings that you can provide to match against a specific name, status, or import task ID to filter your import task.
+          items:
+            type: string
+          example:
+            - IMPORT_COMPLETE
+    OrderByElement:
+      type: object
+      required:
+        - fieldName
+      properties:
+        fieldName:
+          type: string
+          description: The field on which to order.
+          example: hostName
+        sortOrder:
+          type: string
+          description: Ordering direction.
+          enum:
+            - ASC
+            - DESC
+          example: ASC
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The error message describing what went wrong.
+          example: The specified resource was not found.
+        code:
+          type: string
+          description: The error code.
+          example: ResourceNotFoundException

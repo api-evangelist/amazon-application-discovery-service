@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-start-import-task-request-schema.json",
+  "title": "StartImportTaskRequest",
+  "description": "StartImportTaskRequest schema from Amazon Application Discovery Service API",
+  "type": "object",
+  "properties": {
+    "clientRequestToken": {
+      "type": "string",
+      "example": "client-token-500123",
+      "description": "Optional. A unique token that you can provide to prevent the same import request from occurring more than once."
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 255,
+      "example": "Server Inventory Import April 2026",
+      "description": "A descriptive name for this request. You can use this name to filter future requests related to this import task, such as identifying applications and servers that were included in this import task."
+    },
+    "importUrl": {
+      "type": "string",
+      "example": "s3://my-bucket/server-inventory.csv",
+      "description": "The URL for your import file that you've uploaded to Amazon S3."
+    }
+  },
+  "required": [
+    "name",
+    "importUrl"
+  ]
+}

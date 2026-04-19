@@ -1,0 +1,43 @@
+{
+  "type": "object",
+  "description": "CustomerAgentInfo schema from Amazon Application Discovery Service API",
+  "properties": {
+    "activeAgents": {
+      "type": "int32",
+      "description": "Number of active discovery agents.",
+      "example": 3
+    },
+    "healthyAgents": {
+      "type": "int32",
+      "description": "Number of healthy discovery agents.",
+      "example": 3
+    },
+    "blackListedAgents": {
+      "type": "int32",
+      "description": "Number of blacklisted discovery agents.",
+      "example": 0
+    },
+    "shutdownAgents": {
+      "type": "int32",
+      "description": "Number of discovery agents with status SHUTDOWN.",
+      "example": 0
+    },
+    "unhealthyAgents": {
+      "type": "int32",
+      "description": "Number of unhealthy discovery agents.",
+      "example": 0
+    },
+    "totalAgents": {
+      "type": "int32",
+      "description": "Total number of discovery agents.",
+      "example": 3
+    },
+    "unknownAgents": {
+      "type": "int32",
+      "description": "Number of unknown discovery agents.",
+      "example": 0
+    }
+  },
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-customer-agent-info-structure.json"
+}

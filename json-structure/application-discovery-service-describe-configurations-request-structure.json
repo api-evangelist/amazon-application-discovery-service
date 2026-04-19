@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "description": "DescribeConfigurationsRequest schema from Amazon Application Discovery Service API",
+  "properties": {
+    "configurationIds": {
+      "type": "array",
+      "description": "One or more configuration IDs.",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "d-SERVER-500456"
+      ]
+    }
+  },
+  "required": [
+    "configurationIds"
+  ],
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-describe-configurations-request-structure.json"
+}

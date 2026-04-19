@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "description": "FailedConfiguration schema from Amazon Application Discovery Service API",
+  "properties": {
+    "configurationId": {
+      "type": "string",
+      "description": "The configuration ID of the configuration that failed to delete.",
+      "example": "d-SERVER-500456"
+    },
+    "errorStatusCode": {
+      "type": "int32",
+      "description": "The error status code.",
+      "example": 404
+    },
+    "errorMessage": {
+      "type": "string",
+      "description": "A descriptive message indicating why the associated configuration failed to delete.",
+      "example": "Configuration item not found"
+    }
+  },
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-failed-configuration-structure.json"
+}

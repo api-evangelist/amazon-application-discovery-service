@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-create-application-response-schema.json",
+  "title": "CreateApplicationResponse",
+  "description": "CreateApplicationResponse schema from Amazon Application Discovery Service API",
+  "type": "object",
+  "properties": {
+    "configurationId": {
+      "type": "string",
+      "example": "d-APP-500123",
+      "description": "Configuration ID of an application to be created."
+    }
+  }
+}

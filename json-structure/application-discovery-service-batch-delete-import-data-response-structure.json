@@ -1,0 +1,32 @@
+{
+  "type": "object",
+  "description": "BatchDeleteImportDataResponse schema from Amazon Application Discovery Service API",
+  "properties": {
+    "errors": {
+      "type": "array",
+      "description": "Error messages returned for each import task that you deleted as a response for this command.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "importTaskId": {
+            "type": "string",
+            "description": "The unique import ID associated with the error that occurred.",
+            "example": "import-task-500123"
+          },
+          "errorCode": {
+            "type": "string",
+            "description": "The type of error that occurred for a specific import task.",
+            "example": "NOT_FOUND"
+          },
+          "errorDescription": {
+            "type": "string",
+            "description": "The description of the error that occurred for a specific import task.",
+            "example": "Import task not found"
+          }
+        }
+      }
+    }
+  },
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-batch-delete-import-data-response-structure.json"
+}

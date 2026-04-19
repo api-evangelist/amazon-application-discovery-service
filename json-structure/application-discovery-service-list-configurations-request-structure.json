@@ -1,0 +1,100 @@
+{
+  "type": "object",
+  "description": "ListConfigurationsRequest schema from Amazon Application Discovery Service API",
+  "properties": {
+    "configurationType": {
+      "type": "string",
+      "description": "A valid configuration identified by Application Discovery Service.",
+      "enum": [
+        "SERVER",
+        "PROCESS",
+        "CONNECTION",
+        "APPLICATION"
+      ],
+      "example": "SERVER"
+    },
+    "filters": {
+      "type": "array",
+      "description": "You can filter the list using a key-value format.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the filter.",
+            "example": "hostName"
+          },
+          "values": {
+            "type": "array",
+            "description": "A string value on which to filter.",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "server-01.example.com"
+            ]
+          },
+          "condition": {
+            "type": "string",
+            "description": "A conditional operator. The following operators are valid \u2014 EQUALS, NOT_EQUALS, CONTAINS, NOT_CONTAINS.",
+            "enum": [
+              "EQUALS",
+              "NOT_EQUALS",
+              "CONTAINS",
+              "NOT_CONTAINS"
+            ],
+            "example": "EQUALS"
+          }
+        },
+        "required": [
+          "name",
+          "values",
+          "condition"
+        ]
+      }
+    },
+    "maxResults": {
+      "type": "int32",
+      "description": "The total number of items to return. The maximum value is 100.",
+      "minimum": 0,
+      "maximum": 100,
+      "example": 10
+    },
+    "nextToken": {
+      "type": "string",
+      "description": "Token to retrieve the next set of results.",
+      "example": ""
+    },
+    "orderBy": {
+      "type": "array",
+      "description": "Certain filter criteria return output that can be sorted in ascending or descending order. For a list of output characteristics for each filter, see Using the ListConfigurations Action in the AWS Application Discovery Service User Guide.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "fieldName": {
+            "type": "string",
+            "description": "The field on which to order.",
+            "example": "hostName"
+          },
+          "sortOrder": {
+            "type": "string",
+            "description": "Ordering direction.",
+            "enum": [
+              "ASC",
+              "DESC"
+            ],
+            "example": "ASC"
+          }
+        },
+        "required": [
+          "fieldName"
+        ]
+      }
+    }
+  },
+  "required": [
+    "configurationType"
+  ],
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-list-configurations-request-structure.json"
+}

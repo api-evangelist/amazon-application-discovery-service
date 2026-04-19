@@ -1,0 +1,27 @@
+{
+  "type": "object",
+  "description": "BatchDeleteImportDataRequest schema from Amazon Application Discovery Service API",
+  "properties": {
+    "importTaskIds": {
+      "type": "array",
+      "description": "The IDs for the import tasks that you want to delete.",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 10,
+      "example": [
+        "import-task-500123"
+      ]
+    },
+    "deleteHistory": {
+      "type": "boolean",
+      "description": "Set to true to remove the deleted import task from Migration Hub.",
+      "example": false
+    }
+  },
+  "required": [
+    "importTaskIds"
+  ],
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-batch-delete-import-data-request-structure.json"
+}

@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-start-export-task-request-schema.json",
+  "title": "StartExportTaskRequest",
+  "description": "StartExportTaskRequest schema from Amazon Application Discovery Service API",
+  "type": "object",
+  "properties": {
+    "exportDataFormat": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "CSV"
+        ]
+      },
+      "example": [
+        "CSV"
+      ],
+      "description": "The file format for the returned export data. Default(s) are CSV. Note: The GRAPHML option has been deprecated."
+    },
+    "filters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "agentIds",
+            "description": "A single ExportFilter name. Supported filters \u2014 agentIds."
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "d-agent-500123"
+            ],
+            "description": "A single agent ID for a Discovery Agent. An agent ID can be found using the DescribeAgents action."
+          },
+          "condition": {
+            "type": "string",
+            "example": "EQUALS",
+            "description": "Supported condition \u2014 EQUALS."
+          }
+        },
+        "required": [
+          "name",
+          "values",
+          "condition"
+        ]
+      },
+      "description": "If a filter is present, it selects the single agentId of the Application Discovery Agent for which data is exported."
+    },
+    "startTime": {
+      "type": "string",
+      "example": "2026-04-01T00:00:00Z",
+      "description": "The start timestamp for exported data from the single Application Discovery Agent selected in the filters."
+    },
+    "endTime": {
+      "type": "string",
+      "example": "2026-04-19T23:59:59Z",
+      "description": "The end timestamp for exported data from the single Application Discovery Agent selected in the filters."
+    },
+    "preferences": {
+      "type": "object",
+      "description": "Indicates the type of agent export."
+    }
+  }
+}

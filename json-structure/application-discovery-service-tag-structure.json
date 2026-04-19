@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "description": "Tag schema from Amazon Application Discovery Service API",
+  "properties": {
+    "key": {
+      "type": "string",
+      "description": "The type of tag on which to filter.",
+      "example": "environment"
+    },
+    "value": {
+      "type": "string",
+      "description": "A value for a tag key on which to filter.",
+      "example": "production"
+    }
+  },
+  "required": [
+    "key",
+    "value"
+  ],
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-tag-structure.json"
+}

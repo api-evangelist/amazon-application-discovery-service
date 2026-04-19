@@ -1,0 +1,32 @@
+{
+  "type": "object",
+  "description": "StartContinuousExportResponse schema from Amazon Application Discovery Service API",
+  "properties": {
+    "exportId": {
+      "type": "string",
+      "description": "The unique ID assigned to this export.",
+      "example": "continuous-export-500123"
+    },
+    "s3Bucket": {
+      "type": "string",
+      "description": "The name of the s3 bucket where the export data parquet files are stored.",
+      "example": "aws-application-discovery-service-500123"
+    },
+    "startTime": {
+      "type": "string",
+      "description": "The timestamp representing when the continuous export was started.",
+      "example": "2026-04-19T10:00:00Z"
+    },
+    "dataSource": {
+      "type": "string",
+      "description": "The type of data collector used to gather this data.",
+      "example": "AGENT"
+    },
+    "schemaStorageConfig": {
+      "type": "object",
+      "description": "A dictionary which describes how the data is stored."
+    }
+  },
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-start-continuous-export-response-structure.json"
+}

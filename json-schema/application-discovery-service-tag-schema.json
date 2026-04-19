@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-tag-schema.json",
+  "title": "Tag",
+  "description": "Tag schema from Amazon Application Discovery Service API",
+  "type": "object",
+  "properties": {
+    "key": {
+      "type": "string",
+      "example": "environment",
+      "description": "The type of tag on which to filter."
+    },
+    "value": {
+      "type": "string",
+      "example": "production",
+      "description": "A value for a tag key on which to filter."
+    }
+  },
+  "required": [
+    "key",
+    "value"
+  ]
+}

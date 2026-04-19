@@ -1,0 +1,17 @@
+{
+  "agentsInfo": [
+    {
+      "agentId": "d-agent-500123",
+      "hostName": "server-01.example.com",
+      "agentNetworkInfoList": [
+        null
+      ],
+      "connectorId": "500123",
+      "version": "2.0.1",
+      "health": "HEALTHY",
+      "lastHealthPingTime": "2026-04-19T10:00:00Z",
+      "collectionStatus": "START_SCHEDULED"
+    }
+  ],
+  "nextToken": ""
+}

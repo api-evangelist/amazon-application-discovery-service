@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-describe-tags-request-schema.json",
+  "title": "DescribeTagsRequest",
+  "description": "DescribeTagsRequest schema from Amazon Application Discovery Service API",
+  "type": "object",
+  "properties": {
+    "filters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "tagKey",
+            "description": "A name of the tag filter."
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "environment"
+            ],
+            "description": "Values for the tag filter."
+          }
+        },
+        "required": [
+          "name",
+          "values"
+        ]
+      },
+      "description": "You can filter the list using a key-value format. You can separate these items by using logical operators."
+    },
+    "maxResults": {
+      "type": "integer",
+      "example": 10,
+      "description": "The total number of items to return in a single page of output."
+    },
+    "nextToken": {
+      "type": "string",
+      "example": "",
+      "description": "A token to start the list. Use this token to get the next set of results."
+    }
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-describe-continuous-exports-response-schema.json",
+  "title": "DescribeContinuousExportsResponse",
+  "description": "DescribeContinuousExportsResponse schema from Amazon Application Discovery Service API",
+  "type": "object",
+  "properties": {
+    "descriptions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "exportId": {
+            "type": "string",
+            "example": "continuous-export-500123",
+            "description": "The unique ID assigned to this export."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "START_IN_PROGRESS",
+              "START_FAILED",
+              "ACTIVE",
+              "ERROR",
+              "STOP_IN_PROGRESS",
+              "STOP_FAILED",
+              "INACTIVE"
+            ],
+            "example": "ACTIVE",
+            "description": "Describes the status of the export. Can be one of the following values \u2014 START_IN_PROGRESS, START_FAILED, ACTIVE, ERROR, STOP_IN_PROGRESS, STOP_FAILED, INACTIVE."
+          },
+          "statusDetail": {
+            "type": "string",
+            "example": "",
+            "description": "Contains information about any errors that have occurred."
+          },
+          "s3Bucket": {
+            "type": "string",
+            "example": "aws-application-discovery-service-500123",
+            "description": "The name of the s3 bucket where the export data parquet files are stored."
+          },
+          "startTime": {
+            "type": "string",
+            "example": "2026-04-19T10:00:00Z",
+            "description": "The timestamp representing when the continuous export was started."
+          },
+          "stopTime": {
+            "type": "string",
+            "example": "2026-04-19T11:00:00Z",
+            "description": "The timestamp representing when the continuous export was stopped."
+          },
+          "dataSource": {
+            "type": "string",
+            "example": "AGENT",
+            "description": "The type of data collector used to gather this data."
+          },
+          "schemaStorageConfig": {
+            "type": "object",
+            "description": "An object which describes how the data is stored."
+          }
+        }
+      },
+      "description": "A list of continuous export descriptions."
+    },
+    "nextToken": {
+      "type": "string",
+      "example": "",
+      "description": "The token from the previous call to DescribeExportTasks."
+    }
+  }
+}

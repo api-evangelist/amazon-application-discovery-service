@@ -1,0 +1,27 @@
+{
+  "type": "object",
+  "description": "DisassociateConfigurationItemsRequest schema from Amazon Application Discovery Service API",
+  "properties": {
+    "applicationConfigurationId": {
+      "type": "string",
+      "description": "Configuration ID of an application from which each item is to be disassociated.",
+      "example": "d-APP-500123"
+    },
+    "configurationIds": {
+      "type": "array",
+      "description": "Configuration ID of each item to be disassociated from an application.",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "d-SERVER-500456"
+      ]
+    }
+  },
+  "required": [
+    "applicationConfigurationId",
+    "configurationIds"
+  ],
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-disassociate-configuration-items-request-structure.json"
+}

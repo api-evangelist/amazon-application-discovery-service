@@ -1,0 +1,73 @@
+{
+  "type": "object",
+  "description": "DescribeExportTasksResponse schema from Amazon Application Discovery Service API",
+  "properties": {
+    "exportsInfo": {
+      "type": "array",
+      "description": "Contains one or more sets of export request details.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "exportId": {
+            "type": "string",
+            "description": "A unique identifier used to query the status of an export request.",
+            "example": "export-500123"
+          },
+          "exportStatus": {
+            "type": "string",
+            "description": "The status of the data export job.",
+            "enum": [
+              "FAILED",
+              "SUCCEEDED",
+              "IN_PROGRESS"
+            ],
+            "example": "SUCCEEDED"
+          },
+          "statusMessage": {
+            "type": "string",
+            "description": "A status message provided for API callers.",
+            "example": "Export complete"
+          },
+          "configurationsDownloadUrl": {
+            "type": "string",
+            "description": "A URL for an Amazon S3 bucket where you can review the exported data.",
+            "example": "https://s3.amazonaws.com/aws-application-discovery-service-export/500123/export.zip"
+          },
+          "exportRequestTime": {
+            "type": "string",
+            "description": "The time that the data export was initiated.",
+            "example": "2026-04-19T10:00:00Z"
+          },
+          "isTruncated": {
+            "type": "boolean",
+            "description": "If true, the export of agent information exceeded the size limit for a single export, and the exported data is incomplete.",
+            "example": false
+          },
+          "requestedStartTime": {
+            "type": "string",
+            "description": "The value of startTime parameter in the StartExportTask request.",
+            "example": "2026-04-01T00:00:00Z"
+          },
+          "requestedEndTime": {
+            "type": "string",
+            "description": "The endTime used in the StartExportTask request. If no endTime was requested, this result does not appear in ExportInfo.",
+            "example": "2026-04-19T23:59:59Z"
+          }
+        },
+        "required": [
+          "exportId",
+          "exportStatus",
+          "statusMessage",
+          "exportRequestTime"
+        ]
+      }
+    },
+    "nextToken": {
+      "type": "string",
+      "description": "The nextToken value to include in a future DescribeExportTasks request.",
+      "example": ""
+    }
+  },
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-describe-export-tasks-response-structure.json"
+}

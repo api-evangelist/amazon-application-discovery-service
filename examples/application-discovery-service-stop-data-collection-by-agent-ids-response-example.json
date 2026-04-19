@@ -1,0 +1,9 @@
+{
+  "agentsConfigurationStatus": [
+    {
+      "agentId": "d-agent-500123",
+      "operationSucceeded": true,
+      "description": "Started data collection"
+    }
+  ]
+}

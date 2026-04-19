@@ -1,0 +1,30 @@
+{
+  "type": "object",
+  "description": "StartBatchDeleteConfigurationTaskRequest schema from Amazon Application Discovery Service API",
+  "properties": {
+    "configurationType": {
+      "type": "string",
+      "description": "The type of configuration item to delete. Supported types are SERVER.",
+      "enum": [
+        "SERVER"
+      ],
+      "example": "SERVER"
+    },
+    "configurationIds": {
+      "type": "array",
+      "description": "The list of configuration IDs that will be deleted by this task.",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "d-SERVER-500456"
+      ]
+    }
+  },
+  "required": [
+    "configurationType",
+    "configurationIds"
+  ],
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-start-batch-delete-configuration-task-request-structure.json"
+}

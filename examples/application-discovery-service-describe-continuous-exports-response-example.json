@@ -1,0 +1,15 @@
+{
+  "descriptions": [
+    {
+      "exportId": "continuous-export-500123",
+      "status": "ACTIVE",
+      "statusDetail": "example-value",
+      "s3Bucket": "aws-application-discovery-service-500123",
+      "startTime": "2026-04-19T10:00:00Z",
+      "stopTime": "2026-04-19T11:00:00Z",
+      "dataSource": "AGENT",
+      "schemaStorageConfig": {}
+    }
+  ],
+  "nextToken": ""
+}

@@ -1,0 +1,9 @@
+{
+  "errors": [
+    {
+      "agentId": "d-agent-500123",
+      "errorCode": "NOT_FOUND",
+      "errorMessage": "Agent not found"
+    }
+  ]
+}

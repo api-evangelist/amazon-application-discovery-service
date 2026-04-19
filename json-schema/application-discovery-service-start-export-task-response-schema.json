@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-start-export-task-response-schema.json",
+  "title": "StartExportTaskResponse",
+  "description": "StartExportTaskResponse schema from Amazon Application Discovery Service API",
+  "type": "object",
+  "properties": {
+    "exportId": {
+      "type": "string",
+      "example": "export-500123",
+      "description": "A unique identifier used to query the status of an export request."
+    }
+  }
+}

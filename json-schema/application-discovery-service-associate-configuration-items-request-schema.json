@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-associate-configuration-items-request-schema.json",
+  "title": "AssociateConfigurationItemsRequest",
+  "description": "AssociateConfigurationItemsRequest schema from Amazon Application Discovery Service API",
+  "type": "object",
+  "properties": {
+    "applicationConfigurationId": {
+      "type": "string",
+      "example": "d-APP-500123",
+      "description": "The configuration ID of an application with which items are to be associated."
+    },
+    "configurationIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "d-SERVER-500456"
+      ],
+      "description": "The ID of each configuration item to be associated with an application."
+    }
+  },
+  "required": [
+    "applicationConfigurationId",
+    "configurationIds"
+  ]
+}

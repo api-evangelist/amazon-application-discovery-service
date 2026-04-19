@@ -1,0 +1,28 @@
+{
+  "type": "object",
+  "description": "ImportTaskFilter schema from Amazon Application Discovery Service API",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name, status, or import task ID for a specific import task.",
+      "enum": [
+        "IMPORT_TASK_ID",
+        "STATUS",
+        "NAME"
+      ],
+      "example": "STATUS"
+    },
+    "values": {
+      "type": "array",
+      "description": "An array of strings that you can provide to match against a specific name, status, or import task ID to filter your import task.",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "IMPORT_COMPLETE"
+      ]
+    }
+  },
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-import-task-filter-structure.json"
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-neighbor-connection-detail-schema.json",
+  "title": "NeighborConnectionDetail",
+  "description": "NeighborConnectionDetail schema from Amazon Application Discovery Service API",
+  "type": "object",
+  "properties": {
+    "sourceServerId": {
+      "type": "string",
+      "example": "d-SERVER-500456",
+      "description": "The ID of the server that opened the network connection."
+    },
+    "destinationServerId": {
+      "type": "string",
+      "example": "d-SERVER-500457",
+      "description": "The ID of the server that accepted the network connection."
+    },
+    "destinationPort": {
+      "type": "integer",
+      "example": 443,
+      "description": "The destination network port for the connection."
+    },
+    "transportProtocol": {
+      "type": "string",
+      "example": "TCP",
+      "description": "The network protocol used for the connection."
+    },
+    "connectionsCount": {
+      "type": "integer",
+      "format": "int64",
+      "example": 125,
+      "description": "The number of open network connections with the neighboring server."
+    }
+  },
+  "required": [
+    "sourceServerId",
+    "destinationServerId",
+    "connectionsCount"
+  ]
+}

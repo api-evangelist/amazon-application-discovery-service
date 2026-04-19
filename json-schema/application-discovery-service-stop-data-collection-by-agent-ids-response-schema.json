@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-stop-data-collection-by-agent-ids-response-schema.json",
+  "title": "StopDataCollectionByAgentIdsResponse",
+  "description": "StopDataCollectionByAgentIdsResponse schema from Amazon Application Discovery Service API",
+  "type": "object",
+  "properties": {
+    "agentsConfigurationStatus": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "agentId": {
+            "type": "string",
+            "example": "d-agent-500123",
+            "description": "The agent ID."
+          },
+          "operationSucceeded": {
+            "type": "boolean",
+            "example": true,
+            "description": "Information about the status of the StartDataCollection and StopDataCollection operations."
+          },
+          "description": {
+            "type": "string",
+            "example": "Started data collection",
+            "description": "A description of the operation performed."
+          }
+        }
+      },
+      "description": "Information about the agents that were instructed to stop collecting data."
+    }
+  }
+}

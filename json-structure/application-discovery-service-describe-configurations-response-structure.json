@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "description": "DescribeConfigurationsResponse schema from Amazon Application Discovery Service API",
+  "properties": {
+    "configurations": {
+      "type": "array",
+      "description": "A key in the response map. The value is an array of data.",
+      "items": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-describe-configurations-response-structure.json"
+}

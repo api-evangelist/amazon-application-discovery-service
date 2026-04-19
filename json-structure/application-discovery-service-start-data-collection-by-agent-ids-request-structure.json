@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "description": "StartDataCollectionByAgentIdsRequest schema from Amazon Application Discovery Service API",
+  "properties": {
+    "agentIds": {
+      "type": "array",
+      "description": "The IDs of the agents from which to start collecting data. If you send a request to an agent that you do not have permission to contact, according to your AWS account's permission settings, the agent is not included in the list of agents that are started.",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "d-agent-500123"
+      ]
+    }
+  },
+  "required": [
+    "agentIds"
+  ],
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-start-data-collection-by-agent-ids-request-structure.json"
+}

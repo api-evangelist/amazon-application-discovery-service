@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "description": "AgentNetworkInfo schema from Amazon Application Discovery Service API",
+  "properties": {
+    "ipAddress": {
+      "type": "string",
+      "description": "The IP address for the host where the agent or collector resides.",
+      "example": "10.0.0.10"
+    },
+    "macAddress": {
+      "type": "string",
+      "description": "The MAC address for the host where the agent or collector resides.",
+      "example": "aa:bb:cc:dd:ee:ff"
+    }
+  },
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-agent-network-info-structure.json"
+}

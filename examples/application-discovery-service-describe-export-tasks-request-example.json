@@ -1,0 +1,16 @@
+{
+  "exportIds": [
+    "export-500123"
+  ],
+  "filters": [
+    {
+      "name": "agentIds",
+      "values": [
+        "d-agent-500123"
+      ],
+      "condition": "EQUALS"
+    }
+  ],
+  "maxResults": 10,
+  "nextToken": ""
+}

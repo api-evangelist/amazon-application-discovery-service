@@ -1,0 +1,7 @@
+{
+  "sourceServerId": "d-SERVER-500456",
+  "destinationServerId": "d-SERVER-500457",
+  "destinationPort": 443,
+  "transportProtocol": "TCP",
+  "connectionsCount": 125
+}

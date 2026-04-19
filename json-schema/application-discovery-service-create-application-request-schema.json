@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-create-application-request-schema.json",
+  "title": "CreateApplicationRequest",
+  "description": "CreateApplicationRequest schema from Amazon Application Discovery Service API",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "example": "Production Web Tier",
+      "description": "Name of the application to be created."
+    },
+    "description": {
+      "type": "string",
+      "example": "Web servers for the production environment",
+      "description": "Description of the application to be created."
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

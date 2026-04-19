@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-list-configurations-request-schema.json",
+  "title": "ListConfigurationsRequest",
+  "description": "ListConfigurationsRequest schema from Amazon Application Discovery Service API",
+  "type": "object",
+  "properties": {
+    "configurationType": {
+      "type": "string",
+      "enum": [
+        "SERVER",
+        "PROCESS",
+        "CONNECTION",
+        "APPLICATION"
+      ],
+      "example": "SERVER",
+      "description": "A valid configuration identified by Application Discovery Service."
+    },
+    "filters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "hostName",
+            "description": "The name of the filter."
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "server-01.example.com"
+            ],
+            "description": "A string value on which to filter."
+          },
+          "condition": {
+            "type": "string",
+            "enum": [
+              "EQUALS",
+              "NOT_EQUALS",
+              "CONTAINS",
+              "NOT_CONTAINS"
+            ],
+            "example": "EQUALS",
+            "description": "A conditional operator. The following operators are valid \u2014 EQUALS, NOT_EQUALS, CONTAINS, NOT_CONTAINS."
+          }
+        },
+        "required": [
+          "name",
+          "values",
+          "condition"
+        ]
+      },
+      "description": "You can filter the list using a key-value format."
+    },
+    "maxResults": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100,
+      "example": 10,
+      "description": "The total number of items to return. The maximum value is 100."
+    },
+    "nextToken": {
+      "type": "string",
+      "example": "",
+      "description": "Token to retrieve the next set of results."
+    },
+    "orderBy": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "fieldName": {
+            "type": "string",
+            "example": "hostName",
+            "description": "The field on which to order."
+          },
+          "sortOrder": {
+            "type": "string",
+            "enum": [
+              "ASC",
+              "DESC"
+            ],
+            "example": "ASC",
+            "description": "Ordering direction."
+          }
+        },
+        "required": [
+          "fieldName"
+        ]
+      },
+      "description": "Certain filter criteria return output that can be sorted in ascending or descending order. For a list of output characteristics for each filter, see Using the ListConfigurations Action in the AWS Application Discovery Service User Guide."
+    }
+  },
+  "required": [
+    "configurationType"
+  ]
+}

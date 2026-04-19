@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-deletion-warning-schema.json",
+  "title": "DeletionWarning",
+  "description": "DeletionWarning schema from Amazon Application Discovery Service API",
+  "type": "object",
+  "properties": {
+    "configurationId": {
+      "type": "string",
+      "example": "d-SERVER-500456",
+      "description": "The configuration ID of the configuration item associated with the deletion warning."
+    },
+    "warningCode": {
+      "type": "integer",
+      "example": 1,
+      "description": "The integer warning code associated with the warning message."
+    },
+    "warningText": {
+      "type": "string",
+      "example": "Configuration item may have dependencies",
+      "description": "A descriptive message of the warning the associated configuration item produced."
+    }
+  }
+}

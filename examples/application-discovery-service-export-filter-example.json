@@ -1,0 +1,7 @@
+{
+  "name": "agentIds",
+  "values": [
+    "d-agent-500123"
+  ],
+  "condition": "EQUALS"
+}

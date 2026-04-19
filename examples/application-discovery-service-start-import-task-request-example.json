@@ -1,0 +1,5 @@
+{
+  "clientRequestToken": "client-token-500123",
+  "name": "Server Inventory Import April 2026",
+  "importUrl": "s3://my-bucket/server-inventory.csv"
+}

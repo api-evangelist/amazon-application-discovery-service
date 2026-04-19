@@ -1,0 +1,11 @@
+{
+  "configurationIds": [
+    "d-SERVER-500456"
+  ],
+  "tags": [
+    {
+      "key": "environment",
+      "value": "production"
+    }
+  ]
+}

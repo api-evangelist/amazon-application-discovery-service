@@ -1,0 +1,12 @@
+{
+  "filters": [
+    {
+      "name": "STATUS",
+      "values": [
+        "IMPORT_COMPLETE"
+      ]
+    }
+  ],
+  "maxResults": 10,
+  "nextToken": ""
+}

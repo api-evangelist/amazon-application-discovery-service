@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-get-discovery-summary-response-schema.json",
+  "title": "GetDiscoverySummaryResponse",
+  "description": "GetDiscoverySummaryResponse schema from Amazon Application Discovery Service API",
+  "type": "object",
+  "properties": {
+    "servers": {
+      "type": "integer",
+      "example": 42,
+      "description": "The number of servers discovered."
+    },
+    "applications": {
+      "type": "integer",
+      "example": 5,
+      "description": "The number of applications discovered."
+    },
+    "serversMappedToApplications": {
+      "type": "integer",
+      "example": 15,
+      "description": "The number of servers mapped to applications."
+    },
+    "serversMappedtoTags": {
+      "type": "integer",
+      "example": 30,
+      "description": "The number of servers mapped to tags."
+    },
+    "mappedServerCount": {
+      "type": "integer",
+      "example": 15,
+      "description": "The number of servers mapped to applications or tags."
+    },
+    "unmappedServerCount": {
+      "type": "integer",
+      "example": 27,
+      "description": "The number of servers not mapped to any application."
+    },
+    "agentSummary": {
+      "type": "object",
+      "properties": {
+        "activeAgents": {
+          "type": "integer",
+          "example": 3,
+          "description": "Number of active discovery agents."
+        },
+        "healthyAgents": {
+          "type": "integer",
+          "example": 3,
+          "description": "Number of healthy discovery agents."
+        },
+        "blackListedAgents": {
+          "type": "integer",
+          "example": 0,
+          "description": "Number of blacklisted discovery agents."
+        },
+        "shutdownAgents": {
+          "type": "integer",
+          "example": 0,
+          "description": "Number of discovery agents with status SHUTDOWN."
+        },
+        "unhealthyAgents": {
+          "type": "integer",
+          "example": 0,
+          "description": "Number of unhealthy discovery agents."
+        },
+        "totalAgents": {
+          "type": "integer",
+          "example": 3,
+          "description": "Total number of discovery agents."
+        },
+        "unknownAgents": {
+          "type": "integer",
+          "example": 0,
+          "description": "Number of unknown discovery agents."
+        }
+      }
+    },
+    "connectorSummary": {
+      "type": "object",
+      "properties": {
+        "activeConnectors": {
+          "type": "integer",
+          "example": 0,
+          "description": "Number of active discovery connectors."
+        },
+        "healthyConnectors": {
+          "type": "integer",
+          "example": 0,
+          "description": "Number of healthy discovery connectors."
+        },
+        "blackListedConnectors": {
+          "type": "integer",
+          "example": 0,
+          "description": "Number of blacklisted discovery connectors."
+        },
+        "shutdownConnectors": {
+          "type": "integer",
+          "example": 0,
+          "description": "Number of discovery connectors with status SHUTDOWN."
+        },
+        "unhealthyConnectors": {
+          "type": "integer",
+          "example": 0,
+          "description": "Number of unhealthy discovery connectors."
+        },
+        "totalConnectors": {
+          "type": "integer",
+          "example": 0,
+          "description": "Total number of discovery connectors."
+        },
+        "unknownConnectors": {
+          "type": "integer",
+          "example": 0,
+          "description": "Number of unknown discovery connectors."
+        }
+      }
+    }
+  }
+}

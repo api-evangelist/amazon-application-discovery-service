@@ -1,0 +1,27 @@
+{
+  "type": "object",
+  "description": "AssociateConfigurationItemsRequest schema from Amazon Application Discovery Service API",
+  "properties": {
+    "applicationConfigurationId": {
+      "type": "string",
+      "description": "The configuration ID of an application with which items are to be associated.",
+      "example": "d-APP-500123"
+    },
+    "configurationIds": {
+      "type": "array",
+      "description": "The ID of each configuration item to be associated with an application.",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "d-SERVER-500456"
+      ]
+    }
+  },
+  "required": [
+    "applicationConfigurationId",
+    "configurationIds"
+  ],
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-associate-configuration-items-request-structure.json"
+}

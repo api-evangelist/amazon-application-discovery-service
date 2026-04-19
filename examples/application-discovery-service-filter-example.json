@@ -1,0 +1,7 @@
+{
+  "name": "hostName",
+  "values": [
+    "server-01.example.com"
+  ],
+  "condition": "EQUALS"
+}

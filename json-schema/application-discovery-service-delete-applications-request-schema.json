@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-delete-applications-request-schema.json",
+  "title": "DeleteApplicationsRequest",
+  "description": "DeleteApplicationsRequest schema from Amazon Application Discovery Service API",
+  "type": "object",
+  "properties": {
+    "configurationIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "d-APP-500123"
+      ],
+      "description": "Configuration ID of an application to be deleted."
+    }
+  },
+  "required": [
+    "configurationIds"
+  ]
+}

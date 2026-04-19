@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-update-application-request-schema.json",
+  "title": "UpdateApplicationRequest",
+  "description": "UpdateApplicationRequest schema from Amazon Application Discovery Service API",
+  "type": "object",
+  "properties": {
+    "configurationId": {
+      "type": "string",
+      "example": "d-APP-500123",
+      "description": "Configuration ID of the application to be updated."
+    },
+    "name": {
+      "type": "string",
+      "example": "Production Web Tier Updated",
+      "description": "New name of the application to be updated."
+    },
+    "description": {
+      "type": "string",
+      "example": "Updated description for web tier servers",
+      "description": "New description of the application to be updated."
+    }
+  },
+  "required": [
+    "configurationId"
+  ]
+}

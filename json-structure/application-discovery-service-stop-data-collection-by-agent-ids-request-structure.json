@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "description": "StopDataCollectionByAgentIdsRequest schema from Amazon Application Discovery Service API",
+  "properties": {
+    "agentIds": {
+      "type": "array",
+      "description": "The IDs of the agents from which to stop collecting data.",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "d-agent-500123"
+      ]
+    }
+  },
+  "required": [
+    "agentIds"
+  ],
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-stop-data-collection-by-agent-ids-request-structure.json"
+}

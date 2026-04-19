@@ -1,0 +1,32 @@
+{
+  "type": "object",
+  "description": "StopDataCollectionByAgentIdsResponse schema from Amazon Application Discovery Service API",
+  "properties": {
+    "agentsConfigurationStatus": {
+      "type": "array",
+      "description": "Information about the agents that were instructed to stop collecting data.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "agentId": {
+            "type": "string",
+            "description": "The agent ID.",
+            "example": "d-agent-500123"
+          },
+          "operationSucceeded": {
+            "type": "boolean",
+            "description": "Information about the status of the StartDataCollection and StopDataCollection operations.",
+            "example": true
+          },
+          "description": {
+            "type": "string",
+            "description": "A description of the operation performed.",
+            "example": "Started data collection"
+          }
+        }
+      }
+    }
+  },
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-stop-data-collection-by-agent-ids-response-structure.json"
+}

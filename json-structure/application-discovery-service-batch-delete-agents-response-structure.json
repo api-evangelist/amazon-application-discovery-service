@@ -1,0 +1,32 @@
+{
+  "type": "object",
+  "description": "BatchDeleteAgentsResponse schema from Amazon Application Discovery Service API",
+  "properties": {
+    "errors": {
+      "type": "array",
+      "description": "A list of agent IDs that failed to delete along with the cause of the error.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "agentId": {
+            "type": "string",
+            "description": "The ID of the agent that failed to delete.",
+            "example": "d-agent-500123"
+          },
+          "errorCode": {
+            "type": "string",
+            "description": "The type of error that occurred.",
+            "example": "NOT_FOUND"
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "The text of the error message.",
+            "example": "Agent not found"
+          }
+        }
+      }
+    }
+  },
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-batch-delete-agents-response-structure.json"
+}

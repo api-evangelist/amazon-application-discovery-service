@@ -1,0 +1,43 @@
+{
+  "type": "object",
+  "description": "CustomerConnectorInfo schema from Amazon Application Discovery Service API",
+  "properties": {
+    "activeConnectors": {
+      "type": "int32",
+      "description": "Number of active discovery connectors.",
+      "example": 0
+    },
+    "healthyConnectors": {
+      "type": "int32",
+      "description": "Number of healthy discovery connectors.",
+      "example": 0
+    },
+    "blackListedConnectors": {
+      "type": "int32",
+      "description": "Number of blacklisted discovery connectors.",
+      "example": 0
+    },
+    "shutdownConnectors": {
+      "type": "int32",
+      "description": "Number of discovery connectors with status SHUTDOWN.",
+      "example": 0
+    },
+    "unhealthyConnectors": {
+      "type": "int32",
+      "description": "Number of unhealthy discovery connectors.",
+      "example": 0
+    },
+    "totalConnectors": {
+      "type": "int32",
+      "description": "Total number of discovery connectors.",
+      "example": 0
+    },
+    "unknownConnectors": {
+      "type": "int32",
+      "description": "Number of unknown discovery connectors.",
+      "example": 0
+    }
+  },
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-customer-connector-info-structure.json"
+}

@@ -1,0 +1,16 @@
+{
+  "agentIds": [
+    "d-agent-500123"
+  ],
+  "filters": [
+    {
+      "name": "hostName",
+      "values": [
+        "server-01.example.com"
+      ],
+      "condition": "EQUALS"
+    }
+  ],
+  "maxResults": 10,
+  "nextToken": ""
+}

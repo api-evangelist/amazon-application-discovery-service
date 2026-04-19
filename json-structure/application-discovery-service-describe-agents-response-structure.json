@@ -1,0 +1,94 @@
+{
+  "type": "object",
+  "description": "DescribeAgentsResponse schema from Amazon Application Discovery Service API",
+  "properties": {
+    "agentsInfo": {
+      "type": "array",
+      "description": "Lists agents or the collectors with status and configuration.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "agentId": {
+            "type": "string",
+            "description": "The agent or collector ID.",
+            "example": "d-agent-500123"
+          },
+          "hostName": {
+            "type": "string",
+            "description": "The name of the host where the agent or collector resides.",
+            "example": "server-01.example.com"
+          },
+          "agentNetworkInfoList": {
+            "type": "array",
+            "description": "Network details about the host where the agent or collector resides.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "ipAddress": {
+                  "type": "string",
+                  "description": "The IP address for the host where the agent or collector resides.",
+                  "example": "10.0.0.10"
+                },
+                "macAddress": {
+                  "type": "string",
+                  "description": "The MAC address for the host where the agent or collector resides.",
+                  "example": "aa:bb:cc:dd:ee:ff"
+                }
+              }
+            }
+          },
+          "connectorId": {
+            "type": "string",
+            "description": "The ID of the connector.",
+            "example": ""
+          },
+          "version": {
+            "type": "string",
+            "description": "The agent or collector version.",
+            "example": "2.0.1"
+          },
+          "health": {
+            "type": "string",
+            "description": "The health of the agent or collector.",
+            "enum": [
+              "HEALTHY",
+              "UNHEALTHY",
+              "RUNNING",
+              "UNKNOWN",
+              "BLACKLISTED",
+              "SHUTDOWN"
+            ],
+            "example": "HEALTHY"
+          },
+          "lastHealthPingTime": {
+            "type": "string",
+            "description": "Time since agent or collector health was reported.",
+            "example": "2026-04-19T10:00:00Z"
+          },
+          "collectionStatus": {
+            "type": "string",
+            "description": "Status of the collection process for the agent or collector.",
+            "example": "START_SCHEDULED"
+          },
+          "agentType": {
+            "type": "string",
+            "description": "Type of agent.",
+            "example": "AWS_DISCOVERY_AGENT"
+          },
+          "registeredTime": {
+            "type": "string",
+            "description": "Agent's first registration timestamp in UTC.",
+            "example": "2026-01-01T00:00:00Z"
+          }
+        }
+      }
+    },
+    "nextToken": {
+      "type": "string",
+      "description": "Token to retrieve the next set of results.",
+      "example": ""
+    }
+  },
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-describe-agents-response-structure.json"
+}

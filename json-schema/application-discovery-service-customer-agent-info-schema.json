@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-customer-agent-info-schema.json",
+  "title": "CustomerAgentInfo",
+  "description": "CustomerAgentInfo schema from Amazon Application Discovery Service API",
+  "type": "object",
+  "properties": {
+    "activeAgents": {
+      "type": "integer",
+      "example": 3,
+      "description": "Number of active discovery agents."
+    },
+    "healthyAgents": {
+      "type": "integer",
+      "example": 3,
+      "description": "Number of healthy discovery agents."
+    },
+    "blackListedAgents": {
+      "type": "integer",
+      "example": 0,
+      "description": "Number of blacklisted discovery agents."
+    },
+    "shutdownAgents": {
+      "type": "integer",
+      "example": 0,
+      "description": "Number of discovery agents with status SHUTDOWN."
+    },
+    "unhealthyAgents": {
+      "type": "integer",
+      "example": 0,
+      "description": "Number of unhealthy discovery agents."
+    },
+    "totalAgents": {
+      "type": "integer",
+      "example": 3,
+      "description": "Total number of discovery agents."
+    },
+    "unknownAgents": {
+      "type": "integer",
+      "example": 0,
+      "description": "Number of unknown discovery agents."
+    }
+  }
+}

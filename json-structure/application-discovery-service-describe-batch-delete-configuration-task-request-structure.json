@@ -1,0 +1,16 @@
+{
+  "type": "object",
+  "description": "DescribeBatchDeleteConfigurationTaskRequest schema from Amazon Application Discovery Service API",
+  "properties": {
+    "taskId": {
+      "type": "string",
+      "description": "The ID of the task to delete.",
+      "example": "task-500123"
+    }
+  },
+  "required": [
+    "taskId"
+  ],
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-describe-batch-delete-configuration-task-request-structure.json"
+}

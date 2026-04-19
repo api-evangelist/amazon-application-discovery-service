@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-export-filter-schema.json",
+  "title": "ExportFilter",
+  "description": "ExportFilter schema from Amazon Application Discovery Service API",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "example": "agentIds",
+      "description": "A single ExportFilter name. Supported filters \u2014 agentIds."
+    },
+    "values": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "d-agent-500123"
+      ],
+      "description": "A single agent ID for a Discovery Agent. An agent ID can be found using the DescribeAgents action."
+    },
+    "condition": {
+      "type": "string",
+      "example": "EQUALS",
+      "description": "Supported condition \u2014 EQUALS."
+    }
+  },
+  "required": [
+    "name",
+    "values",
+    "condition"
+  ]
+}

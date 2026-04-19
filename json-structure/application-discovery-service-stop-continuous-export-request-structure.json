@@ -1,0 +1,16 @@
+{
+  "type": "object",
+  "description": "StopContinuousExportRequest schema from Amazon Application Discovery Service API",
+  "properties": {
+    "exportId": {
+      "type": "string",
+      "description": "The unique ID assigned to this export.",
+      "example": "continuous-export-500123"
+    }
+  },
+  "required": [
+    "exportId"
+  ],
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-stop-continuous-export-request-structure.json"
+}

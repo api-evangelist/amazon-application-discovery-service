@@ -1,0 +1,20 @@
+{
+  "configurationType": "SERVER",
+  "filters": [
+    {
+      "name": "hostName",
+      "values": [
+        "server-01.example.com"
+      ],
+      "condition": "EQUALS"
+    }
+  ],
+  "maxResults": 10,
+  "nextToken": "",
+  "orderBy": [
+    {
+      "fieldName": "hostName",
+      "sortOrder": "ASC"
+    }
+  ]
+}

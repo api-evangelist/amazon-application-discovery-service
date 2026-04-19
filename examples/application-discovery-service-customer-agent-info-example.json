@@ -1,0 +1,9 @@
+{
+  "activeAgents": 3,
+  "healthyAgents": 3,
+  "blackListedAgents": 0,
+  "shutdownAgents": 0,
+  "unhealthyAgents": 0,
+  "totalAgents": 3,
+  "unknownAgents": 0
+}

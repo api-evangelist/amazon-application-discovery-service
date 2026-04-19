@@ -1,0 +1,7 @@
+{
+  "exportId": "continuous-export-500123",
+  "s3Bucket": "aws-application-discovery-service-500123",
+  "startTime": "2026-04-19T10:00:00Z",
+  "dataSource": "AGENT",
+  "schemaStorageConfig": {}
+}

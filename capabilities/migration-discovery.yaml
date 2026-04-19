@@ -1,0 +1,204 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: Migration Discovery Workflow
+  description: Workflow capability for discovering on-premises infrastructure and preparing migration plans using AWS Application Discovery Service.
+  tags:
+    - Amazon Application Discovery Service
+    - Migration
+    - Discovery
+    - Infrastructure
+    - AWS
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+imports:
+  - namespace: ads
+    from: shared/application-discovery-service-api.yaml
+
+capability:
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: migration-discovery-rest
+      resources:
+        - path: /v1/agents
+          name: agents
+          description: Discovery agents
+          operations:
+            - method: GET
+              name: describe-agents
+              description: List all discovery agents and their health status
+              call: "ads.describe-agents"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/summary
+          name: discovery-summary
+          description: Asset discovery summary
+          operations:
+            - method: GET
+              name: get-discovery-summary
+              description: Get count of discovered servers, agents, and applications
+              call: "ads.get-discovery-summary"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/configurations
+          name: configurations
+          description: Discovered configuration items
+          operations:
+            - method: POST
+              name: list-configurations
+              description: List discovered servers, processes, and connections
+              call: "ads.list-configurations"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/exports
+          name: exports
+          description: Data export tasks
+          operations:
+            - method: POST
+              name: start-export-task
+              description: Export discovered data to S3
+              call: "ads.start-export-task"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: GET
+              name: describe-export-tasks
+              description: Check status of export tasks
+              call: "ads.describe-export-tasks"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: migration-discovery-mcp
+      transport: http
+      tools:
+        - name: describe-agents
+          description: List all AWS Application Discovery Service agents and their health status. Use this to verify agents are running before starting discovery.
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "ads.describe-agents"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: start-data-collection
+          description: Start data collection on specified agents to begin discovering on-premises servers and processes.
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "ads.start-data-collection"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-discovery-summary
+          description: Get a summary count of all discovered servers, applications, and agents to understand the scope of the environment.
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "ads.get-discovery-summary"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-configurations
+          description: List discovered configuration items such as servers, processes, connections, and applications for migration planning.
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "ads.list-configurations"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: describe-configurations
+          description: Get detailed attributes for specific discovered configuration items to understand server specifications.
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "ads.describe-configurations"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-server-neighbors
+          description: Find servers that communicate with a specific server to map application dependencies for migration grouping.
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "ads.list-server-neighbors"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-application
+          description: Create application groupings from discovered servers to organize migration waves.
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "ads.create-application"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: start-export-task
+          description: Export all discovered server data to Amazon S3 for detailed migration analysis and reporting.
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "ads.start-export-task"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: describe-export-tasks
+          description: Check the status of discovery data export tasks to know when data is ready for analysis.
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "ads.describe-export-tasks"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: start-import-task
+          description: Import on-premises server inventory from a CSV file in Amazon S3 when agents cannot be installed.
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "ads.start-import-task"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+personas:
+  - name: Migration Architect
+    description: Plans and executes large-scale on-premises to cloud migrations using discovery data.
+    tools:
+      - get-discovery-summary
+      - list-configurations
+      - describe-configurations
+      - list-server-neighbors
+      - create-application
+      - start-export-task
+      - describe-export-tasks
+
+  - name: Infrastructure Engineer
+    description: Manages discovery agents and data collection processes across on-premises infrastructure.
+    tools:
+      - describe-agents
+      - start-data-collection
+      - list-configurations
+      - describe-configurations
+      - start-import-task

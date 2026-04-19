@@ -1,0 +1,22 @@
+{
+  "task": {
+    "taskId": "task-500123",
+    "status": "COMPLETED",
+    "startTime": "2026-04-19T10:00:00Z",
+    "endTime": "2026-04-19T10:05:00Z",
+    "configurationType": "SERVER",
+    "requestedConfigurations": [
+      "d-SERVER-500456"
+    ],
+    "deletedConfigurations": [
+      "d-SERVER-500456"
+    ],
+    "failedConfigurations": [
+      {
+        "configurationId": null,
+        "errorStatusCode": null,
+        "errorMessage": null
+      }
+    ]
+  }
+}

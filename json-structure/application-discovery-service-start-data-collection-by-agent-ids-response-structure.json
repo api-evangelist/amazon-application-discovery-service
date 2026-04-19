@@ -1,0 +1,32 @@
+{
+  "type": "object",
+  "description": "StartDataCollectionByAgentIdsResponse schema from Amazon Application Discovery Service API",
+  "properties": {
+    "agentsConfigurationStatus": {
+      "type": "array",
+      "description": "Information about agents that were instructed to start collecting data. Information includes the agent ID, a description of the operation performed, and whether the agent configuration was updated successfully.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "agentId": {
+            "type": "string",
+            "description": "The agent ID.",
+            "example": "d-agent-500123"
+          },
+          "operationSucceeded": {
+            "type": "boolean",
+            "description": "Information about the status of the StartDataCollection and StopDataCollection operations.",
+            "example": true
+          },
+          "description": {
+            "type": "string",
+            "description": "A description of the operation performed.",
+            "example": "Started data collection"
+          }
+        }
+      }
+    }
+  },
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-start-data-collection-by-agent-ids-response-structure.json"
+}

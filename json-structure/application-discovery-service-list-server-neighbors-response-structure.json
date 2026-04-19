@@ -1,0 +1,57 @@
+{
+  "type": "object",
+  "description": "ListServerNeighborsResponse schema from Amazon Application Discovery Service API",
+  "properties": {
+    "neighbors": {
+      "type": "array",
+      "description": "List of distinct servers that are one hop away from the given server.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "sourceServerId": {
+            "type": "string",
+            "description": "The ID of the server that opened the network connection.",
+            "example": "d-SERVER-500456"
+          },
+          "destinationServerId": {
+            "type": "string",
+            "description": "The ID of the server that accepted the network connection.",
+            "example": "d-SERVER-500457"
+          },
+          "destinationPort": {
+            "type": "int32",
+            "description": "The destination network port for the connection.",
+            "example": 443
+          },
+          "transportProtocol": {
+            "type": "string",
+            "description": "The network protocol used for the connection.",
+            "example": "TCP"
+          },
+          "connectionsCount": {
+            "type": "int64",
+            "description": "The number of open network connections with the neighboring server.",
+            "example": 125
+          }
+        },
+        "required": [
+          "sourceServerId",
+          "destinationServerId",
+          "connectionsCount"
+        ]
+      }
+    },
+    "nextToken": {
+      "type": "string",
+      "description": "Token to retrieve the next set of results.",
+      "example": ""
+    },
+    "knownDependencyCount": {
+      "type": "int32",
+      "description": "Count of distinct servers that are one hop away from the given server.",
+      "example": 1
+    }
+  },
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-list-server-neighbors-response-structure.json"
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-list-server-neighbors-request-schema.json",
+  "title": "ListServerNeighborsRequest",
+  "description": "ListServerNeighborsRequest schema from Amazon Application Discovery Service API",
+  "type": "object",
+  "properties": {
+    "configurationId": {
+      "type": "string",
+      "example": "d-SERVER-500456",
+      "description": "Configuration ID of the server for which neighbors are being listed."
+    },
+    "portInformationNeeded": {
+      "type": "boolean",
+      "example": false,
+      "description": "Flag to indicate if port and protocol information is needed as part of the response."
+    },
+    "neighborConfigurationIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "d-SERVER-500457"
+      ],
+      "description": "List of configuration IDs to test for one-hop-away. Mandatory parameter when PortInformationNeeded is true."
+    },
+    "maxResults": {
+      "type": "integer",
+      "example": 10,
+      "description": "Maximum number of results to return in a single page of output."
+    },
+    "nextToken": {
+      "type": "string",
+      "example": "",
+      "description": "Token to retrieve the next set of results."
+    }
+  },
+  "required": [
+    "configurationId"
+  ]
+}

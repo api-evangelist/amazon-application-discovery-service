@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-describe-export-tasks-request-schema.json",
+  "title": "DescribeExportTasksRequest",
+  "description": "DescribeExportTasksRequest schema from Amazon Application Discovery Service API",
+  "type": "object",
+  "properties": {
+    "exportIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "export-500123"
+      ],
+      "description": "One or more unique identifiers used to query the status of an export request."
+    },
+    "filters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "agentIds",
+            "description": "A single ExportFilter name. Supported filters \u2014 agentIds."
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "d-agent-500123"
+            ],
+            "description": "A single agent ID for a Discovery Agent. An agent ID can be found using the DescribeAgents action."
+          },
+          "condition": {
+            "type": "string",
+            "example": "EQUALS",
+            "description": "Supported condition \u2014 EQUALS."
+          }
+        },
+        "required": [
+          "name",
+          "values",
+          "condition"
+        ]
+      },
+      "description": "One or more filters."
+    },
+    "maxResults": {
+      "type": "integer",
+      "example": 10,
+      "description": "The maximum number of volume results returned by DescribeExportTasks in paginated output."
+    },
+    "nextToken": {
+      "type": "string",
+      "example": "",
+      "description": "The nextToken value returned from a previous paginated DescribeExportTasks request."
+    }
+  }
+}

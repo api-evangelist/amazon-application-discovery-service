@@ -1,0 +1,12 @@
+{
+  "tags": [
+    {
+      "configurationType": "SERVER",
+      "configurationId": "d-SERVER-500456",
+      "key": "environment",
+      "value": "production",
+      "timeOfCreation": "2026-04-19T10:00:00Z"
+    }
+  ],
+  "nextToken": ""
+}

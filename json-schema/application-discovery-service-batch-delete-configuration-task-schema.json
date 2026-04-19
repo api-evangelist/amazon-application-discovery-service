@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-batch-delete-configuration-task-schema.json",
+  "title": "BatchDeleteConfigurationTask",
+  "description": "BatchDeleteConfigurationTask schema from Amazon Application Discovery Service API",
+  "type": "object",
+  "properties": {
+    "taskId": {
+      "type": "string",
+      "example": "task-500123",
+      "description": "The deletion task's unique identifier."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "INITIALIZING",
+        "VALIDATING",
+        "DELETING",
+        "COMPLETED",
+        "FAILED"
+      ],
+      "example": "COMPLETED",
+      "description": "The current execution status of the deletion task."
+    },
+    "startTime": {
+      "type": "string",
+      "example": "2026-04-19T10:00:00Z",
+      "description": "An epoch seconds timestamp (Unix) of when the deletion task was started."
+    },
+    "endTime": {
+      "type": "string",
+      "example": "2026-04-19T10:05:00Z",
+      "description": "An epoch seconds timestamp (Unix) of when the deletion task was completed."
+    },
+    "configurationType": {
+      "type": "string",
+      "example": "SERVER",
+      "description": "The type of configuration item to delete."
+    },
+    "requestedConfigurations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "d-SERVER-500456"
+      ],
+      "description": "The list of configuration IDs that were originally requested to be deleted by this task."
+    },
+    "deletedConfigurations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "d-SERVER-500456"
+      ],
+      "description": "The list of configuration IDs that were successfully deleted by this task."
+    },
+    "failedConfigurations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "configurationId": {
+            "type": "string",
+            "example": "d-SERVER-500456",
+            "description": "The configuration ID of the configuration that failed to delete."
+          },
+          "errorStatusCode": {
+            "type": "integer",
+            "example": 404,
+            "description": "The error status code."
+          },
+          "errorMessage": {
+            "type": "string",
+            "example": "Configuration item not found",
+            "description": "A descriptive message indicating why the associated configuration failed to delete."
+          }
+        }
+      },
+      "description": "A list of configuration IDs that produced an associated error."
+    },
+    "deletionWarnings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "configurationId": {
+            "type": "string",
+            "example": "d-SERVER-500456",
+            "description": "The configuration ID of the configuration item associated with the deletion warning."
+          },
+          "warningCode": {
+            "type": "integer",
+            "example": 1,
+            "description": "The integer warning code associated with the warning message."
+          },
+          "warningText": {
+            "type": "string",
+            "example": "Configuration item may have dependencies",
+            "description": "A descriptive message of the warning the associated configuration item produced."
+          }
+        }
+      },
+      "description": "A list of warnings associated with this deletion task."
+    }
+  }
+}

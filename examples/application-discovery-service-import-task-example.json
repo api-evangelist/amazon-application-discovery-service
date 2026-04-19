@@ -1,0 +1,10 @@
+{
+  "importTaskId": "import-task-500123",
+  "clientRequestToken": "client-token-500123",
+  "name": "Server Inventory Import April 2026",
+  "importUrl": "s3://my-bucket/server-inventory.csv",
+  "status": "IMPORT_COMPLETE",
+  "importRequestTime": "2026-04-19T10:00:00Z",
+  "importCompletionTime": "2026-04-19T10:05:00Z",
+  "importDeletedTime": "example-value"
+}

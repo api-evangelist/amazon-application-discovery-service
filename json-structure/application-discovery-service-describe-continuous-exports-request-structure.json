@@ -1,0 +1,30 @@
+{
+  "type": "object",
+  "description": "DescribeContinuousExportsRequest schema from Amazon Application Discovery Service API",
+  "properties": {
+    "exportIds": {
+      "type": "array",
+      "description": "The unique IDs assigned to the exports.",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "continuous-export-500123"
+      ]
+    },
+    "maxResults": {
+      "type": "int32",
+      "description": "A number between 1 and 100 specifying the maximum number of continuous export descriptions returned.",
+      "minimum": 1,
+      "maximum": 100,
+      "example": 10
+    },
+    "nextToken": {
+      "type": "string",
+      "description": "The token from the previous call to DescribeExportTasks.",
+      "example": ""
+    }
+  },
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-describe-continuous-exports-request-structure.json"
+}

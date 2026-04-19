@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-delete-agent-schema.json",
+  "title": "DeleteAgent",
+  "description": "DeleteAgent schema from Amazon Application Discovery Service API",
+  "type": "object",
+  "properties": {
+    "agentId": {
+      "type": "string",
+      "example": "d-agent-500123",
+      "description": "The ID of the agent you want to delete."
+    },
+    "force": {
+      "type": "boolean",
+      "example": false,
+      "description": "You can use the force parameter to delete agents that do not respond to API actions."
+    }
+  },
+  "required": [
+    "agentId"
+  ]
+}

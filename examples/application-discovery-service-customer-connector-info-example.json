@@ -1,0 +1,9 @@
+{
+  "activeConnectors": 0,
+  "healthyConnectors": 0,
+  "blackListedConnectors": 0,
+  "shutdownConnectors": 0,
+  "unhealthyConnectors": 0,
+  "totalConnectors": 0,
+  "unknownConnectors": 0
+}

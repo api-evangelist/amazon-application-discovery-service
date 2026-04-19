@@ -1,0 +1,26 @@
+{
+  "type": "object",
+  "description": "UpdateApplicationRequest schema from Amazon Application Discovery Service API",
+  "properties": {
+    "configurationId": {
+      "type": "string",
+      "description": "Configuration ID of the application to be updated.",
+      "example": "d-APP-500123"
+    },
+    "name": {
+      "type": "string",
+      "description": "New name of the application to be updated.",
+      "example": "Production Web Tier Updated"
+    },
+    "description": {
+      "type": "string",
+      "description": "New description of the application to be updated.",
+      "example": "Updated description for web tier servers"
+    }
+  },
+  "required": [
+    "configurationId"
+  ],
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-update-application-request-structure.json"
+}

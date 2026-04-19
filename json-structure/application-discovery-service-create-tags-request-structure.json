@@ -1,0 +1,45 @@
+{
+  "type": "object",
+  "description": "CreateTagsRequest schema from Amazon Application Discovery Service API",
+  "properties": {
+    "configurationIds": {
+      "type": "array",
+      "description": "A list of configuration items that you want to tag.",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "d-SERVER-500456"
+      ]
+    },
+    "tags": {
+      "type": "array",
+      "description": "Tags that you want to associate with one or more configuration items.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "The type of tag on which to filter.",
+            "example": "environment"
+          },
+          "value": {
+            "type": "string",
+            "description": "A value for a tag key on which to filter.",
+            "example": "production"
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ]
+      }
+    }
+  },
+  "required": [
+    "configurationIds",
+    "tags"
+  ],
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-create-tags-request-structure.json"
+}

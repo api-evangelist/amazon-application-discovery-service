@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-stop-continuous-export-response-schema.json",
+  "title": "StopContinuousExportResponse",
+  "description": "StopContinuousExportResponse schema from Amazon Application Discovery Service API",
+  "type": "object",
+  "properties": {
+    "startTime": {
+      "type": "string",
+      "example": "2026-04-19T10:00:00Z",
+      "description": "Timestamp that represents when this continuous export started collecting data."
+    },
+    "stopTime": {
+      "type": "string",
+      "example": "2026-04-19T11:00:00Z",
+      "description": "Timestamp that represents when this continuous export was stopped."
+    }
+  }
+}

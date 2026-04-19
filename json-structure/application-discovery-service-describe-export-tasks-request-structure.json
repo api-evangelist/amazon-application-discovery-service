@@ -1,0 +1,62 @@
+{
+  "type": "object",
+  "description": "DescribeExportTasksRequest schema from Amazon Application Discovery Service API",
+  "properties": {
+    "exportIds": {
+      "type": "array",
+      "description": "One or more unique identifiers used to query the status of an export request.",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "export-500123"
+      ]
+    },
+    "filters": {
+      "type": "array",
+      "description": "One or more filters.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "A single ExportFilter name. Supported filters \u2014 agentIds.",
+            "example": "agentIds"
+          },
+          "values": {
+            "type": "array",
+            "description": "A single agent ID for a Discovery Agent. An agent ID can be found using the DescribeAgents action.",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "d-agent-500123"
+            ]
+          },
+          "condition": {
+            "type": "string",
+            "description": "Supported condition \u2014 EQUALS.",
+            "example": "EQUALS"
+          }
+        },
+        "required": [
+          "name",
+          "values",
+          "condition"
+        ]
+      }
+    },
+    "maxResults": {
+      "type": "int32",
+      "description": "The maximum number of volume results returned by DescribeExportTasks in paginated output.",
+      "example": 10
+    },
+    "nextToken": {
+      "type": "string",
+      "description": "The nextToken value returned from a previous paginated DescribeExportTasks request.",
+      "example": ""
+    }
+  },
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-describe-export-tasks-request-structure.json"
+}

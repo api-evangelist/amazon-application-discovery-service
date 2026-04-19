@@ -1,0 +1,108 @@
+{
+  "type": "object",
+  "description": "BatchDeleteConfigurationTask schema from Amazon Application Discovery Service API",
+  "properties": {
+    "taskId": {
+      "type": "string",
+      "description": "The deletion task's unique identifier.",
+      "example": "task-500123"
+    },
+    "status": {
+      "type": "string",
+      "description": "The current execution status of the deletion task.",
+      "enum": [
+        "INITIALIZING",
+        "VALIDATING",
+        "DELETING",
+        "COMPLETED",
+        "FAILED"
+      ],
+      "example": "COMPLETED"
+    },
+    "startTime": {
+      "type": "string",
+      "description": "An epoch seconds timestamp (Unix) of when the deletion task was started.",
+      "example": "2026-04-19T10:00:00Z"
+    },
+    "endTime": {
+      "type": "string",
+      "description": "An epoch seconds timestamp (Unix) of when the deletion task was completed.",
+      "example": "2026-04-19T10:05:00Z"
+    },
+    "configurationType": {
+      "type": "string",
+      "description": "The type of configuration item to delete.",
+      "example": "SERVER"
+    },
+    "requestedConfigurations": {
+      "type": "array",
+      "description": "The list of configuration IDs that were originally requested to be deleted by this task.",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "d-SERVER-500456"
+      ]
+    },
+    "deletedConfigurations": {
+      "type": "array",
+      "description": "The list of configuration IDs that were successfully deleted by this task.",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "d-SERVER-500456"
+      ]
+    },
+    "failedConfigurations": {
+      "type": "array",
+      "description": "A list of configuration IDs that produced an associated error.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "configurationId": {
+            "type": "string",
+            "description": "The configuration ID of the configuration that failed to delete.",
+            "example": "d-SERVER-500456"
+          },
+          "errorStatusCode": {
+            "type": "int32",
+            "description": "The error status code.",
+            "example": 404
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "A descriptive message indicating why the associated configuration failed to delete.",
+            "example": "Configuration item not found"
+          }
+        }
+      }
+    },
+    "deletionWarnings": {
+      "type": "array",
+      "description": "A list of warnings associated with this deletion task.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "configurationId": {
+            "type": "string",
+            "description": "The configuration ID of the configuration item associated with the deletion warning.",
+            "example": "d-SERVER-500456"
+          },
+          "warningCode": {
+            "type": "int32",
+            "description": "The integer warning code associated with the warning message.",
+            "example": 1
+          },
+          "warningText": {
+            "type": "string",
+            "description": "A descriptive message of the warning the associated configuration item produced.",
+            "example": "Configuration item may have dependencies"
+          }
+        }
+      }
+    }
+  },
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-batch-delete-configuration-task-structure.json"
+}

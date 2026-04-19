@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "description": "AgentConfigurationStatus schema from Amazon Application Discovery Service API",
+  "properties": {
+    "agentId": {
+      "type": "string",
+      "description": "The agent ID.",
+      "example": "d-agent-500123"
+    },
+    "operationSucceeded": {
+      "type": "boolean",
+      "description": "Information about the status of the StartDataCollection and StopDataCollection operations.",
+      "example": true
+    },
+    "description": {
+      "type": "string",
+      "description": "A description of the operation performed.",
+      "example": "Started data collection"
+    }
+  },
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-agent-configuration-status-structure.json"
+}

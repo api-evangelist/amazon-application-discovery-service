@@ -1,0 +1,9 @@
+{
+  "configurationId": "d-SERVER-500456",
+  "portInformationNeeded": false,
+  "neighborConfigurationIds": [
+    "d-SERVER-500457"
+  ],
+  "maxResults": 10,
+  "nextToken": ""
+}

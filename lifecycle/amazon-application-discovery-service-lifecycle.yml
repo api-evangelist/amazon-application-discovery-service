@@ -1,0 +1,24 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  https://docs.aws.amazon.com/application-discovery/latest/APIReference/Welcome.html
+  + AWS general references (API versioning, health dashboard, SLA)
+notes: >-
+  AWS Application Discovery Service uses a date-based API version (2015-11-01)
+  carried in the request. No operations are marked deprecated in the OpenAPI
+  definition. AWS communicates deprecations via service announcements and the
+  AWS Health Dashboard rather than RFC 8594 Sunset/Deprecation headers.
+versioning:
+  scheme: api-version-date
+  current: '2015-11-01'
+  docs: https://docs.aws.amazon.com/application-discovery/latest/APIReference/Welcome.html
+deprecation:
+  policy_url: https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/api-versioning.html
+  sunset_header: false
+  deprecation_header: false
+sla:
+  url: https://aws.amazon.com/service-terms/
+  uptime_target: null
+  note: No standalone SLA published for Application Discovery Service; covered under AWS Service Terms.
+status_page: https://health.aws.amazon.com/health/status
+deprecated_operations: []

@@ -1,0 +1,40 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/amazon-application-discovery-service-openapi.yml + AWS docs
+notes: >-
+  Standards conformance derived from the OpenAPI definition (security scheme,
+  media types, error shapes) and AWS API conventions. AWS Application Discovery
+  Service is a JSON-over-HTTP AWS service authenticated with Signature Version 4.
+standards:
+  - id: aws-sigv4
+    conforms: true
+    evidence: openapi security uses sigv4; all requests signed with AWS Signature Version 4
+  - id: oauth2
+    conforms: false
+    evidence: no OAuth2 security scheme; auth is AWS SigV4
+  - id: oidc
+    conforms: false
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: errors returned as AWS JSON error shape (__type/message), not application/problem+json
+  - id: json-api
+    conforms: false
+  - id: odata
+    conforms: false
+  - id: fhir-r4
+    conforms: false
+  - id: scim2
+    conforms: false
+  - id: fapi
+    conforms: false
+  - id: psd2
+    conforms: false
+  - id: pagination
+    conforms: true
+    evidence: list/describe operations use nextToken and maxResults request/response parameters
+  - id: idempotency
+    conforms: false
+    evidence: no Idempotency-Key header; mutating operations are not documented as idempotent
+  - id: openapi-3-1
+    conforms: true
+    evidence: openapi field is 3.1.0

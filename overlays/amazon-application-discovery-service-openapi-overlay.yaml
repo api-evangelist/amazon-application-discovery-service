@@ -1,0 +1,28 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Amazon Application Discovery Service API
+  version: 1.0.0
+extends: openapi/amazon-application-discovery-service-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: amazon-application-discovery-service
+      x-apievangelist-index: https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/apis.yml
+      x-api-category:
+        - Migration
+        - Discovery
+        - Infrastructure
+  - target: $.info
+    update:
+      x-artifacts:
+        packages: packages/amazon-application-discovery-service-packages.yml
+        llms: llms/amazon-application-discovery-service-llms.txt
+        conformance: conformance/amazon-application-discovery-service-conformance.yml
+        errors: errors/amazon-application-discovery-service-problem-types.yml
+        lifecycle: lifecycle/amazon-application-discovery-service-lifecycle.yml
+        mcp: mcp/amazon-application-discovery-service-mcp.yml
+        well-known: well-known/amazon-application-discovery-service-well-known.yml
+  - target: $.servers[0]
+    update:
+      x-signature-version: v4
+      x-aws-service-endpoints: https://docs.aws.amazon.com/general/latest/gr/discovery.html

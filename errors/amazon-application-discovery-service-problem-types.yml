@@ -1,0 +1,77 @@
+generated: '2026-06-20'
+method: derived
+format: aws-json
+source: >-
+  openapi/amazon-application-discovery-service-openapi.yml (400/500 responses)
+  enriched from
+  https://docs.aws.amazon.com/application-discovery/latest/APIReference/CommonErrors.html
+notes: >-
+  AWS Application Discovery Service returns AWS JSON errors (a __type and
+  message field), not RFC 9457 problem+json. Every operation in the OpenAPI
+  defines a 400 (Validation error) and 500 (Internal server error) response
+  referencing the shared ErrorResponse schema. The named errors below are the
+  common AWS error types documented for this service, plus the OpenAPI-derived
+  status codes.
+problems:
+  - status: 400
+    name: ValidationError
+    title: The input doesn't meet the required format or constraints.
+    remediation: Check that all required parameters are included and that values are valid.
+    source: openapi ErrorResponse (400) + AWS common errors
+  - status: 500
+    name: InternalFailure
+    title: The request can't be processed right now because of an internal server issue.
+    remediation: Try again later. If the problem persists, contact AWS Support.
+    source: openapi ErrorResponse (500) + AWS common errors
+  - status: 400
+    name: MalformedHttpRequestException
+    title: The request body can't be processed.
+    remediation: Verify that the content encoding header matches the compression format used.
+  - status: 400
+    name: RequestAbortedException
+    title: The request was aborted before a response could be returned.
+    remediation: Retry the request; this typically happens when the client closes the connection.
+  - status: 400
+    name: ThrottlingException
+    title: Your request rate is too high.
+    remediation: Reduce request frequency; AWS SDKs automatically retry throttled requests.
+  - status: 401
+    name: NotAuthorized
+    title: You don't have permissions to perform this action.
+    remediation: Verify that your IAM policy includes the required permissions.
+  - status: 403
+    name: AccessDeniedException
+    title: You don't have permission to perform this action.
+    remediation: Verify that your IAM policy includes the required permissions.
+  - status: 403
+    name: ExpiredTokenException
+    title: The security token included in the request has expired.
+    remediation: Request a new security token and try again.
+  - status: 403
+    name: IncompleteSignature
+    title: The request signature doesn't conform to AWS standards.
+    remediation: Verify valid AWS credentials and a properly formatted request; keep your SDK up to date.
+  - status: 403
+    name: OptInRequired
+    title: Your AWS account needs a subscription for this service.
+    remediation: Verify that you've enabled the service in your account.
+  - status: 403
+    name: UnrecognizedClientException
+    title: The X.509 certificate or AWS access key ID you provided doesn't exist in our records.
+    remediation: Verify that you're using valid, unexpired credentials.
+  - status: 404
+    name: UnknownOperationException
+    title: The action or operation isn't recognized.
+    remediation: Verify the action name spelling and that it's supported by the API version you're using.
+  - status: 408
+    name: RequestTimeoutException
+    title: The request timed out.
+    remediation: The server didn't receive the complete request in time; try again.
+  - status: 413
+    name: RequestEntityTooLargeException
+    title: The request entity is too large.
+    remediation: Reduce the size of the request body and try again.
+  - status: 503
+    name: ServiceUnavailable
+    title: The service is temporarily unavailable.
+    remediation: Try again later.

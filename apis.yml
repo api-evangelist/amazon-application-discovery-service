@@ -13,7 +13,7 @@ tags:
 url: >-
   https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/apis.yml
 created: '2026-03-16'
-modified: '2026-04-19'
+modified: '2026-06-20'
 specificationVersion: '0.19'
 apis:
   - aid: amazon-application-discovery-service:amazon-application-discovery-service-api
@@ -75,7 +75,25 @@ apis:
       - type: Example
         url: >-
           https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/examples/application-discovery-service-import-task-example.json
+      - type: Overlay
+        url: overlays/amazon-application-discovery-service-openapi-overlay.yaml
+      - type: MCPServer
+        url: mcp/amazon-application-discovery-service-mcp.yml
+      - type: Conformance
+        url: conformance/amazon-application-discovery-service-conformance.yml
+      - type: ErrorCatalog
+        url: errors/amazon-application-discovery-service-problem-types.yml
+      - type: Lifecycle
+        url: lifecycle/amazon-application-discovery-service-lifecycle.yml
 common:
+  - type: Packages
+    url: packages/amazon-application-discovery-service-packages.yml
+  - type: LLMsTxt
+    url: llms/amazon-application-discovery-service-llms.txt
+  - type: WellKnown
+    url: well-known/amazon-application-discovery-service-well-known.yml
+  - type: SecurityTxt
+    url: well-known/amazon-application-discovery-service-security.txt
   - type: Features
     data:
       - Agentless Discovery via VMware vCenter integration

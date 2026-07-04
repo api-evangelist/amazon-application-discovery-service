@@ -1,0 +1,48 @@
+generated: '2026-06-20'
+method: searched
+source: AWS SDK public package registries (verified 200)
+packages:
+  - language: javascript
+    registry: npm
+    name: "@aws-sdk/client-application-discovery-service"
+    url: https://www.npmjs.com/package/@aws-sdk/client-application-discovery-service
+    install: npm install @aws-sdk/client-application-discovery-service
+    official: true
+  - language: python
+    registry: pypi
+    name: boto3
+    url: https://pypi.org/project/boto3/
+    install: pip install boto3
+    official: true
+    note: AWS SDK for Python; Application Discovery Service accessed via boto3.client('discovery')
+  - language: ruby
+    registry: rubygems
+    name: aws-sdk-applicationdiscoveryservice
+    url: https://rubygems.org/gems/aws-sdk-applicationdiscoveryservice
+    install: gem install aws-sdk-applicationdiscoveryservice
+    official: true
+  - language: dotnet
+    registry: nuget
+    name: AWSSDK.ApplicationDiscoveryService
+    url: https://www.nuget.org/packages/AWSSDK.ApplicationDiscoveryService/
+    install: dotnet add package AWSSDK.ApplicationDiscoveryService
+    official: true
+  - language: go
+    registry: pkg.go.dev
+    name: github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice
+    url: https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice
+    install: go get github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice
+    official: true
+  - language: java
+    registry: maven
+    name: software.amazon.awssdk:applicationdiscovery
+    url: https://central.sonatype.com/artifact/software.amazon.awssdk/applicationdiscovery
+    install: "implementation 'software.amazon.awssdk:applicationdiscovery'"
+    official: true
+  - language: php
+    registry: packagist
+    name: aws/aws-sdk-php
+    url: https://packagist.org/packages/aws/aws-sdk-php
+    install: composer require aws/aws-sdk-php
+    official: true
+    note: AWS SDK for PHP; Application Discovery Service accessed via the ApplicationDiscoveryService client

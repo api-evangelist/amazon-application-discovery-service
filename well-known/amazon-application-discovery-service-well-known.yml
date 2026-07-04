@@ -1,0 +1,25 @@
+generated: '2026-06-20'
+method: searched
+source: probed /.well-known/ on API host and provider org host
+notes: >-
+  The API endpoint host (discovery.us-east-1.amazonaws.com) returns 404 for all
+  probed /.well-known/ paths. The provider organization host (aws.amazon.com)
+  publishes a valid RFC 9116 security.txt, captured verbatim.
+hosts:
+  - host: https://discovery.us-east-1.amazonaws.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: https://aws.amazon.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        file: amazon-application-discovery-service-security.txt

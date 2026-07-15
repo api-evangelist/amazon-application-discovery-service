@@ -86,6 +86,8 @@ apis:
       - type: Lifecycle
         url: lifecycle/amazon-application-discovery-service-lifecycle.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/amazon-application-discovery-service-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/amazon-application-discovery-service-vulnerability-disclosure.yml
   - type: DomainSecurity

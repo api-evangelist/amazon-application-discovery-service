@@ -1,0 +1,366 @@
+openapi: 3.1.0
+info:
+  title: Amazon Application Discovery Service Agents Applications API
+  description: AWS Application Discovery Service helps you plan your migration to AWS by collecting usage and configuration data about your on-premises servers, network infrastructure, and storage. Application Discovery Service enables you to understand the configuration, usage, and behavior of your servers and to develop a migration plan.
+  version: '2015-11-01'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+  x-generated-from: documentation
+  x-last-validated: '2026-04-19'
+servers:
+- url: https://discovery.us-east-1.amazonaws.com
+  description: AWS Application Discovery Service endpoint
+security:
+- sigv4: []
+tags:
+- name: Applications
+  description: Operations for managing application groupings
+paths:
+  /v1/createApplication:
+    post:
+      operationId: createApplication
+      summary: Amazon Application Discovery Service Create Application
+      description: Creates an application with the given name and description.
+      tags:
+      - Applications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateApplicationRequest'
+            examples:
+              CreateApplicationRequestExample:
+                summary: Default createApplication request
+                x-microcks-default: true
+                value:
+                  name: Production Web Tier
+                  description: Web servers for the production environment
+      responses:
+        '200':
+          description: Application created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateApplicationResponse'
+              examples:
+                CreateApplication200Example:
+                  summary: Default createApplication 200 response
+                  x-microcks-default: true
+                  value:
+                    configurationId: d-APP-500123
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/deleteApplications:
+    post:
+      operationId: deleteApplications
+      summary: Amazon Application Discovery Service Delete Applications
+      description: Deletes a list of applications and their associations with configuration items.
+      tags:
+      - Applications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteApplicationsRequest'
+            examples:
+              DeleteApplicationsRequestExample:
+                summary: Default deleteApplications request
+                x-microcks-default: true
+                value:
+                  configurationIds:
+                  - d-APP-500123
+      responses:
+        '200':
+          description: Applications deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DeleteApplications200Example:
+                  summary: Default deleteApplications 200 response
+                  x-microcks-default: true
+                  value: {}
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/updateApplication:
+    post:
+      operationId: updateApplication
+      summary: Amazon Application Discovery Service Update Application
+      description: Updates metadata about an application.
+      tags:
+      - Applications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateApplicationRequest'
+            examples:
+              UpdateApplicationRequestExample:
+                summary: Default updateApplication request
+                x-microcks-default: true
+                value:
+                  configurationId: d-APP-500123
+                  name: Production Web Tier Updated
+                  description: Updated description for web tier servers
+      responses:
+        '200':
+          description: Application updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                UpdateApplication200Example:
+                  summary: Default updateApplication 200 response
+                  x-microcks-default: true
+                  value: {}
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/associateConfigurationItemsToApplication:
+    post:
+      operationId: associateConfigurationItemsToApplication
+      summary: Amazon Application Discovery Service Associate Configuration Items to Application
+      description: Associates one or more configuration items with an application.
+      tags:
+      - Applications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssociateConfigurationItemsRequest'
+            examples:
+              AssociateConfigurationItemsRequestExample:
+                summary: Default associateConfigurationItemsToApplication request
+                x-microcks-default: true
+                value:
+                  applicationConfigurationId: d-APP-500123
+                  configurationIds:
+                  - d-SERVER-500456
+                  - d-SERVER-500457
+      responses:
+        '200':
+          description: Configuration items associated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                AssociateConfigurationItems200Example:
+                  summary: Default associateConfigurationItemsToApplication 200 response
+                  x-microcks-default: true
+                  value: {}
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/disassociateConfigurationItemsFromApplication:
+    post:
+      operationId: disassociateConfigurationItemsFromApplication
+      summary: Amazon Application Discovery Service Disassociate Configuration Items from Application
+      description: Disassociates one or more configuration items from an application.
+      tags:
+      - Applications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisassociateConfigurationItemsRequest'
+            examples:
+              DisassociateConfigurationItemsRequestExample:
+                summary: Default disassociateConfigurationItemsFromApplication request
+                x-microcks-default: true
+                value:
+                  applicationConfigurationId: d-APP-500123
+                  configurationIds:
+                  - d-SERVER-500456
+      responses:
+        '200':
+          description: Configuration items disassociated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DisassociateConfigurationItems200Example:
+                  summary: Default disassociateConfigurationItemsFromApplication 200 response
+                  x-microcks-default: true
+                  value: {}
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    DisassociateConfigurationItemsRequest:
+      type: object
+      required:
+      - applicationConfigurationId
+      - configurationIds
+      properties:
+        applicationConfigurationId:
+          type: string
+          description: Configuration ID of an application from which each item is to be disassociated.
+          example: d-APP-500123
+        configurationIds:
+          type: array
+          description: Configuration ID of each item to be disassociated from an application.
+          items:
+            type: string
+          example:
+          - d-SERVER-500456
+    DeleteApplicationsRequest:
+      type: object
+      required:
+      - configurationIds
+      properties:
+        configurationIds:
+          type: array
+          description: Configuration ID of an application to be deleted.
+          items:
+            type: string
+          example:
+          - d-APP-500123
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The error message describing what went wrong.
+          example: The specified resource was not found.
+        code:
+          type: string
+          description: The error code.
+          example: ResourceNotFoundException
+    CreateApplicationResponse:
+      type: object
+      properties:
+        configurationId:
+          type: string
+          description: Configuration ID of an application to be created.
+          example: d-APP-500123
+    AssociateConfigurationItemsRequest:
+      type: object
+      required:
+      - applicationConfigurationId
+      - configurationIds
+      properties:
+        applicationConfigurationId:
+          type: string
+          description: The configuration ID of an application with which items are to be associated.
+          example: d-APP-500123
+        configurationIds:
+          type: array
+          description: The ID of each configuration item to be associated with an application.
+          items:
+            type: string
+          example:
+          - d-SERVER-500456
+    CreateApplicationRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Name of the application to be created.
+          example: Production Web Tier
+        description:
+          type: string
+          description: Description of the application to be created.
+          example: Web servers for the production environment
+    UpdateApplicationRequest:
+      type: object
+      required:
+      - configurationId
+      properties:
+        configurationId:
+          type: string
+          description: Configuration ID of the application to be updated.
+          example: d-APP-500123
+        name:
+          type: string
+          description: New name of the application to be updated.
+          example: Production Web Tier Updated
+        description:
+          type: string
+          description: New description of the application to be updated.
+          example: Updated description for web tier servers
+  securitySchemes:
+    sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication

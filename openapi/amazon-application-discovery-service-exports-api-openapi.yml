@@ -1,0 +1,549 @@
+openapi: 3.1.0
+info:
+  title: Amazon Application Discovery Service Agents Exports API
+  description: AWS Application Discovery Service helps you plan your migration to AWS by collecting usage and configuration data about your on-premises servers, network infrastructure, and storage. Application Discovery Service enables you to understand the configuration, usage, and behavior of your servers and to develop a migration plan.
+  version: '2015-11-01'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+  x-generated-from: documentation
+  x-last-validated: '2026-04-19'
+servers:
+- url: https://discovery.us-east-1.amazonaws.com
+  description: AWS Application Discovery Service endpoint
+security:
+- sigv4: []
+tags:
+- name: Exports
+  description: Operations for exporting discovered data
+paths:
+  /v1/startExportTask:
+    post:
+      operationId: startExportTask
+      summary: Amazon Application Discovery Service Start Export Task
+      description: Begins the export of discovered data to an S3 bucket. If you specify agentIds in a filter, the task exports up to 72 hours of detailed data collected by the identified Application Discovery Agent, including network, process, and performance details.
+      tags:
+      - Exports
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartExportTaskRequest'
+            examples:
+              StartExportTaskRequestExample:
+                summary: Default startExportTask request
+                x-microcks-default: true
+                value:
+                  exportDataFormat:
+                  - CSV
+                  startTime: '2026-04-01T00:00:00Z'
+                  endTime: '2026-04-19T23:59:59Z'
+      responses:
+        '200':
+          description: Export task started successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartExportTaskResponse'
+              examples:
+                StartExportTask200Example:
+                  summary: Default startExportTask 200 response
+                  x-microcks-default: true
+                  value:
+                    exportId: export-500123
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/describeExportTasks:
+    post:
+      operationId: describeExportTasks
+      summary: Amazon Application Discovery Service Describe Export Tasks
+      description: Retrieve status of one or more export tasks. You can retrieve the status of up to 100 export tasks.
+      tags:
+      - Exports
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeExportTasksRequest'
+            examples:
+              DescribeExportTasksRequestExample:
+                summary: Default describeExportTasks request
+                x-microcks-default: true
+                value:
+                  exportIds:
+                  - export-500123
+                  maxResults: 10
+      responses:
+        '200':
+          description: Export tasks described successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeExportTasksResponse'
+              examples:
+                DescribeExportTasks200Example:
+                  summary: Default describeExportTasks 200 response
+                  x-microcks-default: true
+                  value:
+                    exportsInfo:
+                    - exportId: export-500123
+                      exportStatus: SUCCEEDED
+                      statusMessage: Export complete
+                      configurationsDownloadUrl: https://s3.amazonaws.com/aws-application-discovery-service-export/500123/export.zip
+                      exportRequestTime: '2026-04-19T10:00:00Z'
+                      isTruncated: false
+                    nextToken: ''
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/startContinuousExport:
+    post:
+      operationId: startContinuousExport
+      summary: Amazon Application Discovery Service Start Continuous Export
+      description: Start the continuous flow of agent's discovered data into Amazon Athena.
+      tags:
+      - Exports
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Continuous export started successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartContinuousExportResponse'
+              examples:
+                StartContinuousExport200Example:
+                  summary: Default startContinuousExport 200 response
+                  x-microcks-default: true
+                  value:
+                    exportId: continuous-export-500123
+                    s3Bucket: aws-application-discovery-service-500123
+                    startTime: '2026-04-19T10:00:00Z'
+                    dataSource: AGENT
+                    schemaStorageConfig:
+                      glueDataCatalog:
+                        databaseName: application_discovery_service_export
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/stopContinuousExport:
+    post:
+      operationId: stopContinuousExport
+      summary: Amazon Application Discovery Service Stop Continuous Export
+      description: Stop the continuous flow of agent's discovered data into Amazon Athena.
+      tags:
+      - Exports
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopContinuousExportRequest'
+            examples:
+              StopContinuousExportRequestExample:
+                summary: Default stopContinuousExport request
+                x-microcks-default: true
+                value:
+                  exportId: continuous-export-500123
+      responses:
+        '200':
+          description: Continuous export stopped successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopContinuousExportResponse'
+              examples:
+                StopContinuousExport200Example:
+                  summary: Default stopContinuousExport 200 response
+                  x-microcks-default: true
+                  value:
+                    startTime: '2026-04-19T10:00:00Z'
+                    stopTime: '2026-04-19T11:00:00Z'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/describeContinuousExports:
+    post:
+      operationId: describeContinuousExports
+      summary: Amazon Application Discovery Service Describe Continuous Exports
+      description: Lists exports as specified by ID. All continuous exports associated with your user can be listed if you call DescribeContinuousExports as is without passing any parameters.
+      tags:
+      - Exports
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeContinuousExportsRequest'
+            examples:
+              DescribeContinuousExportsRequestExample:
+                summary: Default describeContinuousExports request
+                x-microcks-default: true
+                value:
+                  maxResults: 10
+      responses:
+        '200':
+          description: Continuous exports described successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeContinuousExportsResponse'
+              examples:
+                DescribeContinuousExports200Example:
+                  summary: Default describeContinuousExports 200 response
+                  x-microcks-default: true
+                  value:
+                    descriptions:
+                    - exportId: continuous-export-500123
+                      status: ACTIVE
+                      startTime: '2026-04-19T10:00:00Z'
+                      s3Bucket: aws-application-discovery-service-500123
+                      dataSource: AGENT
+                    nextToken: ''
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    StopContinuousExportResponse:
+      type: object
+      properties:
+        startTime:
+          type: string
+          description: Timestamp that represents when this continuous export started collecting data.
+          example: '2026-04-19T10:00:00Z'
+        stopTime:
+          type: string
+          description: Timestamp that represents when this continuous export was stopped.
+          example: '2026-04-19T11:00:00Z'
+    DescribeExportTasksRequest:
+      type: object
+      properties:
+        exportIds:
+          type: array
+          description: One or more unique identifiers used to query the status of an export request.
+          items:
+            type: string
+          example:
+          - export-500123
+        filters:
+          type: array
+          description: One or more filters.
+          items:
+            $ref: '#/components/schemas/ExportFilter'
+        maxResults:
+          type: integer
+          description: The maximum number of volume results returned by DescribeExportTasks in paginated output.
+          example: 10
+        nextToken:
+          type: string
+          description: The nextToken value returned from a previous paginated DescribeExportTasks request.
+          example: ''
+    StartContinuousExportResponse:
+      type: object
+      properties:
+        exportId:
+          type: string
+          description: The unique ID assigned to this export.
+          example: continuous-export-500123
+        s3Bucket:
+          type: string
+          description: The name of the s3 bucket where the export data parquet files are stored.
+          example: aws-application-discovery-service-500123
+        startTime:
+          type: string
+          description: The timestamp representing when the continuous export was started.
+          example: '2026-04-19T10:00:00Z'
+        dataSource:
+          type: string
+          description: The type of data collector used to gather this data.
+          example: AGENT
+        schemaStorageConfig:
+          type: object
+          description: A dictionary which describes how the data is stored.
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The error message describing what went wrong.
+          example: The specified resource was not found.
+        code:
+          type: string
+          description: The error code.
+          example: ResourceNotFoundException
+    ContinuousExportDescription:
+      type: object
+      properties:
+        exportId:
+          type: string
+          description: The unique ID assigned to this export.
+          example: continuous-export-500123
+        status:
+          type: string
+          description: Describes the status of the export. Can be one of the following values — START_IN_PROGRESS, START_FAILED, ACTIVE, ERROR, STOP_IN_PROGRESS, STOP_FAILED, INACTIVE.
+          enum:
+          - START_IN_PROGRESS
+          - START_FAILED
+          - ACTIVE
+          - ERROR
+          - STOP_IN_PROGRESS
+          - STOP_FAILED
+          - INACTIVE
+          example: ACTIVE
+        statusDetail:
+          type: string
+          description: Contains information about any errors that have occurred.
+          example: ''
+        s3Bucket:
+          type: string
+          description: The name of the s3 bucket where the export data parquet files are stored.
+          example: aws-application-discovery-service-500123
+        startTime:
+          type: string
+          description: The timestamp representing when the continuous export was started.
+          example: '2026-04-19T10:00:00Z'
+        stopTime:
+          type: string
+          description: The timestamp representing when the continuous export was stopped.
+          example: '2026-04-19T11:00:00Z'
+        dataSource:
+          type: string
+          description: The type of data collector used to gather this data.
+          example: AGENT
+        schemaStorageConfig:
+          type: object
+          description: An object which describes how the data is stored.
+    ExportInfo:
+      type: object
+      required:
+      - exportId
+      - exportStatus
+      - statusMessage
+      - exportRequestTime
+      properties:
+        exportId:
+          type: string
+          description: A unique identifier used to query the status of an export request.
+          example: export-500123
+        exportStatus:
+          type: string
+          description: The status of the data export job.
+          enum:
+          - FAILED
+          - SUCCEEDED
+          - IN_PROGRESS
+          example: SUCCEEDED
+        statusMessage:
+          type: string
+          description: A status message provided for API callers.
+          example: Export complete
+        configurationsDownloadUrl:
+          type: string
+          description: A URL for an Amazon S3 bucket where you can review the exported data.
+          example: https://s3.amazonaws.com/aws-application-discovery-service-export/500123/export.zip
+        exportRequestTime:
+          type: string
+          description: The time that the data export was initiated.
+          example: '2026-04-19T10:00:00Z'
+        isTruncated:
+          type: boolean
+          description: If true, the export of agent information exceeded the size limit for a single export, and the exported data is incomplete.
+          example: false
+        requestedStartTime:
+          type: string
+          description: The value of startTime parameter in the StartExportTask request.
+          example: '2026-04-01T00:00:00Z'
+        requestedEndTime:
+          type: string
+          description: The endTime used in the StartExportTask request. If no endTime was requested, this result does not appear in ExportInfo.
+          example: '2026-04-19T23:59:59Z'
+    ExportFilter:
+      type: object
+      required:
+      - name
+      - values
+      - condition
+      properties:
+        name:
+          type: string
+          description: A single ExportFilter name. Supported filters — agentIds.
+          example: agentIds
+        values:
+          type: array
+          description: A single agent ID for a Discovery Agent. An agent ID can be found using the DescribeAgents action.
+          items:
+            type: string
+          example:
+          - d-agent-500123
+        condition:
+          type: string
+          description: Supported condition — EQUALS.
+          example: EQUALS
+    StopContinuousExportRequest:
+      type: object
+      required:
+      - exportId
+      properties:
+        exportId:
+          type: string
+          description: The unique ID assigned to this export.
+          example: continuous-export-500123
+    DescribeExportTasksResponse:
+      type: object
+      properties:
+        exportsInfo:
+          type: array
+          description: Contains one or more sets of export request details.
+          items:
+            $ref: '#/components/schemas/ExportInfo'
+        nextToken:
+          type: string
+          description: The nextToken value to include in a future DescribeExportTasks request.
+          example: ''
+    StartExportTaskRequest:
+      type: object
+      properties:
+        exportDataFormat:
+          type: array
+          description: 'The file format for the returned export data. Default(s) are CSV. Note: The GRAPHML option has been deprecated.'
+          items:
+            type: string
+            enum:
+            - CSV
+          example:
+          - CSV
+        filters:
+          type: array
+          description: If a filter is present, it selects the single agentId of the Application Discovery Agent for which data is exported.
+          items:
+            $ref: '#/components/schemas/ExportFilter'
+        startTime:
+          type: string
+          description: The start timestamp for exported data from the single Application Discovery Agent selected in the filters.
+          example: '2026-04-01T00:00:00Z'
+        endTime:
+          type: string
+          description: The end timestamp for exported data from the single Application Discovery Agent selected in the filters.
+          example: '2026-04-19T23:59:59Z'
+        preferences:
+          type: object
+          description: Indicates the type of agent export.
+    DescribeContinuousExportsResponse:
+      type: object
+      properties:
+        descriptions:
+          type: array
+          description: A list of continuous export descriptions.
+          items:
+            $ref: '#/components/schemas/ContinuousExportDescription'
+        nextToken:
+          type: string
+          description: The token from the previous call to DescribeExportTasks.
+          example: ''
+    StartExportTaskResponse:
+      type: object
+      properties:
+        exportId:
+          type: string
+          description: A unique identifier used to query the status of an export request.
+          example: export-500123
+    DescribeContinuousExportsRequest:
+      type: object
+      properties:
+        exportIds:
+          type: array
+          description: The unique IDs assigned to the exports.
+          items:
+            type: string
+          example:
+          - continuous-export-500123
+        maxResults:
+          type: integer
+          description: A number between 1 and 100 specifying the maximum number of continuous export descriptions returned.
+          minimum: 1
+          maximum: 100
+          example: 10
+        nextToken:
+          type: string
+          description: The token from the previous call to DescribeExportTasks.
+          example: ''
+  securitySchemes:
+    sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication

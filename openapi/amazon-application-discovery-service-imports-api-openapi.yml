@@ -1,0 +1,381 @@
+openapi: 3.1.0
+info:
+  title: Amazon Application Discovery Service Agents Imports API
+  description: AWS Application Discovery Service helps you plan your migration to AWS by collecting usage and configuration data about your on-premises servers, network infrastructure, and storage. Application Discovery Service enables you to understand the configuration, usage, and behavior of your servers and to develop a migration plan.
+  version: '2015-11-01'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+  x-generated-from: documentation
+  x-last-validated: '2026-04-19'
+servers:
+- url: https://discovery.us-east-1.amazonaws.com
+  description: AWS Application Discovery Service endpoint
+security:
+- sigv4: []
+tags:
+- name: Imports
+  description: Operations for importing server data
+paths:
+  /v1/startImportTask:
+    post:
+      operationId: startImportTask
+      summary: Amazon Application Discovery Service Start Import Task
+      description: Starts an import task, which allows you to import details of your on-premises environment directly into AWS Migration Hub without having to use the Application Discovery Service (ADS) tools.
+      tags:
+      - Imports
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartImportTaskRequest'
+            examples:
+              StartImportTaskRequestExample:
+                summary: Default startImportTask request
+                x-microcks-default: true
+                value:
+                  clientRequestToken: client-token-500123
+                  name: Server Inventory Import April 2026
+                  importUrl: s3://my-bucket/server-inventory.csv
+      responses:
+        '200':
+          description: Import task started successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartImportTaskResponse'
+              examples:
+                StartImportTask200Example:
+                  summary: Default startImportTask 200 response
+                  x-microcks-default: true
+                  value:
+                    task:
+                      importTaskId: import-task-500123
+                      clientRequestToken: client-token-500123
+                      name: Server Inventory Import April 2026
+                      importUrl: s3://my-bucket/server-inventory.csv
+                      status: IMPORT_IN_PROGRESS
+                      importRequestTime: '2026-04-19T10:00:00Z'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/describeImportTasks:
+    post:
+      operationId: describeImportTasks
+      summary: Amazon Application Discovery Service Describe Import Tasks
+      description: Returns an array of import tasks for your account, including status information, times, IDs, the Amazon S3 Object URL for the import file, and more.
+      tags:
+      - Imports
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeImportTasksRequest'
+            examples:
+              DescribeImportTasksRequestExample:
+                summary: Default describeImportTasks request
+                x-microcks-default: true
+                value:
+                  maxResults: 10
+      responses:
+        '200':
+          description: Import tasks described successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeImportTasksResponse'
+              examples:
+                DescribeImportTasks200Example:
+                  summary: Default describeImportTasks 200 response
+                  x-microcks-default: true
+                  value:
+                    tasks:
+                    - importTaskId: import-task-500123
+                      name: Server Inventory Import April 2026
+                      status: IMPORT_COMPLETE
+                      importUrl: s3://my-bucket/server-inventory.csv
+                      importRequestTime: '2026-04-19T10:00:00Z'
+                      importCompletionTime: '2026-04-19T10:05:00Z'
+                      serverImportSuccess: 42
+                      serverImportFailure: 0
+                    nextToken: ''
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/batchDeleteImportData:
+    post:
+      operationId: batchDeleteImportData
+      summary: Amazon Application Discovery Service Batch Delete Import Data
+      description: Deletes one or more import tasks, each identified by their import ID. Each import task has a number of records that can identify servers or applications.
+      tags:
+      - Imports
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchDeleteImportDataRequest'
+            examples:
+              BatchDeleteImportDataRequestExample:
+                summary: Default batchDeleteImportData request
+                x-microcks-default: true
+                value:
+                  importTaskIds:
+                  - import-task-500123
+      responses:
+        '200':
+          description: Import data deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchDeleteImportDataResponse'
+              examples:
+                BatchDeleteImportData200Example:
+                  summary: Default batchDeleteImportData 200 response
+                  x-microcks-default: true
+                  value:
+                    errors: []
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    DescribeImportTasksResponse:
+      type: object
+      properties:
+        nextToken:
+          type: string
+          description: The token to request the next page of results.
+          example: ''
+        tasks:
+          type: array
+          description: A returned array of import tasks that match any applied filters, up to the specified number of maximum results.
+          items:
+            $ref: '#/components/schemas/ImportTask'
+    ImportTaskFilter:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name, status, or import task ID for a specific import task.
+          enum:
+          - IMPORT_TASK_ID
+          - STATUS
+          - NAME
+          example: STATUS
+        values:
+          type: array
+          description: An array of strings that you can provide to match against a specific name, status, or import task ID to filter your import task.
+          items:
+            type: string
+          example:
+          - IMPORT_COMPLETE
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The error message describing what went wrong.
+          example: The specified resource was not found.
+        code:
+          type: string
+          description: The error code.
+          example: ResourceNotFoundException
+    BatchDeleteImportDataResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          description: Error messages returned for each import task that you deleted as a response for this command.
+          items:
+            $ref: '#/components/schemas/BatchDeleteImportDataError'
+    StartImportTaskResponse:
+      type: object
+      properties:
+        task:
+          $ref: '#/components/schemas/ImportTask'
+    StartImportTaskRequest:
+      type: object
+      required:
+      - name
+      - importUrl
+      properties:
+        clientRequestToken:
+          type: string
+          description: Optional. A unique token that you can provide to prevent the same import request from occurring more than once.
+          example: client-token-500123
+        name:
+          type: string
+          description: A descriptive name for this request. You can use this name to filter future requests related to this import task, such as identifying applications and servers that were included in this import task.
+          maxLength: 255
+          example: Server Inventory Import April 2026
+        importUrl:
+          type: string
+          description: The URL for your import file that you've uploaded to Amazon S3.
+          example: s3://my-bucket/server-inventory.csv
+    BatchDeleteImportDataRequest:
+      type: object
+      required:
+      - importTaskIds
+      properties:
+        importTaskIds:
+          type: array
+          description: The IDs for the import tasks that you want to delete.
+          maxItems: 10
+          items:
+            type: string
+          example:
+          - import-task-500123
+        deleteHistory:
+          type: boolean
+          description: Set to true to remove the deleted import task from Migration Hub.
+          example: false
+    ImportTask:
+      type: object
+      properties:
+        importTaskId:
+          type: string
+          description: The unique ID for a specific import task.
+          example: import-task-500123
+        clientRequestToken:
+          type: string
+          description: A unique token used to prevent the same import request from occurring more than once.
+          example: client-token-500123
+        name:
+          type: string
+          description: A descriptive name for an import task.
+          example: Server Inventory Import April 2026
+        importUrl:
+          type: string
+          description: The URL for your import file that you've uploaded to Amazon S3.
+          example: s3://my-bucket/server-inventory.csv
+        status:
+          type: string
+          description: The status of the import task.
+          enum:
+          - IMPORT_IN_PROGRESS
+          - IMPORT_COMPLETE
+          - IMPORT_COMPLETE_WITH_ERRORS
+          - IMPORT_FAILED
+          - IMPORT_FAILED_SERVER_LIMIT_EXCEEDED
+          - IMPORT_FAILED_RECORD_LIMIT_EXCEEDED
+          - DELETE_IN_PROGRESS
+          - DELETE_COMPLETE
+          - DELETE_FAILED
+          - DELETE_FAILED_LIMIT_EXCEEDED
+          - INTERNAL_ERROR
+          example: IMPORT_COMPLETE
+        importRequestTime:
+          type: string
+          description: The time that the import task request was made, presented in the Unix time stamp format.
+          example: '2026-04-19T10:00:00Z'
+        importCompletionTime:
+          type: string
+          description: The time that the import task request finished, presented in the Unix time stamp format.
+          example: '2026-04-19T10:05:00Z'
+        importDeletedTime:
+          type: string
+          description: The time that the import task request was deleted, presented in the Unix time stamp format.
+          example: ''
+        serverImportSuccess:
+          type: integer
+          description: The total number of server records in the import file that were successfully imported.
+          example: 42
+        serverImportFailure:
+          type: integer
+          description: The total number of server records in the import file that failed to be imported.
+          example: 0
+        applicationImportSuccess:
+          type: integer
+          description: The total number of application records in the import file that were successfully imported.
+          example: 5
+        applicationImportFailure:
+          type: integer
+          description: The total number of application records in the import file that failed to be imported.
+          example: 0
+        errorsAndFailedEntriesZip:
+          type: string
+          description: A link to a compressed archive folder (in the ZIP format) of all errors and failed entries that were detected, organized according to the type of error.
+          example: ''
+    DescribeImportTasksRequest:
+      type: object
+      properties:
+        filters:
+          type: array
+          description: An array of name-value pairs that you provide to filter the results for the DescribeImportTask request to a specific subset of results.
+          items:
+            $ref: '#/components/schemas/ImportTaskFilter'
+        maxResults:
+          type: integer
+          description: The maximum number of results that you want this request to return.
+          minimum: 1
+          maximum: 100
+          example: 10
+        nextToken:
+          type: string
+          description: The token to request a specific page of results.
+          example: ''
+    BatchDeleteImportDataError:
+      type: object
+      properties:
+        importTaskId:
+          type: string
+          description: The unique import ID associated with the error that occurred.
+          example: import-task-500123
+        errorCode:
+          type: string
+          description: The type of error that occurred for a specific import task.
+          example: NOT_FOUND
+        errorDescription:
+          type: string
+          description: The description of the error that occurred for a specific import task.
+          example: Import task not found
+  securitySchemes:
+    sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication

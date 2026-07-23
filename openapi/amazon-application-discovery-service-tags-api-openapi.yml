@@ -1,0 +1,320 @@
+openapi: 3.1.0
+info:
+  title: Amazon Application Discovery Service Agents Tags API
+  description: AWS Application Discovery Service helps you plan your migration to AWS by collecting usage and configuration data about your on-premises servers, network infrastructure, and storage. Application Discovery Service enables you to understand the configuration, usage, and behavior of your servers and to develop a migration plan.
+  version: '2015-11-01'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+  x-generated-from: documentation
+  x-last-validated: '2026-04-19'
+servers:
+- url: https://discovery.us-east-1.amazonaws.com
+  description: AWS Application Discovery Service endpoint
+security:
+- sigv4: []
+tags:
+- name: Tags
+  description: Operations for managing configuration item tags
+paths:
+  /v1/createTags:
+    post:
+      operationId: createTags
+      summary: Amazon Application Discovery Service Create Tags
+      description: Creates one or more tags for configuration items. Tags are metadata that help you categorize IT assets.
+      tags:
+      - Tags
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTagsRequest'
+            examples:
+              CreateTagsRequestExample:
+                summary: Default createTags request
+                x-microcks-default: true
+                value:
+                  configurationIds:
+                  - d-SERVER-500456
+                  tags:
+                  - key: environment
+                    value: production
+                  - key: team
+                    value: infrastructure
+      responses:
+        '200':
+          description: Tags created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                CreateTags200Example:
+                  summary: Default createTags 200 response
+                  x-microcks-default: true
+                  value: {}
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/deleteTags:
+    post:
+      operationId: deleteTags
+      summary: Amazon Application Discovery Service Delete Tags
+      description: Deletes the association between configuration items and one or more tags. This API accepts a list of multiple configuration items.
+      tags:
+      - Tags
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteTagsRequest'
+            examples:
+              DeleteTagsRequestExample:
+                summary: Default deleteTags request
+                x-microcks-default: true
+                value:
+                  configurationIds:
+                  - d-SERVER-500456
+                  tags:
+                  - key: environment
+                    value: production
+      responses:
+        '200':
+          description: Tags deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DeleteTags200Example:
+                  summary: Default deleteTags 200 response
+                  x-microcks-default: true
+                  value: {}
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/describeTags:
+    post:
+      operationId: describeTags
+      summary: Amazon Application Discovery Service Describe Tags
+      description: Retrieves a list of configuration items that have tags as specified by the key-value pairs, name and value, passed to the optional parameter filters.
+      tags:
+      - Tags
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeTagsRequest'
+            examples:
+              DescribeTagsRequestExample:
+                summary: Default describeTags request
+                x-microcks-default: true
+                value:
+                  maxResults: 10
+      responses:
+        '200':
+          description: Tags described successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeTagsResponse'
+              examples:
+                DescribeTags200Example:
+                  summary: Default describeTags 200 response
+                  x-microcks-default: true
+                  value:
+                    tags:
+                    - configurationId: d-SERVER-500456
+                      key: environment
+                      value: production
+                      configurationType: SERVER
+                      timeOfCreation: '2026-04-19T10:00:00Z'
+                    nextToken: ''
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    DescribeTagsResponse:
+      type: object
+      properties:
+        tags:
+          type: array
+          description: Depending on the input, this is a list of configuration items tagged with a specific tag, or a list of tags for a specific configuration item.
+          items:
+            $ref: '#/components/schemas/ConfigurationTag'
+        nextToken:
+          type: string
+          description: The call returns a token. Use this token to get the next set of results.
+          example: ''
+    TagFilter:
+      type: object
+      required:
+      - name
+      - values
+      properties:
+        name:
+          type: string
+          description: A name of the tag filter.
+          example: tagKey
+        values:
+          type: array
+          description: Values for the tag filter.
+          items:
+            type: string
+          example:
+          - environment
+    Tag:
+      type: object
+      required:
+      - key
+      - value
+      properties:
+        key:
+          type: string
+          description: The type of tag on which to filter.
+          example: environment
+        value:
+          type: string
+          description: A value for a tag key on which to filter.
+          example: production
+    ConfigurationTag:
+      type: object
+      properties:
+        configurationType:
+          type: string
+          description: A type of IT asset to tag.
+          enum:
+          - SERVER
+          - PROCESS
+          - CONNECTION
+          - APPLICATION
+          example: SERVER
+        configurationId:
+          type: string
+          description: The configuration ID for the item to tag.
+          example: d-SERVER-500456
+        key:
+          type: string
+          description: A type of tag on which to filter.
+          example: environment
+        value:
+          type: string
+          description: A value on which to filter.
+          example: production
+        timeOfCreation:
+          type: string
+          description: The time the configuration tag was created in Coordinated Universal Time (UTC).
+          example: '2026-04-19T10:00:00Z'
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The error message describing what went wrong.
+          example: The specified resource was not found.
+        code:
+          type: string
+          description: The error code.
+          example: ResourceNotFoundException
+    CreateTagsRequest:
+      type: object
+      required:
+      - configurationIds
+      - tags
+      properties:
+        configurationIds:
+          type: array
+          description: A list of configuration items that you want to tag.
+          items:
+            type: string
+          example:
+          - d-SERVER-500456
+        tags:
+          type: array
+          description: Tags that you want to associate with one or more configuration items.
+          items:
+            $ref: '#/components/schemas/Tag'
+    DescribeTagsRequest:
+      type: object
+      properties:
+        filters:
+          type: array
+          description: You can filter the list using a key-value format. You can separate these items by using logical operators.
+          items:
+            $ref: '#/components/schemas/TagFilter'
+        maxResults:
+          type: integer
+          description: The total number of items to return in a single page of output.
+          example: 10
+        nextToken:
+          type: string
+          description: A token to start the list. Use this token to get the next set of results.
+          example: ''
+    DeleteTagsRequest:
+      type: object
+      required:
+      - configurationIds
+      properties:
+        configurationIds:
+          type: array
+          description: A list of configuration items with tags that you want to delete.
+          items:
+            type: string
+          example:
+          - d-SERVER-500456
+        tags:
+          type: array
+          description: Tags that you want to delete from one or more configuration items.
+          items:
+            $ref: '#/components/schemas/Tag'
+  securitySchemes:
+    sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication

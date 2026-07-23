@@ -1,0 +1,482 @@
+openapi: 3.1.0
+info:
+  title: Amazon Application Discovery Service Agents API
+  description: AWS Application Discovery Service helps you plan your migration to AWS by collecting usage and configuration data about your on-premises servers, network infrastructure, and storage. Application Discovery Service enables you to understand the configuration, usage, and behavior of your servers and to develop a migration plan.
+  version: '2015-11-01'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+  x-generated-from: documentation
+  x-last-validated: '2026-04-19'
+servers:
+- url: https://discovery.us-east-1.amazonaws.com
+  description: AWS Application Discovery Service endpoint
+security:
+- sigv4: []
+tags:
+- name: Agents
+  description: Operations for managing discovery agents and collectors
+paths:
+  /v1/describeAgents:
+    post:
+      operationId: describeAgents
+      summary: Amazon Application Discovery Service Describe Agents
+      description: Lists agents or collectors as specified by ID or all agents/collectors associated with your user, if you did not specify an ID. The output includes information about each agent/collector, including the agent/collector ID, IP address, media access control (MAC) address, agent/collector version, and so on.
+      tags:
+      - Agents
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeAgentsRequest'
+            examples:
+              DescribeAgentsRequestExample:
+                summary: Default describeAgents request
+                x-microcks-default: true
+                value:
+                  maxResults: 10
+      responses:
+        '200':
+          description: Agents described successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeAgentsResponse'
+              examples:
+                DescribeAgents200Example:
+                  summary: Default describeAgents 200 response
+                  x-microcks-default: true
+                  value:
+                    agentsInfo:
+                    - agentId: d-agent-500123
+                      hostName: server-01.example.com
+                      agentNetworkInfoList:
+                      - ipAddress: 10.0.0.10
+                        macAddress: aa:bb:cc:dd:ee:ff
+                      connectorId: ''
+                      version: 2.0.1
+                      health: HEALTHY
+                      lastHealthPingTime: '2026-04-19T10:00:00Z'
+                      collectionStatus: START_SCHEDULED
+                      agentType: AWS_DISCOVERY_AGENT
+                      registeredTime: '2026-01-01T00:00:00Z'
+                    nextToken: ''
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/batchDeleteAgents:
+    post:
+      operationId: batchDeleteAgents
+      summary: Amazon Application Discovery Service Batch Delete Agents
+      description: Deletes one or more agents or collectors as specified by ID. Deleting an agent or collector does not delete the previously discovered data. To delete the data collected, use StartBatchDeleteConfigurationTask.
+      tags:
+      - Agents
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchDeleteAgentsRequest'
+            examples:
+              BatchDeleteAgentsRequestExample:
+                summary: Default batchDeleteAgents request
+                x-microcks-default: true
+                value:
+                  deleteAgents:
+                  - agentId: d-agent-500123
+                    force: false
+      responses:
+        '200':
+          description: Agents deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchDeleteAgentsResponse'
+              examples:
+                BatchDeleteAgents200Example:
+                  summary: Default batchDeleteAgents 200 response
+                  x-microcks-default: true
+                  value:
+                    errors: []
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/startDataCollectionByAgentIds:
+    post:
+      operationId: startDataCollectionByAgentIds
+      summary: Amazon Application Discovery Service Start Data Collection by Agent IDs
+      description: Instructs the specified agents to start collecting data.
+      tags:
+      - Agents
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartDataCollectionByAgentIdsRequest'
+            examples:
+              StartDataCollectionByAgentIdsRequestExample:
+                summary: Default startDataCollectionByAgentIds request
+                x-microcks-default: true
+                value:
+                  agentIds:
+                  - d-agent-500123
+                  - d-agent-500124
+      responses:
+        '200':
+          description: Data collection started successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartDataCollectionByAgentIdsResponse'
+              examples:
+                StartDataCollectionByAgentIds200Example:
+                  summary: Default startDataCollectionByAgentIds 200 response
+                  x-microcks-default: true
+                  value:
+                    agentsConfigurationStatus:
+                    - agentId: d-agent-500123
+                      operationSucceeded: true
+                      description: Started data collection
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/stopDataCollectionByAgentIds:
+    post:
+      operationId: stopDataCollectionByAgentIds
+      summary: Amazon Application Discovery Service Stop Data Collection by Agent IDs
+      description: Instructs the specified agents to stop collecting data.
+      tags:
+      - Agents
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopDataCollectionByAgentIdsRequest'
+            examples:
+              StopDataCollectionByAgentIdsRequestExample:
+                summary: Default stopDataCollectionByAgentIds request
+                x-microcks-default: true
+                value:
+                  agentIds:
+                  - d-agent-500123
+      responses:
+        '200':
+          description: Data collection stopped successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopDataCollectionByAgentIdsResponse'
+              examples:
+                StopDataCollectionByAgentIds200Example:
+                  summary: Default stopDataCollectionByAgentIds 200 response
+                  x-microcks-default: true
+                  value:
+                    agentsConfigurationStatus:
+                    - agentId: d-agent-500123
+                      operationSucceeded: true
+                      description: Stopped data collection
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    AgentInfo:
+      type: object
+      properties:
+        agentId:
+          type: string
+          description: The agent or collector ID.
+          example: d-agent-500123
+        hostName:
+          type: string
+          description: The name of the host where the agent or collector resides.
+          example: server-01.example.com
+        agentNetworkInfoList:
+          type: array
+          description: Network details about the host where the agent or collector resides.
+          items:
+            $ref: '#/components/schemas/AgentNetworkInfo'
+        connectorId:
+          type: string
+          description: The ID of the connector.
+          example: ''
+        version:
+          type: string
+          description: The agent or collector version.
+          example: 2.0.1
+        health:
+          type: string
+          description: The health of the agent or collector.
+          enum:
+          - HEALTHY
+          - UNHEALTHY
+          - RUNNING
+          - UNKNOWN
+          - BLACKLISTED
+          - SHUTDOWN
+          example: HEALTHY
+        lastHealthPingTime:
+          type: string
+          description: Time since agent or collector health was reported.
+          example: '2026-04-19T10:00:00Z'
+        collectionStatus:
+          type: string
+          description: Status of the collection process for the agent or collector.
+          example: START_SCHEDULED
+        agentType:
+          type: string
+          description: Type of agent.
+          example: AWS_DISCOVERY_AGENT
+        registeredTime:
+          type: string
+          description: Agent's first registration timestamp in UTC.
+          example: '2026-01-01T00:00:00Z'
+    AgentNetworkInfo:
+      type: object
+      properties:
+        ipAddress:
+          type: string
+          description: The IP address for the host where the agent or collector resides.
+          example: 10.0.0.10
+        macAddress:
+          type: string
+          description: The MAC address for the host where the agent or collector resides.
+          example: aa:bb:cc:dd:ee:ff
+    DescribeAgentsRequest:
+      type: object
+      properties:
+        agentIds:
+          type: array
+          description: The agent or the collector IDs for which you want information. If you specify no IDs, the system returns information about all agents/collectors associated with your AWS user account.
+          items:
+            type: string
+          example:
+          - d-agent-500123
+        filters:
+          type: array
+          description: You can filter the request using various logical operators and a key-value format.
+          items:
+            $ref: '#/components/schemas/Filter'
+        maxResults:
+          type: integer
+          description: The total number of agents/collectors to return in a single page of output.
+          minimum: 0
+          maximum: 900
+          example: 10
+        nextToken:
+          type: string
+          description: Token to retrieve the next set of results.
+          example: ''
+    BatchDeleteAgentsRequest:
+      type: object
+      required:
+      - deleteAgents
+      properties:
+        deleteAgents:
+          type: array
+          description: The list of agents to delete.
+          items:
+            $ref: '#/components/schemas/DeleteAgent'
+    AgentConfigurationStatus:
+      type: object
+      properties:
+        agentId:
+          type: string
+          description: The agent ID.
+          example: d-agent-500123
+        operationSucceeded:
+          type: boolean
+          description: Information about the status of the StartDataCollection and StopDataCollection operations.
+          example: true
+        description:
+          type: string
+          description: A description of the operation performed.
+          example: Started data collection
+    StopDataCollectionByAgentIdsRequest:
+      type: object
+      required:
+      - agentIds
+      properties:
+        agentIds:
+          type: array
+          description: The IDs of the agents from which to stop collecting data.
+          items:
+            type: string
+          example:
+          - d-agent-500123
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The error message describing what went wrong.
+          example: The specified resource was not found.
+        code:
+          type: string
+          description: The error code.
+          example: ResourceNotFoundException
+    DescribeAgentsResponse:
+      type: object
+      properties:
+        agentsInfo:
+          type: array
+          description: Lists agents or the collectors with status and configuration.
+          items:
+            $ref: '#/components/schemas/AgentInfo'
+        nextToken:
+          type: string
+          description: Token to retrieve the next set of results.
+          example: ''
+    StartDataCollectionByAgentIdsResponse:
+      type: object
+      properties:
+        agentsConfigurationStatus:
+          type: array
+          description: Information about agents that were instructed to start collecting data. Information includes the agent ID, a description of the operation performed, and whether the agent configuration was updated successfully.
+          items:
+            $ref: '#/components/schemas/AgentConfigurationStatus'
+    DeleteAgent:
+      type: object
+      required:
+      - agentId
+      properties:
+        agentId:
+          type: string
+          description: The ID of the agent you want to delete.
+          example: d-agent-500123
+        force:
+          type: boolean
+          description: You can use the force parameter to delete agents that do not respond to API actions.
+          example: false
+    Filter:
+      type: object
+      required:
+      - name
+      - values
+      - condition
+      properties:
+        name:
+          type: string
+          description: The name of the filter.
+          example: hostName
+        values:
+          type: array
+          description: A string value on which to filter.
+          items:
+            type: string
+          example:
+          - server-01.example.com
+        condition:
+          type: string
+          description: A conditional operator. The following operators are valid — EQUALS, NOT_EQUALS, CONTAINS, NOT_CONTAINS.
+          enum:
+          - EQUALS
+          - NOT_EQUALS
+          - CONTAINS
+          - NOT_CONTAINS
+          example: EQUALS
+    BatchDeleteAgentError:
+      type: object
+      properties:
+        agentId:
+          type: string
+          description: The ID of the agent that failed to delete.
+          example: d-agent-500123
+        errorCode:
+          type: string
+          description: The type of error that occurred.
+          example: NOT_FOUND
+        errorMessage:
+          type: string
+          description: The text of the error message.
+          example: Agent not found
+    StartDataCollectionByAgentIdsRequest:
+      type: object
+      required:
+      - agentIds
+      properties:
+        agentIds:
+          type: array
+          description: The IDs of the agents from which to start collecting data. If you send a request to an agent that you do not have permission to contact, according to your AWS account's permission settings, the agent is not included in the list of agents that are started.
+          items:
+            type: string
+          example:
+          - d-agent-500123
+    BatchDeleteAgentsResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          description: A list of agent IDs that failed to delete along with the cause of the error.
+          items:
+            $ref: '#/components/schemas/BatchDeleteAgentError'
+    StopDataCollectionByAgentIdsResponse:
+      type: object
+      properties:
+        agentsConfigurationStatus:
+          type: array
+          description: Information about the agents that were instructed to stop collecting data.
+          items:
+            $ref: '#/components/schemas/AgentConfigurationStatus'
+  securitySchemes:
+    sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication

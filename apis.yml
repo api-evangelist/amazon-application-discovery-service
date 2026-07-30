@@ -3,7 +3,19 @@ name: Amazon Application Discovery Service
 description: >-
   Amazon Application Discovery Service helps enterprise customers plan application migration projects by automatically identifying servers, virtual machines, software, and software dependencies running in their on-premises data centers.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/amazon-application-discovery-service.png
 tags:
   - Amazon Application Discovery Service
   - Migration
@@ -16,75 +28,356 @@ created: '2026-03-16'
 modified: '2026-06-20'
 specificationVersion: '0.19'
 apis:
-  - aid: amazon-application-discovery-service:amazon-application-discovery-service-api
-    name: Amazon Application Discovery Service API
-    description: >-
-      REST API for AWS Application Discovery Service covering agents, applications, configurations, exports, imports, and tags for on-premises infrastructure discovery.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
-    humanURL: https://docs.aws.amazon.com/application-discovery/latest/APIReference/Welcome.html
-    baseURL: https://discovery.us-east-1.amazonaws.com
-    tags:
-      - Amazon Application Discovery Service
-      - Migration
-      - Discovery
-      - Infrastructure
-      - AWS
-    properties:
-      - type: OpenAPI
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/openapi/amazon-application-discovery-service-openapi.yml
-      - type: SpectralRules
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/rules/amazon-application-discovery-service-spectral-rules.yml
-      - type: NaftikoCapability
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/capabilities/shared/application-discovery-service-api.yaml
-      - type: NaftikoCapability
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/capabilities/migration-discovery.yaml
-      - type: Vocabulary
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/vocabulary/amazon-application-discovery-service-vocabulary.yaml
-      - type: JSONSchema
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-agent-info-schema.json
-      - type: JSONSchema
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-configuration-tag-schema.json
-      - type: JSONSchema
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-export-task-schema.json
-      - type: JSONSchema
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-import-task-schema.json
-      - type: JSONStructure
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-agent-info-structure.json
-      - type: JSONStructure
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-export-task-structure.json
-      - type: JSONLD
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-ld/amazon-application-discovery-service-context.jsonld
-      - type: Example
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/examples/application-discovery-service-agent-info-example.json
-      - type: Example
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/examples/application-discovery-service-export-task-example.json
-      - type: Example
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/examples/application-discovery-service-import-task-example.json
-      - type: Overlay
-        url: overlays/amazon-application-discovery-service-openapi-overlay.yaml
-      - type: MCPServer
-        url: mcp/amazon-application-discovery-service-mcp.yml
-      - type: Conformance
-        url: conformance/amazon-application-discovery-service-conformance.yml
-      - type: ErrorCatalog
-        url: errors/amazon-application-discovery-service-problem-types.yml
-      - type: Lifecycle
-        url: lifecycle/amazon-application-discovery-service-lifecycle.yml
+- aid: amazon-application-discovery-service:amazon-application-discovery-service-agents-api
+  name: Amazon Application Discovery Service Agents API
+  description: Operations for managing discovery agents and collectors
+  humanURL: https://docs.aws.amazon.com/application-discovery/latest/APIReference/Welcome.html
+  baseURL: https://discovery.us-east-1.amazonaws.com
+  tags:
+  - Agents
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-application-discovery-service-agents-api-openapi.yml
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/rules/amazon-application-discovery-service-spectral-rules.yml
+  - type: NaftikoCapability
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/capabilities/shared/application-discovery-service-api.yaml
+  - type: NaftikoCapability
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/capabilities/migration-discovery.yaml
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/vocabulary/amazon-application-discovery-service-vocabulary.yaml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-agent-info-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-configuration-tag-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-export-task-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-import-task-schema.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-agent-info-structure.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-export-task-structure.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-ld/amazon-application-discovery-service-context.jsonld
+  - type: Example
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/examples/application-discovery-service-agent-info-example.json
+  - type: Example
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/examples/application-discovery-service-export-task-example.json
+  - type: Example
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/examples/application-discovery-service-import-task-example.json
+  - type: Conformance
+    url: conformance/amazon-application-discovery-service-conformance.yml
+  - type: ErrorCatalog
+    url: errors/amazon-application-discovery-service-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/amazon-application-discovery-service-lifecycle.yml
+- aid: >-
+    amazon-application-discovery-service:amazon-application-discovery-service-applications-api
+  name: Amazon Application Discovery Service Applications API
+  description: Operations for managing application groupings
+  humanURL: https://docs.aws.amazon.com/application-discovery/latest/APIReference/Welcome.html
+  baseURL: https://discovery.us-east-1.amazonaws.com
+  tags:
+  - Applications
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-application-discovery-service-applications-api-openapi.yml
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/rules/amazon-application-discovery-service-spectral-rules.yml
+  - type: NaftikoCapability
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/capabilities/shared/application-discovery-service-api.yaml
+  - type: NaftikoCapability
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/capabilities/migration-discovery.yaml
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/vocabulary/amazon-application-discovery-service-vocabulary.yaml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-agent-info-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-configuration-tag-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-export-task-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-import-task-schema.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-agent-info-structure.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-export-task-structure.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-ld/amazon-application-discovery-service-context.jsonld
+  - type: Example
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/examples/application-discovery-service-agent-info-example.json
+  - type: Example
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/examples/application-discovery-service-export-task-example.json
+  - type: Example
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/examples/application-discovery-service-import-task-example.json
+  - type: Conformance
+    url: conformance/amazon-application-discovery-service-conformance.yml
+  - type: ErrorCatalog
+    url: errors/amazon-application-discovery-service-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/amazon-application-discovery-service-lifecycle.yml
+- aid: >-
+    amazon-application-discovery-service:amazon-application-discovery-service-configurations-api
+  name: Amazon Application Discovery Service Configurations API
+  description: Operations for querying discovered configuration items
+  humanURL: https://docs.aws.amazon.com/application-discovery/latest/APIReference/Welcome.html
+  baseURL: https://discovery.us-east-1.amazonaws.com
+  tags:
+  - Configurations
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-application-discovery-service-configurations-api-openapi.yml
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/rules/amazon-application-discovery-service-spectral-rules.yml
+  - type: NaftikoCapability
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/capabilities/shared/application-discovery-service-api.yaml
+  - type: NaftikoCapability
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/capabilities/migration-discovery.yaml
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/vocabulary/amazon-application-discovery-service-vocabulary.yaml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-agent-info-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-configuration-tag-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-export-task-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-import-task-schema.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-agent-info-structure.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-export-task-structure.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-ld/amazon-application-discovery-service-context.jsonld
+  - type: Example
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/examples/application-discovery-service-agent-info-example.json
+  - type: Example
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/examples/application-discovery-service-export-task-example.json
+  - type: Example
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/examples/application-discovery-service-import-task-example.json
+  - type: Conformance
+    url: conformance/amazon-application-discovery-service-conformance.yml
+  - type: ErrorCatalog
+    url: errors/amazon-application-discovery-service-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/amazon-application-discovery-service-lifecycle.yml
+- aid: amazon-application-discovery-service:amazon-application-discovery-service-exports-api
+  name: Amazon Application Discovery Service Exports API
+  description: Operations for exporting discovered data
+  humanURL: https://docs.aws.amazon.com/application-discovery/latest/APIReference/Welcome.html
+  baseURL: https://discovery.us-east-1.amazonaws.com
+  tags:
+  - Exports
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-application-discovery-service-exports-api-openapi.yml
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/rules/amazon-application-discovery-service-spectral-rules.yml
+  - type: NaftikoCapability
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/capabilities/shared/application-discovery-service-api.yaml
+  - type: NaftikoCapability
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/capabilities/migration-discovery.yaml
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/vocabulary/amazon-application-discovery-service-vocabulary.yaml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-agent-info-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-configuration-tag-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-export-task-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-import-task-schema.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-agent-info-structure.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-export-task-structure.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-ld/amazon-application-discovery-service-context.jsonld
+  - type: Example
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/examples/application-discovery-service-agent-info-example.json
+  - type: Example
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/examples/application-discovery-service-export-task-example.json
+  - type: Example
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/examples/application-discovery-service-import-task-example.json
+  - type: Conformance
+    url: conformance/amazon-application-discovery-service-conformance.yml
+  - type: ErrorCatalog
+    url: errors/amazon-application-discovery-service-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/amazon-application-discovery-service-lifecycle.yml
+- aid: amazon-application-discovery-service:amazon-application-discovery-service-imports-api
+  name: Amazon Application Discovery Service Imports API
+  description: Operations for importing server data
+  humanURL: https://docs.aws.amazon.com/application-discovery/latest/APIReference/Welcome.html
+  baseURL: https://discovery.us-east-1.amazonaws.com
+  tags:
+  - Imports
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-application-discovery-service-imports-api-openapi.yml
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/rules/amazon-application-discovery-service-spectral-rules.yml
+  - type: NaftikoCapability
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/capabilities/shared/application-discovery-service-api.yaml
+  - type: NaftikoCapability
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/capabilities/migration-discovery.yaml
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/vocabulary/amazon-application-discovery-service-vocabulary.yaml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-agent-info-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-configuration-tag-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-export-task-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-import-task-schema.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-agent-info-structure.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-export-task-structure.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-ld/amazon-application-discovery-service-context.jsonld
+  - type: Example
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/examples/application-discovery-service-agent-info-example.json
+  - type: Example
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/examples/application-discovery-service-export-task-example.json
+  - type: Example
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/examples/application-discovery-service-import-task-example.json
+  - type: Conformance
+    url: conformance/amazon-application-discovery-service-conformance.yml
+  - type: ErrorCatalog
+    url: errors/amazon-application-discovery-service-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/amazon-application-discovery-service-lifecycle.yml
+- aid: amazon-application-discovery-service:amazon-application-discovery-service-tags-api
+  name: Amazon Application Discovery Service Tags API
+  description: Operations for managing configuration item tags
+  humanURL: https://docs.aws.amazon.com/application-discovery/latest/APIReference/Welcome.html
+  baseURL: https://discovery.us-east-1.amazonaws.com
+  tags:
+  - Tags
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-application-discovery-service-tags-api-openapi.yml
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/rules/amazon-application-discovery-service-spectral-rules.yml
+  - type: NaftikoCapability
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/capabilities/shared/application-discovery-service-api.yaml
+  - type: NaftikoCapability
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/capabilities/migration-discovery.yaml
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/vocabulary/amazon-application-discovery-service-vocabulary.yaml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-agent-info-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-configuration-tag-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-export-task-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-schema/application-discovery-service-import-task-schema.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-agent-info-structure.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-structure/application-discovery-service-export-task-structure.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/json-ld/amazon-application-discovery-service-context.jsonld
+  - type: Example
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/examples/application-discovery-service-agent-info-example.json
+  - type: Example
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/examples/application-discovery-service-export-task-example.json
+  - type: Example
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-application-discovery-service/refs/heads/main/examples/application-discovery-service-import-task-example.json
+  - type: Conformance
+    url: conformance/amazon-application-discovery-service-conformance.yml
+  - type: ErrorCatalog
+    url: errors/amazon-application-discovery-service-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/amazon-application-discovery-service-lifecycle.yml
 common:
   - type: AgenticAccess
     url: agentic-access/amazon-application-discovery-service-agentic-access.yml

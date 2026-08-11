@@ -379,6 +379,10 @@ apis:
   - type: Lifecycle
     url: lifecycle/amazon-application-discovery-service-lifecycle.yml
 common:
+  - type: MCPServer
+    url: mcp/amazon-application-discovery-service-mcp.yml
+  - type: Overlay
+    url: overlays/amazon-application-discovery-service-openapi-overlay.yaml
   - type: AgenticAccess
     url: agentic-access/amazon-application-discovery-service-agentic-access.yml
   - type: VulnerabilityDisclosure

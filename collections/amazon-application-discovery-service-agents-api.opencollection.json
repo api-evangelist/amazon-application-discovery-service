@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Application Discovery Service Agents API",
+    "version": "2015-11-01"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Agents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Application Discovery Service Describe Agents",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://discovery.us-east-1.amazonaws.com/v1/describeAgents",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists agents or collectors as specified by ID or all agents/collectors associated with your user, if you did not specify an ID. The output includes information about each agent/collector, including the agent/collector ID, IP address, media access control (MAC) address, agent/collector version, and so on."
+        },
+        {
+          "info": {
+            "name": "Amazon Application Discovery Service Batch Delete Agents",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://discovery.us-east-1.amazonaws.com/v1/batchDeleteAgents",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes one or more agents or collectors as specified by ID. Deleting an agent or collector does not delete the previously discovered data. To delete the data collected, use StartBatchDeleteConfigurationTask."
+        },
+        {
+          "info": {
+            "name": "Amazon Application Discovery Service Start Data Collection by Agent IDs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://discovery.us-east-1.amazonaws.com/v1/startDataCollectionByAgentIds",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Instructs the specified agents to start collecting data."
+        },
+        {
+          "info": {
+            "name": "Amazon Application Discovery Service Stop Data Collection by Agent IDs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://discovery.us-east-1.amazonaws.com/v1/stopDataCollectionByAgentIds",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Instructs the specified agents to stop collecting data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

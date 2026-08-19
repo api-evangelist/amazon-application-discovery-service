@@ -1,0 +1,116 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Application Discovery Service Agents Configurations API",
+    "version": "2015-11-01"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Configurations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Application Discovery Service Describe Configurations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://discovery.us-east-1.amazonaws.com/v1/describeConfigurations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves attributes for a list of configuration item IDs. All of the supplied IDs must be for the same asset type from one of the following — server, application, process, or connection. Output fields are specific to the asset type."
+        },
+        {
+          "info": {
+            "name": "Amazon Application Discovery Service List Configurations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://discovery.us-east-1.amazonaws.com/v1/listConfigurations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves a list of configuration items as specified by the value passed to the required parameter configurationType. Optional filtering may be applied to refine search results."
+        },
+        {
+          "info": {
+            "name": "Amazon Application Discovery Service Get Discovery Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://discovery.us-east-1.amazonaws.com/v1/getDiscoverySummary",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves a short summary of discovered assets. This API operation takes no request parameters and is called as is at the command prompt."
+        },
+        {
+          "info": {
+            "name": "Amazon Application Discovery Service List Server Neighbors",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://discovery.us-east-1.amazonaws.com/v1/listServerNeighbors",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves a list of servers that are one network hop away from a specified server."
+        },
+        {
+          "info": {
+            "name": "Amazon Application Discovery Service Start Batch Delete Configuration Task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://discovery.us-east-1.amazonaws.com/v1/startBatchDeleteConfigurationTask",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Takes a list of configurationIds as input and starts an asynchronous deletion task to remove the specified configuration items and their relationships."
+        },
+        {
+          "info": {
+            "name": "Amazon Application Discovery Service Describe Batch Delete Configuration Task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://discovery.us-east-1.amazonaws.com/v1/describeBatchDeleteConfigurationTask",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Takes a unique deletion task identifier as input and returns metadata about a configuration deletion task."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

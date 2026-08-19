@@ -1,0 +1,71 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Application Discovery Service Agents Tags API",
+    "version": "2015-11-01"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Application Discovery Service Create Tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://discovery.us-east-1.amazonaws.com/v1/createTags",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates one or more tags for configuration items. Tags are metadata that help you categorize IT assets."
+        },
+        {
+          "info": {
+            "name": "Amazon Application Discovery Service Delete Tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://discovery.us-east-1.amazonaws.com/v1/deleteTags",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes the association between configuration items and one or more tags. This API accepts a list of multiple configuration items."
+        },
+        {
+          "info": {
+            "name": "Amazon Application Discovery Service Describe Tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://discovery.us-east-1.amazonaws.com/v1/describeTags",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves a list of configuration items that have tags as specified by the key-value pairs, name and value, passed to the optional parameter filters."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,71 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Application Discovery Service Agents Imports API",
+    "version": "2015-11-01"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Imports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Application Discovery Service Start Import Task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://discovery.us-east-1.amazonaws.com/v1/startImportTask",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Starts an import task, which allows you to import details of your on-premises environment directly into AWS Migration Hub without having to use the Application Discovery Service (ADS) tools."
+        },
+        {
+          "info": {
+            "name": "Amazon Application Discovery Service Describe Import Tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://discovery.us-east-1.amazonaws.com/v1/describeImportTasks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns an array of import tasks for your account, including status information, times, IDs, the Amazon S3 Object URL for the import file, and more."
+        },
+        {
+          "info": {
+            "name": "Amazon Application Discovery Service Batch Delete Import Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://discovery.us-east-1.amazonaws.com/v1/batchDeleteImportData",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes one or more import tasks, each identified by their import ID. Each import task has a number of records that can identify servers or applications."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

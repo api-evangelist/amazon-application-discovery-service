@@ -1,0 +1,101 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Application Discovery Service Agents Exports API",
+    "version": "2015-11-01"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Exports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Application Discovery Service Start Export Task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://discovery.us-east-1.amazonaws.com/v1/startExportTask",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Begins the export of discovered data to an S3 bucket. If you specify agentIds in a filter, the task exports up to 72 hours of detailed data collected by the identified Application Discovery Agent, including network, process, and performance details."
+        },
+        {
+          "info": {
+            "name": "Amazon Application Discovery Service Describe Export Tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://discovery.us-east-1.amazonaws.com/v1/describeExportTasks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve status of one or more export tasks. You can retrieve the status of up to 100 export tasks."
+        },
+        {
+          "info": {
+            "name": "Amazon Application Discovery Service Start Continuous Export",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://discovery.us-east-1.amazonaws.com/v1/startContinuousExport",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Start the continuous flow of agent's discovered data into Amazon Athena."
+        },
+        {
+          "info": {
+            "name": "Amazon Application Discovery Service Stop Continuous Export",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://discovery.us-east-1.amazonaws.com/v1/stopContinuousExport",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Stop the continuous flow of agent's discovered data into Amazon Athena."
+        },
+        {
+          "info": {
+            "name": "Amazon Application Discovery Service Describe Continuous Exports",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://discovery.us-east-1.amazonaws.com/v1/describeContinuousExports",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists exports as specified by ID. All continuous exports associated with your user can be listed if you call DescribeContinuousExports as is without passing any parameters."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

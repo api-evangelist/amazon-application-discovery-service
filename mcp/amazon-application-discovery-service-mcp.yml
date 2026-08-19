@@ -2,89 +2,93 @@ generated: '2026-06-20'
 method: derived
 status: candidate
 source: openapi/amazon-application-discovery-service-openapi.yml
-notes: >-
-  No official first-party hosted MCP server was found for AWS Application
-  Discovery Service. Tool list derived one-per-operationId from the OpenAPI
-  definition as a candidate surface.
+notes: No official first-party hosted MCP server was found for AWS Application Discovery Service. Tool
+  list derived one-per-operationId from the OpenAPI definition as a candidate surface.
 server:
   name: amazon-application-discovery-service
   transport: stdio
 tools:
-  - name: describeAgents
-    description: List agents or collectors, including ID, IP, MAC, version and health.
-    source_operation: openapi/amazon-application-discovery-service-openapi.yml#describeAgents
-  - name: batchDeleteAgents
-    description: Delete one or more agents or collectors.
-    source_operation: openapi/amazon-application-discovery-service-openapi.yml#batchDeleteAgents
-  - name: startDataCollectionByAgentIds
-    description: Instruct specified agents or collectors to start collecting data.
-    source_operation: openapi/amazon-application-discovery-service-openapi.yml#startDataCollectionByAgentIds
-  - name: stopDataCollectionByAgentIds
-    description: Instruct specified agents or collectors to stop collecting data.
-    source_operation: openapi/amazon-application-discovery-service-openapi.yml#stopDataCollectionByAgentIds
-  - name: createApplication
-    description: Create an application from a list of associated configuration items.
-    source_operation: openapi/amazon-application-discovery-service-openapi.yml#createApplication
-  - name: deleteApplications
-    description: Delete one or more applications.
-    source_operation: openapi/amazon-application-discovery-service-openapi.yml#deleteApplications
-  - name: updateApplication
-    description: Update metadata about an application.
-    source_operation: openapi/amazon-application-discovery-service-openapi.yml#updateApplication
-  - name: associateConfigurationItemsToApplication
-    description: Associate configuration items to an application.
-    source_operation: openapi/amazon-application-discovery-service-openapi.yml#associateConfigurationItemsToApplication
-  - name: disassociateConfigurationItemsFromApplication
-    description: Disassociate configuration items from an application.
-    source_operation: openapi/amazon-application-discovery-service-openapi.yml#disassociateConfigurationItemsFromApplication
-  - name: describeConfigurations
-    description: Retrieve attributes for a list of configuration item IDs.
-    source_operation: openapi/amazon-application-discovery-service-openapi.yml#describeConfigurations
-  - name: listConfigurations
-    description: Retrieve a list of configuration items matching filter criteria.
-    source_operation: openapi/amazon-application-discovery-service-openapi.yml#listConfigurations
-  - name: getDiscoverySummary
-    description: Retrieve a short summary of discovered assets.
-    source_operation: openapi/amazon-application-discovery-service-openapi.yml#getDiscoverySummary
-  - name: listServerNeighbors
-    description: Retrieve a list of servers that are one network hop away from a specified server.
-    source_operation: openapi/amazon-application-discovery-service-openapi.yml#listServerNeighbors
-  - name: startBatchDeleteConfigurationTask
-    description: Start a task to batch delete configuration items.
-    source_operation: openapi/amazon-application-discovery-service-openapi.yml#startBatchDeleteConfigurationTask
-  - name: describeBatchDeleteConfigurationTask
-    description: Describe a batch delete configuration task.
-    source_operation: openapi/amazon-application-discovery-service-openapi.yml#describeBatchDeleteConfigurationTask
-  - name: startExportTask
-    description: Begin the export of discovered configuration data to Amazon S3.
-    source_operation: openapi/amazon-application-discovery-service-openapi.yml#startExportTask
-  - name: describeExportTasks
-    description: Retrieve status of one or more export tasks.
-    source_operation: openapi/amazon-application-discovery-service-openapi.yml#describeExportTasks
-  - name: startContinuousExport
-    description: Start the continuous flow of agent-collected data into Amazon Athena.
-    source_operation: openapi/amazon-application-discovery-service-openapi.yml#startContinuousExport
-  - name: stopContinuousExport
-    description: Stop the continuous flow of agent-collected data into Amazon Athena.
-    source_operation: openapi/amazon-application-discovery-service-openapi.yml#stopContinuousExport
-  - name: describeContinuousExports
-    description: List exports as specified by ID, or all continuous exports.
-    source_operation: openapi/amazon-application-discovery-service-openapi.yml#describeContinuousExports
-  - name: startImportTask
-    description: Begin an import task to bulk import server inventory from a CSV file.
-    source_operation: openapi/amazon-application-discovery-service-openapi.yml#startImportTask
-  - name: describeImportTasks
-    description: Return an array of import tasks for your account.
-    source_operation: openapi/amazon-application-discovery-service-openapi.yml#describeImportTasks
-  - name: batchDeleteImportData
-    description: Delete one or more import tasks, each identified by their import ID.
-    source_operation: openapi/amazon-application-discovery-service-openapi.yml#batchDeleteImportData
-  - name: createTags
-    description: Create one or more tags for configuration items.
-    source_operation: openapi/amazon-application-discovery-service-openapi.yml#createTags
-  - name: deleteTags
-    description: Delete the association between configuration items and one or more tags.
-    source_operation: openapi/amazon-application-discovery-service-openapi.yml#deleteTags
-  - name: describeTags
-    description: Retrieve a list of configuration items that have tags as specified by the key-value pairs.
-    source_operation: openapi/amazon-application-discovery-service-openapi.yml#describeTags
+- name: describeAgents
+  description: List agents or collectors, including ID, IP, MAC, version and health.
+  source_operation: openapi/amazon-application-discovery-service-openapi.yml#describeAgents
+- name: batchDeleteAgents
+  description: Delete one or more agents or collectors.
+  source_operation: openapi/amazon-application-discovery-service-openapi.yml#batchDeleteAgents
+- name: startDataCollectionByAgentIds
+  description: Instruct specified agents or collectors to start collecting data.
+  source_operation: openapi/amazon-application-discovery-service-openapi.yml#startDataCollectionByAgentIds
+- name: stopDataCollectionByAgentIds
+  description: Instruct specified agents or collectors to stop collecting data.
+  source_operation: openapi/amazon-application-discovery-service-openapi.yml#stopDataCollectionByAgentIds
+- name: createApplication
+  description: Create an application from a list of associated configuration items.
+  source_operation: openapi/amazon-application-discovery-service-openapi.yml#createApplication
+- name: deleteApplications
+  description: Delete one or more applications.
+  source_operation: openapi/amazon-application-discovery-service-openapi.yml#deleteApplications
+- name: updateApplication
+  description: Update metadata about an application.
+  source_operation: openapi/amazon-application-discovery-service-openapi.yml#updateApplication
+- name: associateConfigurationItemsToApplication
+  description: Associate configuration items to an application.
+  source_operation: openapi/amazon-application-discovery-service-openapi.yml#associateConfigurationItemsToApplication
+- name: disassociateConfigurationItemsFromApplication
+  description: Disassociate configuration items from an application.
+  source_operation: openapi/amazon-application-discovery-service-openapi.yml#disassociateConfigurationItemsFromApplication
+- name: describeConfigurations
+  description: Retrieve attributes for a list of configuration item IDs.
+  source_operation: openapi/amazon-application-discovery-service-openapi.yml#describeConfigurations
+- name: listConfigurations
+  description: Retrieve a list of configuration items matching filter criteria.
+  source_operation: openapi/amazon-application-discovery-service-openapi.yml#listConfigurations
+- name: getDiscoverySummary
+  description: Retrieve a short summary of discovered assets.
+  source_operation: openapi/amazon-application-discovery-service-openapi.yml#getDiscoverySummary
+- name: listServerNeighbors
+  description: Retrieve a list of servers that are one network hop away from a specified server.
+  source_operation: openapi/amazon-application-discovery-service-openapi.yml#listServerNeighbors
+- name: startBatchDeleteConfigurationTask
+  description: Start a task to batch delete configuration items.
+  source_operation: openapi/amazon-application-discovery-service-openapi.yml#startBatchDeleteConfigurationTask
+- name: describeBatchDeleteConfigurationTask
+  description: Describe a batch delete configuration task.
+  source_operation: openapi/amazon-application-discovery-service-openapi.yml#describeBatchDeleteConfigurationTask
+- name: startExportTask
+  description: Begin the export of discovered configuration data to Amazon S3.
+  source_operation: openapi/amazon-application-discovery-service-openapi.yml#startExportTask
+- name: describeExportTasks
+  description: Retrieve status of one or more export tasks.
+  source_operation: openapi/amazon-application-discovery-service-openapi.yml#describeExportTasks
+- name: startContinuousExport
+  description: Start the continuous flow of agent-collected data into Amazon Athena.
+  source_operation: openapi/amazon-application-discovery-service-openapi.yml#startContinuousExport
+- name: stopContinuousExport
+  description: Stop the continuous flow of agent-collected data into Amazon Athena.
+  source_operation: openapi/amazon-application-discovery-service-openapi.yml#stopContinuousExport
+- name: describeContinuousExports
+  description: List exports as specified by ID, or all continuous exports.
+  source_operation: openapi/amazon-application-discovery-service-openapi.yml#describeContinuousExports
+- name: startImportTask
+  description: Begin an import task to bulk import server inventory from a CSV file.
+  source_operation: openapi/amazon-application-discovery-service-openapi.yml#startImportTask
+- name: describeImportTasks
+  description: Return an array of import tasks for your account.
+  source_operation: openapi/amazon-application-discovery-service-openapi.yml#describeImportTasks
+- name: batchDeleteImportData
+  description: Delete one or more import tasks, each identified by their import ID.
+  source_operation: openapi/amazon-application-discovery-service-openapi.yml#batchDeleteImportData
+- name: createTags
+  description: Create one or more tags for configuration items.
+  source_operation: openapi/amazon-application-discovery-service-openapi.yml#createTags
+- name: deleteTags
+  description: Delete the association between configuration items and one or more tags.
+  source_operation: openapi/amazon-application-discovery-service-openapi.yml#deleteTags
+- name: describeTags
+  description: Retrieve a list of configuration items that have tags as specified by the key-value pairs.
+  source_operation: openapi/amazon-application-discovery-service-openapi.yml#describeTags
+deployment:
+  mode: none
+  verified: derived
+  tools: 26
+  checked: '2026-08-12'
+  source: catalog MCP census

@@ -86,6 +86,8 @@ apis:
     humanURL: https://docs.aws.amazon.com/application-discovery/latest/APIReference/Welcome.html
     baseURL: https://discovery.us-east-1.amazonaws.com
     tags:
+      - Application
+    tags_raw:
       - Applications
     properties:
       - type: OpenAPI
@@ -190,6 +192,8 @@ apis:
     humanURL: https://docs.aws.amazon.com/application-discovery/latest/APIReference/Welcome.html
     baseURL: https://discovery.us-east-1.amazonaws.com
     tags:
+      - Export
+    tags_raw:
       - Exports
     properties:
       - type: OpenAPI

@@ -4,6 +4,17 @@ description: >-
   Amazon Application Discovery Service helps enterprise customers plan application migration projects by automatically
   identifying servers, virtual machines, software, and software dependencies running in their on-premises data centers.
 type: Index
+deliveryModel:
+  model: unknown
+  open_source: false
+  commercial: false
+  callable_host: true
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve

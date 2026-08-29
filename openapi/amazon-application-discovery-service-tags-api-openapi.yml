@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Amazon Application Discovery Service Agents Tags API
   description: AWS Application Discovery Service helps you plan your migration to AWS by collecting usage and configuration data about your on-premises servers, network infrastructure, and storage. Application Discovery Service enables you to understand the configuration, usage, and behavior of your servers and to develop a migration plan.
@@ -191,23 +191,22 @@ components:
           type: string
           description: The call returns a token. Use this token to get the next set of results.
           example: ''
-    TagFilter:
+    DescribeTagsRequest:
       type: object
-      required:
-      - name
-      - values
       properties:
-        name:
-          type: string
-          description: A name of the tag filter.
-          example: tagKey
-        values:
+        filters:
           type: array
-          description: Values for the tag filter.
+          description: You can filter the list using a key-value format. You can separate these items by using logical operators.
           items:
-            type: string
-          example:
-          - environment
+            $ref: '#/components/schemas/TagFilter'
+        maxResults:
+          type: integer
+          description: The total number of items to return in a single page of output.
+          example: 10
+        nextToken:
+          type: string
+          description: A token to start the list. Use this token to get the next set of results.
+          example: ''
     Tag:
       type: object
       required:
@@ -222,6 +221,35 @@ components:
           type: string
           description: A value for a tag key on which to filter.
           example: production
+    CreateTagsRequest:
+      type: object
+      required:
+      - configurationIds
+      - tags
+      properties:
+        configurationIds:
+          type: array
+          description: A list of configuration items that you want to tag.
+          items:
+            type: string
+          example:
+          - d-SERVER-500456
+        tags:
+          type: array
+          description: Tags that you want to associate with one or more configuration items.
+          items:
+            $ref: '#/components/schemas/Tag'
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The error message describing what went wrong.
+          example: The specified resource was not found.
+        code:
+          type: string
+          description: The error code.
+          example: ResourceNotFoundException
     ConfigurationTag:
       type: object
       properties:
@@ -250,51 +278,23 @@ components:
           type: string
           description: The time the configuration tag was created in Coordinated Universal Time (UTC).
           example: '2026-04-19T10:00:00Z'
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          description: The error message describing what went wrong.
-          example: The specified resource was not found.
-        code:
-          type: string
-          description: The error code.
-          example: ResourceNotFoundException
-    CreateTagsRequest:
+    TagFilter:
       type: object
       required:
-      - configurationIds
-      - tags
+      - name
+      - values
       properties:
-        configurationIds:
+        name:
+          type: string
+          description: A name of the tag filter.
+          example: tagKey
+        values:
           type: array
-          description: A list of configuration items that you want to tag.
+          description: Values for the tag filter.
           items:
             type: string
           example:
-          - d-SERVER-500456
-        tags:
-          type: array
-          description: Tags that you want to associate with one or more configuration items.
-          items:
-            $ref: '#/components/schemas/Tag'
-    DescribeTagsRequest:
-      type: object
-      properties:
-        filters:
-          type: array
-          description: You can filter the list using a key-value format. You can separate these items by using logical operators.
-          items:
-            $ref: '#/components/schemas/TagFilter'
-        maxResults:
-          type: integer
-          description: The total number of items to return in a single page of output.
-          example: 10
-        nextToken:
-          type: string
-          description: A token to start the list. Use this token to get the next set of results.
-          example: ''
+          - environment
     DeleteTagsRequest:
       type: object
       required:

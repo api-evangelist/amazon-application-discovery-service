@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Amazon Application Discovery Service Agents Applications API
   description: AWS Application Discovery Service helps you plan your migration to AWS by collecting usage and configuration data about your on-premises servers, network infrastructure, and storage. Application Discovery Service enables you to understand the configuration, usage, and behavior of your servers and to develop a migration plan.
@@ -304,13 +304,6 @@ components:
           type: string
           description: The error code.
           example: ResourceNotFoundException
-    CreateApplicationResponse:
-      type: object
-      properties:
-        configurationId:
-          type: string
-          description: Configuration ID of an application to be created.
-          example: d-APP-500123
     AssociateConfigurationItemsRequest:
       type: object
       required:
@@ -358,6 +351,13 @@ components:
           type: string
           description: New description of the application to be updated.
           example: Updated description for web tier servers
+    CreateApplicationResponse:
+      type: object
+      properties:
+        configurationId:
+          type: string
+          description: Configuration ID of an application to be created.
+          example: d-APP-500123
   securitySchemes:
     sigv4:
       type: apiKey

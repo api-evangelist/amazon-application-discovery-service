@@ -210,6 +210,8 @@ apis:
   humanURL: https://docs.aws.amazon.com/application-discovery/latest/APIReference/Welcome.html
   baseURL: https://discovery.us-east-1.amazonaws.com
   tags:
+  - Import
+  tags_raw:
   - Imports
   properties:
   - type: OpenAPI

@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Amazon Application Discovery Service Agents Tags API
+  title: Amazon Application Discovery Service Tags API
   description: AWS Application Discovery Service helps you plan your migration to AWS by collecting usage and configuration data about your on-premises servers, network infrastructure, and storage. Application Discovery Service enables you to understand the configuration, usage, and behavior of your servers and to develop a migration plan.
   version: '2015-11-01'
   contact:
@@ -179,48 +179,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    DescribeTagsResponse:
-      type: object
-      properties:
-        tags:
-          type: array
-          description: Depending on the input, this is a list of configuration items tagged with a specific tag, or a list of tags for a specific configuration item.
-          items:
-            $ref: '#/components/schemas/ConfigurationTag'
-        nextToken:
-          type: string
-          description: The call returns a token. Use this token to get the next set of results.
-          example: ''
-    DescribeTagsRequest:
-      type: object
-      properties:
-        filters:
-          type: array
-          description: You can filter the list using a key-value format. You can separate these items by using logical operators.
-          items:
-            $ref: '#/components/schemas/TagFilter'
-        maxResults:
-          type: integer
-          description: The total number of items to return in a single page of output.
-          example: 10
-        nextToken:
-          type: string
-          description: A token to start the list. Use this token to get the next set of results.
-          example: ''
-    Tag:
-      type: object
-      required:
-      - key
-      - value
-      properties:
-        key:
-          type: string
-          description: The type of tag on which to filter.
-          example: environment
-        value:
-          type: string
-          description: A value for a tag key on which to filter.
-          example: production
     CreateTagsRequest:
       type: object
       required:
@@ -239,6 +197,65 @@ components:
           description: Tags that you want to associate with one or more configuration items.
           items:
             $ref: '#/components/schemas/Tag'
+    Tag:
+      type: object
+      required:
+      - key
+      - value
+      properties:
+        key:
+          type: string
+          description: The type of tag on which to filter.
+          example: environment
+        value:
+          type: string
+          description: A value for a tag key on which to filter.
+          example: production
+    DeleteTagsRequest:
+      type: object
+      required:
+      - configurationIds
+      properties:
+        configurationIds:
+          type: array
+          description: A list of configuration items with tags that you want to delete.
+          items:
+            type: string
+          example:
+          - d-SERVER-500456
+        tags:
+          type: array
+          description: Tags that you want to delete from one or more configuration items.
+          items:
+            $ref: '#/components/schemas/Tag'
+    DescribeTagsRequest:
+      type: object
+      properties:
+        filters:
+          type: array
+          description: You can filter the list using a key-value format. You can separate these items by using logical operators.
+          items:
+            $ref: '#/components/schemas/TagFilter'
+        maxResults:
+          type: integer
+          description: The total number of items to return in a single page of output.
+          example: 10
+        nextToken:
+          type: string
+          description: A token to start the list. Use this token to get the next set of results.
+          example: ''
+    DescribeTagsResponse:
+      type: object
+      properties:
+        tags:
+          type: array
+          description: Depending on the input, this is a list of configuration items tagged with a specific tag, or a list of tags for a specific configuration item.
+          items:
+            $ref: '#/components/schemas/ConfigurationTag'
+        nextToken:
+          type: string
+          description: The call returns a token. Use this token to get the next set of results.
+          example: ''
     ErrorResponse:
       type: object
       properties:
@@ -295,23 +312,6 @@ components:
             type: string
           example:
           - environment
-    DeleteTagsRequest:
-      type: object
-      required:
-      - configurationIds
-      properties:
-        configurationIds:
-          type: array
-          description: A list of configuration items with tags that you want to delete.
-          items:
-            type: string
-          example:
-          - d-SERVER-500456
-        tags:
-          type: array
-          description: Tags that you want to delete from one or more configuration items.
-          items:
-            $ref: '#/components/schemas/Tag'
   securitySchemes:
     sigv4:
       type: apiKey

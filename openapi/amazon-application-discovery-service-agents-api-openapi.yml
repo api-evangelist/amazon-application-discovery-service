@@ -236,6 +236,41 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    StopDataCollectionByAgentIdsResponse:
+      type: object
+      properties:
+        agentsConfigurationStatus:
+          type: array
+          description: Information about the agents that were instructed to stop collecting data.
+          items:
+            $ref: '#/components/schemas/AgentConfigurationStatus'
+    Filter:
+      type: object
+      required:
+      - name
+      - values
+      - condition
+      properties:
+        name:
+          type: string
+          description: The name of the filter.
+          example: hostName
+        values:
+          type: array
+          description: A string value on which to filter.
+          items:
+            type: string
+          example:
+          - server-01.example.com
+        condition:
+          type: string
+          description: A conditional operator. The following operators are valid — EQUALS, NOT_EQUALS, CONTAINS, NOT_CONTAINS.
+          enum:
+          - EQUALS
+          - NOT_EQUALS
+          - CONTAINS
+          - NOT_CONTAINS
+          example: EQUALS
     StopDataCollectionByAgentIdsRequest:
       type: object
       required:
@@ -248,46 +283,6 @@ components:
             type: string
           example:
           - d-agent-500123
-    DescribeAgentsRequest:
-      type: object
-      properties:
-        agentIds:
-          type: array
-          description: The agent or the collector IDs for which you want information. If you specify no IDs, the system returns information about all agents/collectors associated with your AWS user account.
-          items:
-            type: string
-          example:
-          - d-agent-500123
-        filters:
-          type: array
-          description: You can filter the request using various logical operators and a key-value format.
-          items:
-            $ref: '#/components/schemas/Filter'
-        maxResults:
-          type: integer
-          description: The total number of agents/collectors to return in a single page of output.
-          minimum: 0
-          maximum: 900
-          example: 10
-        nextToken:
-          type: string
-          description: Token to retrieve the next set of results.
-          example: ''
-    AgentConfigurationStatus:
-      type: object
-      properties:
-        agentId:
-          type: string
-          description: The agent ID.
-          example: d-agent-500123
-        operationSucceeded:
-          type: boolean
-          description: Information about the status of the StartDataCollection and StopDataCollection operations.
-          example: true
-        description:
-          type: string
-          description: A description of the operation performed.
-          example: Started data collection
     StartDataCollectionByAgentIdsResponse:
       type: object
       properties:
@@ -296,45 +291,6 @@ components:
           description: Information about agents that were instructed to start collecting data. Information includes the agent ID, a description of the operation performed, and whether the agent configuration was updated successfully.
           items:
             $ref: '#/components/schemas/AgentConfigurationStatus'
-    BatchDeleteAgentsResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          description: A list of agent IDs that failed to delete along with the cause of the error.
-          items:
-            $ref: '#/components/schemas/BatchDeleteAgentError'
-    StopDataCollectionByAgentIdsResponse:
-      type: object
-      properties:
-        agentsConfigurationStatus:
-          type: array
-          description: Information about the agents that were instructed to stop collecting data.
-          items:
-            $ref: '#/components/schemas/AgentConfigurationStatus'
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          description: The error message describing what went wrong.
-          example: The specified resource was not found.
-        code:
-          type: string
-          description: The error code.
-          example: ResourceNotFoundException
-    DescribeAgentsResponse:
-      type: object
-      properties:
-        agentsInfo:
-          type: array
-          description: Lists agents or the collectors with status and configuration.
-          items:
-            $ref: '#/components/schemas/AgentInfo'
-        nextToken:
-          type: string
-          description: Token to retrieve the next set of results.
-          example: ''
     AgentNetworkInfo:
       type: object
       properties:
@@ -346,44 +302,6 @@ components:
           type: string
           description: The MAC address for the host where the agent or collector resides.
           example: aa:bb:cc:dd:ee:ff
-    BatchDeleteAgentError:
-      type: object
-      properties:
-        agentId:
-          type: string
-          description: The ID of the agent that failed to delete.
-          example: d-agent-500123
-        errorCode:
-          type: string
-          description: The type of error that occurred.
-          example: NOT_FOUND
-        errorMessage:
-          type: string
-          description: The text of the error message.
-          example: Agent not found
-    BatchDeleteAgentsRequest:
-      type: object
-      required:
-      - deleteAgents
-      properties:
-        deleteAgents:
-          type: array
-          description: The list of agents to delete.
-          items:
-            $ref: '#/components/schemas/DeleteAgent'
-    DeleteAgent:
-      type: object
-      required:
-      - agentId
-      properties:
-        agentId:
-          type: string
-          description: The ID of the agent you want to delete.
-          example: d-agent-500123
-        force:
-          type: boolean
-          description: You can use the force parameter to delete agents that do not respond to API actions.
-          example: false
     AgentInfo:
       type: object
       properties:
@@ -435,33 +353,105 @@ components:
           type: string
           description: Agent's first registration timestamp in UTC.
           example: '2026-01-01T00:00:00Z'
-    Filter:
+    DescribeAgentsRequest:
       type: object
-      required:
-      - name
-      - values
-      - condition
       properties:
-        name:
-          type: string
-          description: The name of the filter.
-          example: hostName
-        values:
+        agentIds:
           type: array
-          description: A string value on which to filter.
+          description: The agent or the collector IDs for which you want information. If you specify no IDs, the system returns information about all agents/collectors associated with your AWS user account.
           items:
             type: string
           example:
-          - server-01.example.com
-        condition:
+          - d-agent-500123
+        filters:
+          type: array
+          description: You can filter the request using various logical operators and a key-value format.
+          items:
+            $ref: '#/components/schemas/Filter'
+        maxResults:
+          type: integer
+          description: The total number of agents/collectors to return in a single page of output.
+          minimum: 0
+          maximum: 900
+          example: 10
+        nextToken:
           type: string
-          description: A conditional operator. The following operators are valid — EQUALS, NOT_EQUALS, CONTAINS, NOT_CONTAINS.
-          enum:
-          - EQUALS
-          - NOT_EQUALS
-          - CONTAINS
-          - NOT_CONTAINS
-          example: EQUALS
+          description: Token to retrieve the next set of results.
+          example: ''
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The error message describing what went wrong.
+          example: The specified resource was not found.
+        code:
+          type: string
+          description: The error code.
+          example: ResourceNotFoundException
+    BatchDeleteAgentError:
+      type: object
+      properties:
+        agentId:
+          type: string
+          description: The ID of the agent that failed to delete.
+          example: d-agent-500123
+        errorCode:
+          type: string
+          description: The type of error that occurred.
+          example: NOT_FOUND
+        errorMessage:
+          type: string
+          description: The text of the error message.
+          example: Agent not found
+    DeleteAgent:
+      type: object
+      required:
+      - agentId
+      properties:
+        agentId:
+          type: string
+          description: The ID of the agent you want to delete.
+          example: d-agent-500123
+        force:
+          type: boolean
+          description: You can use the force parameter to delete agents that do not respond to API actions.
+          example: false
+    BatchDeleteAgentsResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          description: A list of agent IDs that failed to delete along with the cause of the error.
+          items:
+            $ref: '#/components/schemas/BatchDeleteAgentError'
+    DescribeAgentsResponse:
+      type: object
+      properties:
+        agentsInfo:
+          type: array
+          description: Lists agents or the collectors with status and configuration.
+          items:
+            $ref: '#/components/schemas/AgentInfo'
+        nextToken:
+          type: string
+          description: Token to retrieve the next set of results.
+          example: ''
+    AgentConfigurationStatus:
+      type: object
+      properties:
+        agentId:
+          type: string
+          description: The agent ID.
+          example: d-agent-500123
+        operationSucceeded:
+          type: boolean
+          description: Information about the status of the StartDataCollection and StopDataCollection operations.
+          example: true
+        description:
+          type: string
+          description: A description of the operation performed.
+          example: Started data collection
     StartDataCollectionByAgentIdsRequest:
       type: object
       required:
@@ -474,6 +464,16 @@ components:
             type: string
           example:
           - d-agent-500123
+    BatchDeleteAgentsRequest:
+      type: object
+      required:
+      - deleteAgents
+      properties:
+        deleteAgents:
+          type: array
+          description: The list of agents to delete.
+          items:
+            $ref: '#/components/schemas/DeleteAgent'
   securitySchemes:
     sigv4:
       type: apiKey

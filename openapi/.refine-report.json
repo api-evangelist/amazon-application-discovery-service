@@ -1,12 +1,7 @@
 {
   "provider": "amazon-application-discovery-service",
   "sources": [
-    "amazon-application-discovery-service-agents-api-openapi.yml",
-    "amazon-application-discovery-service-applications-api-openapi.yml",
-    "amazon-application-discovery-service-configurations-api-openapi.yml",
-    "amazon-application-discovery-service-exports-api-openapi.yml",
-    "amazon-application-discovery-service-imports-api-openapi.yml",
-    "amazon-application-discovery-service-tags-api-openapi.yml"
+    "_ae-authored/amazon-application-discovery-service-openapi.yml"
   ],
   "outputs": [
     "amazon-application-discovery-service-agents-api-openapi.yml",
@@ -20,7 +15,16 @@
   "errors": [],
   "warnings": [],
   "notes": [
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "amazon-application-discovery-service-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "amazon-application-discovery-service-agents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-application-discovery-service-applications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-application-discovery-service-configurations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-application-discovery-service-exports-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-application-discovery-service-imports-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-application-discovery-service-tags-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

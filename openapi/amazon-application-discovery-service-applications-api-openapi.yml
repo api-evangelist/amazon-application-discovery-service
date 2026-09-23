@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Amazon Application Discovery Service Agents Applications API
+  title: Amazon Application Discovery Service Applications API
   description: AWS Application Discovery Service helps you plan your migration to AWS by collecting usage and configuration data about your on-premises servers, network infrastructure, and storage. Application Discovery Service enables you to understand the configuration, usage, and behavior of your servers and to develop a migration plan.
   version: '2015-11-01'
   contact:
@@ -168,7 +168,7 @@ paths:
   /v1/associateConfigurationItemsToApplication:
     post:
       operationId: associateConfigurationItemsToApplication
-      summary: Amazon Application Discovery Service Associate Configuration Items to Application
+      summary: Amazon Application Discovery Service Associate Configuration Items to…
       description: Associates one or more configuration items with an application.
       tags:
       - Applications
@@ -217,7 +217,7 @@ paths:
   /v1/disassociateConfigurationItemsFromApplication:
     post:
       operationId: disassociateConfigurationItemsFromApplication
-      summary: Amazon Application Discovery Service Disassociate Configuration Items from Application
+      summary: Amazon Application Discovery Service Disassociate Configuration Items from…
       description: Disassociates one or more configuration items from an application.
       tags:
       - Applications
@@ -264,46 +264,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    DisassociateConfigurationItemsRequest:
-      type: object
-      required:
-      - applicationConfigurationId
-      - configurationIds
-      properties:
-        applicationConfigurationId:
-          type: string
-          description: Configuration ID of an application from which each item is to be disassociated.
-          example: d-APP-500123
-        configurationIds:
-          type: array
-          description: Configuration ID of each item to be disassociated from an application.
-          items:
-            type: string
-          example:
-          - d-SERVER-500456
-    DeleteApplicationsRequest:
-      type: object
-      required:
-      - configurationIds
-      properties:
-        configurationIds:
-          type: array
-          description: Configuration ID of an application to be deleted.
-          items:
-            type: string
-          example:
-          - d-APP-500123
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          description: The error message describing what went wrong.
-          example: The specified resource was not found.
-        code:
-          type: string
-          description: The error code.
-          example: ResourceNotFoundException
     AssociateConfigurationItemsRequest:
       type: object
       required:
@@ -321,19 +281,6 @@ components:
             type: string
           example:
           - d-SERVER-500456
-    CreateApplicationRequest:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Name of the application to be created.
-          example: Production Web Tier
-        description:
-          type: string
-          description: Description of the application to be created.
-          example: Web servers for the production environment
     UpdateApplicationRequest:
       type: object
       required:
@@ -358,6 +305,59 @@ components:
           type: string
           description: Configuration ID of an application to be created.
           example: d-APP-500123
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The error message describing what went wrong.
+          example: The specified resource was not found.
+        code:
+          type: string
+          description: The error code.
+          example: ResourceNotFoundException
+    CreateApplicationRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Name of the application to be created.
+          example: Production Web Tier
+        description:
+          type: string
+          description: Description of the application to be created.
+          example: Web servers for the production environment
+    DeleteApplicationsRequest:
+      type: object
+      required:
+      - configurationIds
+      properties:
+        configurationIds:
+          type: array
+          description: Configuration ID of an application to be deleted.
+          items:
+            type: string
+          example:
+          - d-APP-500123
+    DisassociateConfigurationItemsRequest:
+      type: object
+      required:
+      - applicationConfigurationId
+      - configurationIds
+      properties:
+        applicationConfigurationId:
+          type: string
+          description: Configuration ID of an application from which each item is to be disassociated.
+          example: d-APP-500123
+        configurationIds:
+          type: array
+          description: Configuration ID of each item to be disassociated from an application.
+          items:
+            type: string
+          example:
+          - d-SERVER-500456
   securitySchemes:
     sigv4:
       type: apiKey

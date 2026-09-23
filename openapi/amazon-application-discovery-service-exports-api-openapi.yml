@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Amazon Application Discovery Service Agents Exports API
+  title: Amazon Application Discovery Service Exports API
   description: AWS Application Discovery Service helps you plan your migration to AWS by collecting usage and configuration data about your on-premises servers, network infrastructure, and storage. Application Discovery Service enables you to understand the configuration, usage, and behavior of your servers and to develop a migration plan.
   version: '2015-11-01'
   contact:
@@ -278,17 +278,62 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    DescribeExportTasksResponse:
+    DescribeContinuousExportsResponse:
       type: object
       properties:
-        exportsInfo:
+        descriptions:
           type: array
-          description: Contains one or more sets of export request details.
+          description: A list of continuous export descriptions.
           items:
-            $ref: '#/components/schemas/ExportInfo'
+            $ref: '#/components/schemas/ContinuousExportDescription'
         nextToken:
           type: string
-          description: The nextToken value to include in a future DescribeExportTasks request.
+          description: The token from the previous call to DescribeExportTasks.
+          example: ''
+    StartContinuousExportResponse:
+      type: object
+      properties:
+        exportId:
+          type: string
+          description: The unique ID assigned to this export.
+          example: continuous-export-500123
+        s3Bucket:
+          type: string
+          description: The name of the s3 bucket where the export data parquet files are stored.
+          example: aws-application-discovery-service-500123
+        startTime:
+          type: string
+          description: The timestamp representing when the continuous export was started.
+          example: '2026-04-19T10:00:00Z'
+        dataSource:
+          type: string
+          description: The type of data collector used to gather this data.
+          example: AGENT
+        schemaStorageConfig:
+          type: object
+          description: A dictionary which describes how the data is stored.
+    DescribeExportTasksRequest:
+      type: object
+      properties:
+        exportIds:
+          type: array
+          description: One or more unique identifiers used to query the status of an export request.
+          items:
+            type: string
+          example:
+          - export-500123
+        filters:
+          type: array
+          description: One or more filters.
+          items:
+            $ref: '#/components/schemas/ExportFilter'
+        maxResults:
+          type: integer
+          description: The maximum number of volume results returned by DescribeExportTasks in paginated output.
+          example: 10
+        nextToken:
+          type: string
+          description: The nextToken value returned from a previous paginated DescribeExportTasks request.
           example: ''
     ExportFilter:
       type: object
@@ -312,102 +357,17 @@ components:
           type: string
           description: Supported condition — EQUALS.
           example: EQUALS
-    DescribeContinuousExportsRequest:
+    StopContinuousExportResponse:
       type: object
       properties:
-        exportIds:
-          type: array
-          description: The unique IDs assigned to the exports.
-          items:
-            type: string
-          example:
-          - continuous-export-500123
-        maxResults:
-          type: integer
-          description: A number between 1 and 100 specifying the maximum number of continuous export descriptions returned.
-          minimum: 1
-          maximum: 100
-          example: 10
-        nextToken:
-          type: string
-          description: The token from the previous call to DescribeExportTasks.
-          example: ''
-    DescribeContinuousExportsResponse:
-      type: object
-      properties:
-        descriptions:
-          type: array
-          description: A list of continuous export descriptions.
-          items:
-            $ref: '#/components/schemas/ContinuousExportDescription'
-        nextToken:
-          type: string
-          description: The token from the previous call to DescribeExportTasks.
-          example: ''
-    ContinuousExportDescription:
-      type: object
-      properties:
-        exportId:
-          type: string
-          description: The unique ID assigned to this export.
-          example: continuous-export-500123
-        status:
-          type: string
-          description: Describes the status of the export. Can be one of the following values — START_IN_PROGRESS, START_FAILED, ACTIVE, ERROR, STOP_IN_PROGRESS, STOP_FAILED, INACTIVE.
-          enum:
-          - START_IN_PROGRESS
-          - START_FAILED
-          - ACTIVE
-          - ERROR
-          - STOP_IN_PROGRESS
-          - STOP_FAILED
-          - INACTIVE
-          example: ACTIVE
-        statusDetail:
-          type: string
-          description: Contains information about any errors that have occurred.
-          example: ''
-        s3Bucket:
-          type: string
-          description: The name of the s3 bucket where the export data parquet files are stored.
-          example: aws-application-discovery-service-500123
         startTime:
           type: string
-          description: The timestamp representing when the continuous export was started.
+          description: Timestamp that represents when this continuous export started collecting data.
           example: '2026-04-19T10:00:00Z'
         stopTime:
           type: string
-          description: The timestamp representing when the continuous export was stopped.
+          description: Timestamp that represents when this continuous export was stopped.
           example: '2026-04-19T11:00:00Z'
-        dataSource:
-          type: string
-          description: The type of data collector used to gather this data.
-          example: AGENT
-        schemaStorageConfig:
-          type: object
-          description: An object which describes how the data is stored.
-    StartContinuousExportResponse:
-      type: object
-      properties:
-        exportId:
-          type: string
-          description: The unique ID assigned to this export.
-          example: continuous-export-500123
-        s3Bucket:
-          type: string
-          description: The name of the s3 bucket where the export data parquet files are stored.
-          example: aws-application-discovery-service-500123
-        startTime:
-          type: string
-          description: The timestamp representing when the continuous export was started.
-          example: '2026-04-19T10:00:00Z'
-        dataSource:
-          type: string
-          description: The type of data collector used to gather this data.
-          example: AGENT
-        schemaStorageConfig:
-          type: object
-          description: A dictionary which describes how the data is stored.
     StartExportTaskRequest:
       type: object
       properties:
@@ -436,13 +396,6 @@ components:
         preferences:
           type: object
           description: Indicates the type of agent export.
-    StartExportTaskResponse:
-      type: object
-      properties:
-        exportId:
-          type: string
-          description: A unique identifier used to query the status of an export request.
-          example: export-500123
     ExportInfo:
       type: object
       required:
@@ -487,6 +440,13 @@ components:
           type: string
           description: The endTime used in the StartExportTask request. If no endTime was requested, this result does not appear in ExportInfo.
           example: '2026-04-19T23:59:59Z'
+    StartExportTaskResponse:
+      type: object
+      properties:
+        exportId:
+          type: string
+          description: A unique identifier used to query the status of an export request.
+          example: export-500123
     ErrorResponse:
       type: object
       properties:
@@ -507,40 +467,80 @@ components:
           type: string
           description: The unique ID assigned to this export.
           example: continuous-export-500123
-    DescribeExportTasksRequest:
+    ContinuousExportDescription:
+      type: object
+      properties:
+        exportId:
+          type: string
+          description: The unique ID assigned to this export.
+          example: continuous-export-500123
+        status:
+          type: string
+          description: Describes the status of the export. Can be one of the following values — START_IN_PROGRESS, START_FAILED, ACTIVE, ERROR, STOP_IN_PROGRESS, STOP_FAILED, INACTIVE.
+          enum:
+          - START_IN_PROGRESS
+          - START_FAILED
+          - ACTIVE
+          - ERROR
+          - STOP_IN_PROGRESS
+          - STOP_FAILED
+          - INACTIVE
+          example: ACTIVE
+        statusDetail:
+          type: string
+          description: Contains information about any errors that have occurred.
+          example: ''
+        s3Bucket:
+          type: string
+          description: The name of the s3 bucket where the export data parquet files are stored.
+          example: aws-application-discovery-service-500123
+        startTime:
+          type: string
+          description: The timestamp representing when the continuous export was started.
+          example: '2026-04-19T10:00:00Z'
+        stopTime:
+          type: string
+          description: The timestamp representing when the continuous export was stopped.
+          example: '2026-04-19T11:00:00Z'
+        dataSource:
+          type: string
+          description: The type of data collector used to gather this data.
+          example: AGENT
+        schemaStorageConfig:
+          type: object
+          description: An object which describes how the data is stored.
+    DescribeContinuousExportsRequest:
       type: object
       properties:
         exportIds:
           type: array
-          description: One or more unique identifiers used to query the status of an export request.
+          description: The unique IDs assigned to the exports.
           items:
             type: string
           example:
-          - export-500123
-        filters:
-          type: array
-          description: One or more filters.
-          items:
-            $ref: '#/components/schemas/ExportFilter'
+          - continuous-export-500123
         maxResults:
           type: integer
-          description: The maximum number of volume results returned by DescribeExportTasks in paginated output.
+          description: A number between 1 and 100 specifying the maximum number of continuous export descriptions returned.
+          minimum: 1
+          maximum: 100
           example: 10
         nextToken:
           type: string
-          description: The nextToken value returned from a previous paginated DescribeExportTasks request.
+          description: The token from the previous call to DescribeExportTasks.
           example: ''
-    StopContinuousExportResponse:
+    DescribeExportTasksResponse:
       type: object
       properties:
-        startTime:
+        exportsInfo:
+          type: array
+          description: Contains one or more sets of export request details.
+          items:
+            $ref: '#/components/schemas/ExportInfo'
+        nextToken:
           type: string
-          description: Timestamp that represents when this continuous export started collecting data.
-          example: '2026-04-19T10:00:00Z'
-        stopTime:
-          type: string
-          description: Timestamp that represents when this continuous export was stopped.
-          example: '2026-04-19T11:00:00Z'
+          description: The nextToken value to include in a future DescribeExportTasks request.
+          example: ''
   securitySchemes:
     sigv4:
       type: apiKey

@@ -288,7 +288,7 @@ apis:
     url: lifecycle/amazon-application-discovery-service-lifecycle.yml
 common:
 - type: Website
-  url: https://amazon.com
+  url: https://docs.aws.amazon.com/application-discovery/latest/userguide/what-is-appdiscovery.html
 - type: X-MCPServerCandidate
   url: mcp/amazon-application-discovery-service-mcp.yml
   note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate
@@ -348,5 +348,5 @@ common:
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
-x-parent: aws
+x-parent: amazon-web-services
 x-relationship: product

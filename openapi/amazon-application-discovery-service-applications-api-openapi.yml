@@ -264,7 +264,7 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    AssociateConfigurationItemsRequest:
+    DisassociateConfigurationItemsRequest:
       type: object
       required:
       - applicationConfigurationId
@@ -272,50 +272,15 @@ components:
       properties:
         applicationConfigurationId:
           type: string
-          description: The configuration ID of an application with which items are to be associated.
+          description: Configuration ID of an application from which each item is to be disassociated.
           example: d-APP-500123
         configurationIds:
           type: array
-          description: The ID of each configuration item to be associated with an application.
+          description: Configuration ID of each item to be disassociated from an application.
           items:
             type: string
           example:
           - d-SERVER-500456
-    UpdateApplicationRequest:
-      type: object
-      required:
-      - configurationId
-      properties:
-        configurationId:
-          type: string
-          description: Configuration ID of the application to be updated.
-          example: d-APP-500123
-        name:
-          type: string
-          description: New name of the application to be updated.
-          example: Production Web Tier Updated
-        description:
-          type: string
-          description: New description of the application to be updated.
-          example: Updated description for web tier servers
-    CreateApplicationResponse:
-      type: object
-      properties:
-        configurationId:
-          type: string
-          description: Configuration ID of an application to be created.
-          example: d-APP-500123
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          description: The error message describing what went wrong.
-          example: The specified resource was not found.
-        code:
-          type: string
-          description: The error code.
-          example: ResourceNotFoundException
     CreateApplicationRequest:
       type: object
       required:
@@ -341,7 +306,24 @@ components:
             type: string
           example:
           - d-APP-500123
-    DisassociateConfigurationItemsRequest:
+    UpdateApplicationRequest:
+      type: object
+      required:
+      - configurationId
+      properties:
+        configurationId:
+          type: string
+          description: Configuration ID of the application to be updated.
+          example: d-APP-500123
+        name:
+          type: string
+          description: New name of the application to be updated.
+          example: Production Web Tier Updated
+        description:
+          type: string
+          description: New description of the application to be updated.
+          example: Updated description for web tier servers
+    AssociateConfigurationItemsRequest:
       type: object
       required:
       - applicationConfigurationId
@@ -349,15 +331,33 @@ components:
       properties:
         applicationConfigurationId:
           type: string
-          description: Configuration ID of an application from which each item is to be disassociated.
+          description: The configuration ID of an application with which items are to be associated.
           example: d-APP-500123
         configurationIds:
           type: array
-          description: Configuration ID of each item to be disassociated from an application.
+          description: The ID of each configuration item to be associated with an application.
           items:
             type: string
           example:
           - d-SERVER-500456
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The error message describing what went wrong.
+          example: The specified resource was not found.
+        code:
+          type: string
+          description: The error code.
+          example: ResourceNotFoundException
+    CreateApplicationResponse:
+      type: object
+      properties:
+        configurationId:
+          type: string
+          description: Configuration ID of an application to be created.
+          example: d-APP-500123
   securitySchemes:
     sigv4:
       type: apiKey

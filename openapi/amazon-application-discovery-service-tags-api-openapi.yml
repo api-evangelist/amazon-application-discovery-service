@@ -179,6 +179,48 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Tag:
+      type: object
+      required:
+      - key
+      - value
+      properties:
+        key:
+          type: string
+          description: The type of tag on which to filter.
+          example: environment
+        value:
+          type: string
+          description: A value for a tag key on which to filter.
+          example: production
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The error message describing what went wrong.
+          example: The specified resource was not found.
+        code:
+          type: string
+          description: The error code.
+          example: ResourceNotFoundException
+    DeleteTagsRequest:
+      type: object
+      required:
+      - configurationIds
+      properties:
+        configurationIds:
+          type: array
+          description: A list of configuration items with tags that you want to delete.
+          items:
+            type: string
+          example:
+          - d-SERVER-500456
+        tags:
+          type: array
+          description: Tags that you want to delete from one or more configuration items.
+          items:
+            $ref: '#/components/schemas/Tag'
     DescribeTagsRequest:
       type: object
       properties:
@@ -223,6 +265,18 @@ components:
           type: string
           description: The time the configuration tag was created in Coordinated Universal Time (UTC).
           example: '2026-04-19T10:00:00Z'
+    DescribeTagsResponse:
+      type: object
+      properties:
+        tags:
+          type: array
+          description: Depending on the input, this is a list of configuration items tagged with a specific tag, or a list of tags for a specific configuration item.
+          items:
+            $ref: '#/components/schemas/ConfigurationTag'
+        nextToken:
+          type: string
+          description: The call returns a token. Use this token to get the next set of results.
+          example: ''
     CreateTagsRequest:
       type: object
       required:
@@ -241,18 +295,6 @@ components:
           description: Tags that you want to associate with one or more configuration items.
           items:
             $ref: '#/components/schemas/Tag'
-    DescribeTagsResponse:
-      type: object
-      properties:
-        tags:
-          type: array
-          description: Depending on the input, this is a list of configuration items tagged with a specific tag, or a list of tags for a specific configuration item.
-          items:
-            $ref: '#/components/schemas/ConfigurationTag'
-        nextToken:
-          type: string
-          description: The call returns a token. Use this token to get the next set of results.
-          example: ''
     TagFilter:
       type: object
       required:
@@ -270,48 +312,6 @@ components:
             type: string
           example:
           - environment
-    DeleteTagsRequest:
-      type: object
-      required:
-      - configurationIds
-      properties:
-        configurationIds:
-          type: array
-          description: A list of configuration items with tags that you want to delete.
-          items:
-            type: string
-          example:
-          - d-SERVER-500456
-        tags:
-          type: array
-          description: Tags that you want to delete from one or more configuration items.
-          items:
-            $ref: '#/components/schemas/Tag'
-    Tag:
-      type: object
-      required:
-      - key
-      - value
-      properties:
-        key:
-          type: string
-          description: The type of tag on which to filter.
-          example: environment
-        value:
-          type: string
-          description: A value for a tag key on which to filter.
-          example: production
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          description: The error message describing what went wrong.
-          example: The specified resource was not found.
-        code:
-          type: string
-          description: The error code.
-          example: ResourceNotFoundException
   securitySchemes:
     sigv4:
       type: apiKey

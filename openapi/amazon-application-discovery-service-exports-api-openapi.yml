@@ -278,29 +278,17 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    DescribeContinuousExportsResponse:
+    ErrorResponse:
       type: object
       properties:
-        descriptions:
-          type: array
-          description: A list of continuous export descriptions.
-          items:
-            $ref: '#/components/schemas/ContinuousExportDescription'
-        nextToken:
+        message:
           type: string
-          description: The token from the previous call to DescribeExportTasks.
-          example: ''
-    StopContinuousExportResponse:
-      type: object
-      properties:
-        startTime:
+          description: The error message describing what went wrong.
+          example: The specified resource was not found.
+        code:
           type: string
-          description: Timestamp that represents when this continuous export started collecting data.
-          example: '2026-04-19T10:00:00Z'
-        stopTime:
-          type: string
-          description: Timestamp that represents when this continuous export was stopped.
-          example: '2026-04-19T11:00:00Z'
+          description: The error code.
+          example: ResourceNotFoundException
     DescribeExportTasksRequest:
       type: object
       properties:
@@ -324,6 +312,67 @@ components:
           type: string
           description: The nextToken value returned from a previous paginated DescribeExportTasks request.
           example: ''
+    StartExportTaskResponse:
+      type: object
+      properties:
+        exportId:
+          type: string
+          description: A unique identifier used to query the status of an export request.
+          example: export-500123
+    ExportFilter:
+      type: object
+      required:
+      - name
+      - values
+      - condition
+      properties:
+        name:
+          type: string
+          description: A single ExportFilter name. Supported filters — agentIds.
+          example: agentIds
+        values:
+          type: array
+          description: A single agent ID for a Discovery Agent. An agent ID can be found using the DescribeAgents action.
+          items:
+            type: string
+          example:
+          - d-agent-500123
+        condition:
+          type: string
+          description: Supported condition — EQUALS.
+          example: EQUALS
+    DescribeContinuousExportsRequest:
+      type: object
+      properties:
+        exportIds:
+          type: array
+          description: The unique IDs assigned to the exports.
+          items:
+            type: string
+          example:
+          - continuous-export-500123
+        maxResults:
+          type: integer
+          description: A number between 1 and 100 specifying the maximum number of continuous export descriptions returned.
+          minimum: 1
+          maximum: 100
+          example: 10
+        nextToken:
+          type: string
+          description: The token from the previous call to DescribeExportTasks.
+          example: ''
+    DescribeContinuousExportsResponse:
+      type: object
+      properties:
+        descriptions:
+          type: array
+          description: A list of continuous export descriptions.
+          items:
+            $ref: '#/components/schemas/ContinuousExportDescription'
+        nextToken:
+          type: string
+          description: The token from the previous call to DescribeExportTasks.
+          example: ''
     StartContinuousExportResponse:
       type: object
       properties:
@@ -346,33 +395,54 @@ components:
         schemaStorageConfig:
           type: object
           description: A dictionary which describes how the data is stored.
-    DescribeContinuousExportsRequest:
+    StopContinuousExportRequest:
       type: object
-      properties:
-        exportIds:
-          type: array
-          description: The unique IDs assigned to the exports.
-          items:
-            type: string
-          example:
-          - continuous-export-500123
-        maxResults:
-          type: integer
-          description: A number between 1 and 100 specifying the maximum number of continuous export descriptions returned.
-          minimum: 1
-          maximum: 100
-          example: 10
-        nextToken:
-          type: string
-          description: The token from the previous call to DescribeExportTasks.
-          example: ''
-    StartExportTaskResponse:
-      type: object
+      required:
+      - exportId
       properties:
         exportId:
           type: string
-          description: A unique identifier used to query the status of an export request.
-          example: export-500123
+          description: The unique ID assigned to this export.
+          example: continuous-export-500123
+    StartExportTaskRequest:
+      type: object
+      properties:
+        exportDataFormat:
+          type: array
+          description: 'The file format for the returned export data. Default(s) are CSV. Note: The GRAPHML option has been deprecated.'
+          items:
+            type: string
+            enum:
+            - CSV
+          example:
+          - CSV
+        filters:
+          type: array
+          description: If a filter is present, it selects the single agentId of the Application Discovery Agent for which data is exported.
+          items:
+            $ref: '#/components/schemas/ExportFilter'
+        startTime:
+          type: string
+          description: The start timestamp for exported data from the single Application Discovery Agent selected in the filters.
+          example: '2026-04-01T00:00:00Z'
+        endTime:
+          type: string
+          description: The end timestamp for exported data from the single Application Discovery Agent selected in the filters.
+          example: '2026-04-19T23:59:59Z'
+        preferences:
+          type: object
+          description: Indicates the type of agent export.
+    StopContinuousExportResponse:
+      type: object
+      properties:
+        startTime:
+          type: string
+          description: Timestamp that represents when this continuous export started collecting data.
+          example: '2026-04-19T10:00:00Z'
+        stopTime:
+          type: string
+          description: Timestamp that represents when this continuous export was stopped.
+          example: '2026-04-19T11:00:00Z'
     ContinuousExportDescription:
       type: object
       properties:
@@ -415,88 +485,6 @@ components:
         schemaStorageConfig:
           type: object
           description: An object which describes how the data is stored.
-    DescribeExportTasksResponse:
-      type: object
-      properties:
-        exportsInfo:
-          type: array
-          description: Contains one or more sets of export request details.
-          items:
-            $ref: '#/components/schemas/ExportInfo'
-        nextToken:
-          type: string
-          description: The nextToken value to include in a future DescribeExportTasks request.
-          example: ''
-    ExportFilter:
-      type: object
-      required:
-      - name
-      - values
-      - condition
-      properties:
-        name:
-          type: string
-          description: A single ExportFilter name. Supported filters — agentIds.
-          example: agentIds
-        values:
-          type: array
-          description: A single agent ID for a Discovery Agent. An agent ID can be found using the DescribeAgents action.
-          items:
-            type: string
-          example:
-          - d-agent-500123
-        condition:
-          type: string
-          description: Supported condition — EQUALS.
-          example: EQUALS
-    StartExportTaskRequest:
-      type: object
-      properties:
-        exportDataFormat:
-          type: array
-          description: 'The file format for the returned export data. Default(s) are CSV. Note: The GRAPHML option has been deprecated.'
-          items:
-            type: string
-            enum:
-            - CSV
-          example:
-          - CSV
-        filters:
-          type: array
-          description: If a filter is present, it selects the single agentId of the Application Discovery Agent for which data is exported.
-          items:
-            $ref: '#/components/schemas/ExportFilter'
-        startTime:
-          type: string
-          description: The start timestamp for exported data from the single Application Discovery Agent selected in the filters.
-          example: '2026-04-01T00:00:00Z'
-        endTime:
-          type: string
-          description: The end timestamp for exported data from the single Application Discovery Agent selected in the filters.
-          example: '2026-04-19T23:59:59Z'
-        preferences:
-          type: object
-          description: Indicates the type of agent export.
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          description: The error message describing what went wrong.
-          example: The specified resource was not found.
-        code:
-          type: string
-          description: The error code.
-          example: ResourceNotFoundException
-    StopContinuousExportRequest:
-      type: object
-      required:
-      - exportId
-      properties:
-        exportId:
-          type: string
-          description: The unique ID assigned to this export.
-          example: continuous-export-500123
     ExportInfo:
       type: object
       required:
@@ -541,6 +529,18 @@ components:
           type: string
           description: The endTime used in the StartExportTask request. If no endTime was requested, this result does not appear in ExportInfo.
           example: '2026-04-19T23:59:59Z'
+    DescribeExportTasksResponse:
+      type: object
+      properties:
+        exportsInfo:
+          type: array
+          description: Contains one or more sets of export request details.
+          items:
+            $ref: '#/components/schemas/ExportInfo'
+        nextToken:
+          type: string
+          description: The nextToken value to include in a future DescribeExportTasks request.
+          example: ''
   securitySchemes:
     sigv4:
       type: apiKey

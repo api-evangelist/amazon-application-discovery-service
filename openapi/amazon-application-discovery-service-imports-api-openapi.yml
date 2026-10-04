@@ -183,59 +183,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          description: The error message describing what went wrong.
-          example: The specified resource was not found.
-        code:
-          type: string
-          description: The error code.
-          example: ResourceNotFoundException
-    StartImportTaskResponse:
-      type: object
-      properties:
-        task:
-          $ref: '#/components/schemas/ImportTask'
-    BatchDeleteImportDataResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          description: Error messages returned for each import task that you deleted as a response for this command.
-          items:
-            $ref: '#/components/schemas/BatchDeleteImportDataError'
-    BatchDeleteImportDataRequest:
-      type: object
-      required:
-      - importTaskIds
-      properties:
-        importTaskIds:
-          type: array
-          description: The IDs for the import tasks that you want to delete.
-          maxItems: 10
-          items:
-            type: string
-          example:
-          - import-task-500123
-        deleteHistory:
-          type: boolean
-          description: Set to true to remove the deleted import task from Migration Hub.
-          example: false
-    DescribeImportTasksResponse:
-      type: object
-      properties:
-        nextToken:
-          type: string
-          description: The token to request the next page of results.
-          example: ''
-        tasks:
-          type: array
-          description: A returned array of import tasks that match any applied filters, up to the specified number of maximum results.
-          items:
-            $ref: '#/components/schemas/ImportTask'
     StartImportTaskRequest:
       type: object
       required:
@@ -255,6 +202,54 @@ components:
           type: string
           description: The URL for your import file that you've uploaded to Amazon S3.
           example: s3://my-bucket/server-inventory.csv
+    BatchDeleteImportDataResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          description: Error messages returned for each import task that you deleted as a response for this command.
+          items:
+            $ref: '#/components/schemas/BatchDeleteImportDataError'
+    StartImportTaskResponse:
+      type: object
+      properties:
+        task:
+          $ref: '#/components/schemas/ImportTask'
+    BatchDeleteImportDataRequest:
+      type: object
+      required:
+      - importTaskIds
+      properties:
+        importTaskIds:
+          type: array
+          description: The IDs for the import tasks that you want to delete.
+          maxItems: 10
+          items:
+            type: string
+          example:
+          - import-task-500123
+        deleteHistory:
+          type: boolean
+          description: Set to true to remove the deleted import task from Migration Hub.
+          example: false
+    DescribeImportTasksRequest:
+      type: object
+      properties:
+        filters:
+          type: array
+          description: An array of name-value pairs that you provide to filter the results for the DescribeImportTask request to a specific subset of results.
+          items:
+            $ref: '#/components/schemas/ImportTaskFilter'
+        maxResults:
+          type: integer
+          description: The maximum number of results that you want this request to return.
+          minimum: 1
+          maximum: 100
+          example: 10
+        nextToken:
+          type: string
+          description: The token to request a specific page of results.
+          example: ''
     ImportTask:
       type: object
       properties:
@@ -322,24 +317,6 @@ components:
           type: string
           description: A link to a compressed archive folder (in the ZIP format) of all errors and failed entries that were detected, organized according to the type of error.
           example: ''
-    DescribeImportTasksRequest:
-      type: object
-      properties:
-        filters:
-          type: array
-          description: An array of name-value pairs that you provide to filter the results for the DescribeImportTask request to a specific subset of results.
-          items:
-            $ref: '#/components/schemas/ImportTaskFilter'
-        maxResults:
-          type: integer
-          description: The maximum number of results that you want this request to return.
-          minimum: 1
-          maximum: 100
-          example: 10
-        nextToken:
-          type: string
-          description: The token to request a specific page of results.
-          example: ''
     BatchDeleteImportDataError:
       type: object
       properties:
@@ -355,6 +332,29 @@ components:
           type: string
           description: The description of the error that occurred for a specific import task.
           example: Import task not found
+    DescribeImportTasksResponse:
+      type: object
+      properties:
+        nextToken:
+          type: string
+          description: The token to request the next page of results.
+          example: ''
+        tasks:
+          type: array
+          description: A returned array of import tasks that match any applied filters, up to the specified number of maximum results.
+          items:
+            $ref: '#/components/schemas/ImportTask'
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The error message describing what went wrong.
+          example: The specified resource was not found.
+        code:
+          type: string
+          description: The error code.
+          example: ResourceNotFoundException
     ImportTaskFilter:
       type: object
       properties:

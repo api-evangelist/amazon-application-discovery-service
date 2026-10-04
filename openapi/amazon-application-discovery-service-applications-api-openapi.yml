@@ -264,34 +264,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          description: The error message describing what went wrong.
-          example: The specified resource was not found.
-        code:
-          type: string
-          description: The error code.
-          example: ResourceNotFoundException
-    UpdateApplicationRequest:
-      type: object
-      required:
-      - configurationId
-      properties:
-        configurationId:
-          type: string
-          description: Configuration ID of the application to be updated.
-          example: d-APP-500123
-        name:
-          type: string
-          description: New name of the application to be updated.
-          example: Production Web Tier Updated
-        description:
-          type: string
-          description: New description of the application to be updated.
-          example: Updated description for web tier servers
     AssociateConfigurationItemsRequest:
       type: object
       required:
@@ -309,6 +281,30 @@ components:
             type: string
           example:
           - d-SERVER-500456
+    UpdateApplicationRequest:
+      type: object
+      required:
+      - configurationId
+      properties:
+        configurationId:
+          type: string
+          description: Configuration ID of the application to be updated.
+          example: d-APP-500123
+        name:
+          type: string
+          description: New name of the application to be updated.
+          example: Production Web Tier Updated
+        description:
+          type: string
+          description: New description of the application to be updated.
+          example: Updated description for web tier servers
+    CreateApplicationResponse:
+      type: object
+      properties:
+        configurationId:
+          type: string
+          description: Configuration ID of an application to be created.
+          example: d-APP-500123
     DeleteApplicationsRequest:
       type: object
       required:
@@ -321,13 +317,19 @@ components:
             type: string
           example:
           - d-APP-500123
-    CreateApplicationResponse:
+    CreateApplicationRequest:
       type: object
+      required:
+      - name
       properties:
-        configurationId:
+        name:
           type: string
-          description: Configuration ID of an application to be created.
-          example: d-APP-500123
+          description: Name of the application to be created.
+          example: Production Web Tier
+        description:
+          type: string
+          description: Description of the application to be created.
+          example: Web servers for the production environment
     DisassociateConfigurationItemsRequest:
       type: object
       required:
@@ -345,19 +347,17 @@ components:
             type: string
           example:
           - d-SERVER-500456
-    CreateApplicationRequest:
+    ErrorResponse:
       type: object
-      required:
-      - name
       properties:
-        name:
+        message:
           type: string
-          description: Name of the application to be created.
-          example: Production Web Tier
-        description:
+          description: The error message describing what went wrong.
+          example: The specified resource was not found.
+        code:
           type: string
-          description: Description of the application to be created.
-          example: Web servers for the production environment
+          description: The error code.
+          example: ResourceNotFoundException
   securitySchemes:
     sigv4:
       type: apiKey

@@ -356,91 +356,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CustomerAgentInfo:
-      type: object
-      properties:
-        activeAgents:
-          type: integer
-          description: Number of active discovery agents.
-          example: 3
-        healthyAgents:
-          type: integer
-          description: Number of healthy discovery agents.
-          example: 3
-        blackListedAgents:
-          type: integer
-          description: Number of blacklisted discovery agents.
-          example: 0
-        shutdownAgents:
-          type: integer
-          description: Number of discovery agents with status SHUTDOWN.
-          example: 0
-        unhealthyAgents:
-          type: integer
-          description: Number of unhealthy discovery agents.
-          example: 0
-        totalAgents:
-          type: integer
-          description: Total number of discovery agents.
-          example: 3
-        unknownAgents:
-          type: integer
-          description: Number of unknown discovery agents.
-          example: 0
-    StartBatchDeleteConfigurationTaskResponse:
-      type: object
-      properties:
-        taskId:
-          type: string
-          description: The unique ID associated with the task.
-          example: task-500123
-    NeighborConnectionDetail:
-      type: object
-      required:
-      - sourceServerId
-      - destinationServerId
-      - connectionsCount
-      properties:
-        sourceServerId:
-          type: string
-          description: The ID of the server that opened the network connection.
-          example: d-SERVER-500456
-        destinationServerId:
-          type: string
-          description: The ID of the server that accepted the network connection.
-          example: d-SERVER-500457
-        destinationPort:
-          type: integer
-          description: The destination network port for the connection.
-          example: 443
-        transportProtocol:
-          type: string
-          description: The network protocol used for the connection.
-          example: TCP
-        connectionsCount:
-          type: integer
-          format: int64
-          description: The number of open network connections with the neighboring server.
-          example: 125
-    StartBatchDeleteConfigurationTaskRequest:
-      type: object
-      required:
-      - configurationType
-      - configurationIds
-      properties:
-        configurationType:
-          type: string
-          description: The type of configuration item to delete. Supported types are SERVER.
-          enum:
-          - SERVER
-          example: SERVER
-        configurationIds:
-          type: array
-          description: The list of configuration IDs that will be deleted by this task.
-          items:
-            type: string
-          example:
-          - d-SERVER-500456
     DescribeBatchDeleteConfigurationTaskRequest:
       type: object
       required:
@@ -450,72 +365,6 @@ components:
           type: string
           description: The ID of the task to delete.
           example: task-500123
-    ListConfigurationsResponse:
-      type: object
-      properties:
-        configurations:
-          type: array
-          description: Returns configuration details, including the configuration ID, attribute names, and attribute values.
-          items:
-            type: object
-            additionalProperties:
-              type: string
-        nextToken:
-          type: string
-          description: Token to retrieve the next set of results.
-          example: ''
-    DescribeConfigurationsResponse:
-      type: object
-      properties:
-        configurations:
-          type: array
-          description: A key in the response map. The value is an array of data.
-          items:
-            type: object
-            additionalProperties:
-              type: string
-    CustomerConnectorInfo:
-      type: object
-      properties:
-        activeConnectors:
-          type: integer
-          description: Number of active discovery connectors.
-          example: 0
-        healthyConnectors:
-          type: integer
-          description: Number of healthy discovery connectors.
-          example: 0
-        blackListedConnectors:
-          type: integer
-          description: Number of blacklisted discovery connectors.
-          example: 0
-        shutdownConnectors:
-          type: integer
-          description: Number of discovery connectors with status SHUTDOWN.
-          example: 0
-        unhealthyConnectors:
-          type: integer
-          description: Number of unhealthy discovery connectors.
-          example: 0
-        totalConnectors:
-          type: integer
-          description: Total number of discovery connectors.
-          example: 0
-        unknownConnectors:
-          type: integer
-          description: Number of unknown discovery connectors.
-          example: 0
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          description: The error message describing what went wrong.
-          example: The specified resource was not found.
-        code:
-          type: string
-          description: The error code.
-          example: ResourceNotFoundException
     ListServerNeighborsRequest:
       type: object
       required:
@@ -544,95 +393,49 @@ components:
           type: string
           description: Token to retrieve the next set of results.
           example: ''
-    Filter:
+    StartBatchDeleteConfigurationTaskRequest:
       type: object
       required:
-      - name
-      - values
-      - condition
+      - configurationType
+      - configurationIds
       properties:
-        name:
+        configurationType:
           type: string
-          description: The name of the filter.
-          example: hostName
-        values:
+          description: The type of configuration item to delete. Supported types are SERVER.
+          enum:
+          - SERVER
+          example: SERVER
+        configurationIds:
           type: array
-          description: A string value on which to filter.
+          description: The list of configuration IDs that will be deleted by this task.
           items:
             type: string
           example:
-          - server-01.example.com
-        condition:
-          type: string
-          description: A conditional operator. The following operators are valid — EQUALS, NOT_EQUALS, CONTAINS, NOT_CONTAINS.
-          enum:
-          - EQUALS
-          - NOT_EQUALS
-          - CONTAINS
-          - NOT_CONTAINS
-          example: EQUALS
-    GetDiscoverySummaryResponse:
+          - d-SERVER-500456
+    ListConfigurationsResponse:
       type: object
       properties:
-        servers:
-          type: integer
-          description: The number of servers discovered.
-          example: 42
-        applications:
-          type: integer
-          description: The number of applications discovered.
-          example: 5
-        serversMappedToApplications:
-          type: integer
-          description: The number of servers mapped to applications.
-          example: 15
-        serversMappedtoTags:
-          type: integer
-          description: The number of servers mapped to tags.
-          example: 30
-        mappedServerCount:
-          type: integer
-          description: The number of servers mapped to applications or tags.
-          example: 15
-        unmappedServerCount:
-          type: integer
-          description: The number of servers not mapped to any application.
-          example: 27
-        agentSummary:
-          $ref: '#/components/schemas/CustomerAgentInfo'
-        connectorSummary:
-          $ref: '#/components/schemas/CustomerConnectorInfo'
-    FailedConfiguration:
-      type: object
-      properties:
-        configurationId:
-          type: string
-          description: The configuration ID of the configuration that failed to delete.
-          example: d-SERVER-500456
-        errorStatusCode:
-          type: integer
-          description: The error status code.
-          example: 404
-        errorMessage:
-          type: string
-          description: A descriptive message indicating why the associated configuration failed to delete.
-          example: Configuration item not found
-    ListServerNeighborsResponse:
-      type: object
-      properties:
-        neighbors:
+        configurations:
           type: array
-          description: List of distinct servers that are one hop away from the given server.
+          description: Returns configuration details, including the configuration ID, attribute names, and attribute values.
           items:
-            $ref: '#/components/schemas/NeighborConnectionDetail'
+            type: object
+            additionalProperties:
+              type: string
         nextToken:
           type: string
           description: Token to retrieve the next set of results.
           example: ''
-        knownDependencyCount:
-          type: integer
-          description: Count of distinct servers that are one hop away from the given server.
-          example: 1
+    DescribeConfigurationsResponse:
+      type: object
+      properties:
+        configurations:
+          type: array
+          description: A key in the response map. The value is an array of data.
+          items:
+            type: object
+            additionalProperties:
+              type: string
     BatchDeleteConfigurationTask:
       type: object
       properties:
@@ -686,21 +489,34 @@ components:
           description: A list of warnings associated with this deletion task.
           items:
             $ref: '#/components/schemas/DeletionWarning'
-    DeletionWarning:
+    NeighborConnectionDetail:
       type: object
+      required:
+      - sourceServerId
+      - destinationServerId
+      - connectionsCount
       properties:
-        configurationId:
+        sourceServerId:
           type: string
-          description: The configuration ID of the configuration item associated with the deletion warning.
+          description: The ID of the server that opened the network connection.
           example: d-SERVER-500456
-        warningCode:
-          type: integer
-          description: The integer warning code associated with the warning message.
-          example: 1
-        warningText:
+        destinationServerId:
           type: string
-          description: A descriptive message of the warning the associated configuration item produced.
-          example: Configuration item may have dependencies
+          description: The ID of the server that accepted the network connection.
+          example: d-SERVER-500457
+        destinationPort:
+          type: integer
+          description: The destination network port for the connection.
+          example: 443
+        transportProtocol:
+          type: string
+          description: The network protocol used for the connection.
+          example: TCP
+        connectionsCount:
+          type: integer
+          format: int64
+          description: The number of open network connections with the neighboring server.
+          example: 125
     OrderByElement:
       type: object
       required:
@@ -717,6 +533,114 @@ components:
           - ASC
           - DESC
           example: ASC
+    GetDiscoverySummaryResponse:
+      type: object
+      properties:
+        servers:
+          type: integer
+          description: The number of servers discovered.
+          example: 42
+        applications:
+          type: integer
+          description: The number of applications discovered.
+          example: 5
+        serversMappedToApplications:
+          type: integer
+          description: The number of servers mapped to applications.
+          example: 15
+        serversMappedtoTags:
+          type: integer
+          description: The number of servers mapped to tags.
+          example: 30
+        mappedServerCount:
+          type: integer
+          description: The number of servers mapped to applications or tags.
+          example: 15
+        unmappedServerCount:
+          type: integer
+          description: The number of servers not mapped to any application.
+          example: 27
+        agentSummary:
+          $ref: '#/components/schemas/CustomerAgentInfo'
+        connectorSummary:
+          $ref: '#/components/schemas/CustomerConnectorInfo'
+    DeletionWarning:
+      type: object
+      properties:
+        configurationId:
+          type: string
+          description: The configuration ID of the configuration item associated with the deletion warning.
+          example: d-SERVER-500456
+        warningCode:
+          type: integer
+          description: The integer warning code associated with the warning message.
+          example: 1
+        warningText:
+          type: string
+          description: A descriptive message of the warning the associated configuration item produced.
+          example: Configuration item may have dependencies
+    ListServerNeighborsResponse:
+      type: object
+      properties:
+        neighbors:
+          type: array
+          description: List of distinct servers that are one hop away from the given server.
+          items:
+            $ref: '#/components/schemas/NeighborConnectionDetail'
+        nextToken:
+          type: string
+          description: Token to retrieve the next set of results.
+          example: ''
+        knownDependencyCount:
+          type: integer
+          description: Count of distinct servers that are one hop away from the given server.
+          example: 1
+    FailedConfiguration:
+      type: object
+      properties:
+        configurationId:
+          type: string
+          description: The configuration ID of the configuration that failed to delete.
+          example: d-SERVER-500456
+        errorStatusCode:
+          type: integer
+          description: The error status code.
+          example: 404
+        errorMessage:
+          type: string
+          description: A descriptive message indicating why the associated configuration failed to delete.
+          example: Configuration item not found
+    CustomerConnectorInfo:
+      type: object
+      properties:
+        activeConnectors:
+          type: integer
+          description: Number of active discovery connectors.
+          example: 0
+        healthyConnectors:
+          type: integer
+          description: Number of healthy discovery connectors.
+          example: 0
+        blackListedConnectors:
+          type: integer
+          description: Number of blacklisted discovery connectors.
+          example: 0
+        shutdownConnectors:
+          type: integer
+          description: Number of discovery connectors with status SHUTDOWN.
+          example: 0
+        unhealthyConnectors:
+          type: integer
+          description: Number of unhealthy discovery connectors.
+          example: 0
+        totalConnectors:
+          type: integer
+          description: Total number of discovery connectors.
+          example: 0
+        unknownConnectors:
+          type: integer
+          description: Number of unknown discovery connectors.
+          example: 0
     ListConfigurationsRequest:
       type: object
       required:
@@ -751,11 +675,6 @@ components:
           description: Certain filter criteria return output that can be sorted in ascending or descending order. For a list of output characteristics for each filter, see Using the ListConfigurations Action in the AWS Application Discovery Service User Guide.
           items:
             $ref: '#/components/schemas/OrderByElement'
-    DescribeBatchDeleteConfigurationTaskResponse:
-      type: object
-      properties:
-        task:
-          $ref: '#/components/schemas/BatchDeleteConfigurationTask'
     DescribeConfigurationsRequest:
       type: object
       required:
@@ -768,6 +687,87 @@ components:
             type: string
           example:
           - d-SERVER-500456
+    DescribeBatchDeleteConfigurationTaskResponse:
+      type: object
+      properties:
+        task:
+          $ref: '#/components/schemas/BatchDeleteConfigurationTask'
+    Filter:
+      type: object
+      required:
+      - name
+      - values
+      - condition
+      properties:
+        name:
+          type: string
+          description: The name of the filter.
+          example: hostName
+        values:
+          type: array
+          description: A string value on which to filter.
+          items:
+            type: string
+          example:
+          - server-01.example.com
+        condition:
+          type: string
+          description: A conditional operator. The following operators are valid — EQUALS, NOT_EQUALS, CONTAINS, NOT_CONTAINS.
+          enum:
+          - EQUALS
+          - NOT_EQUALS
+          - CONTAINS
+          - NOT_CONTAINS
+          example: EQUALS
+    CustomerAgentInfo:
+      type: object
+      properties:
+        activeAgents:
+          type: integer
+          description: Number of active discovery agents.
+          example: 3
+        healthyAgents:
+          type: integer
+          description: Number of healthy discovery agents.
+          example: 3
+        blackListedAgents:
+          type: integer
+          description: Number of blacklisted discovery agents.
+          example: 0
+        shutdownAgents:
+          type: integer
+          description: Number of discovery agents with status SHUTDOWN.
+          example: 0
+        unhealthyAgents:
+          type: integer
+          description: Number of unhealthy discovery agents.
+          example: 0
+        totalAgents:
+          type: integer
+          description: Total number of discovery agents.
+          example: 3
+        unknownAgents:
+          type: integer
+          description: Number of unknown discovery agents.
+          example: 0
+    StartBatchDeleteConfigurationTaskResponse:
+      type: object
+      properties:
+        taskId:
+          type: string
+          description: The unique ID associated with the task.
+          example: task-500123
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The error message describing what went wrong.
+          example: The specified resource was not found.
+        code:
+          type: string
+          description: The error code.
+          example: ResourceNotFoundException
   securitySchemes:
     sigv4:
       type: apiKey

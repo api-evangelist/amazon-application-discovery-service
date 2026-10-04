@@ -179,6 +179,51 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    DescribeTagsResponse:
+      type: object
+      properties:
+        tags:
+          type: array
+          description: Depending on the input, this is a list of configuration items tagged with a specific tag, or a list of tags for a specific configuration item.
+          items:
+            $ref: '#/components/schemas/ConfigurationTag'
+        nextToken:
+          type: string
+          description: The call returns a token. Use this token to get the next set of results.
+          example: ''
+    TagFilter:
+      type: object
+      required:
+      - name
+      - values
+      properties:
+        name:
+          type: string
+          description: A name of the tag filter.
+          example: tagKey
+        values:
+          type: array
+          description: Values for the tag filter.
+          items:
+            type: string
+          example:
+          - environment
+    DescribeTagsRequest:
+      type: object
+      properties:
+        filters:
+          type: array
+          description: You can filter the list using a key-value format. You can separate these items by using logical operators.
+          items:
+            $ref: '#/components/schemas/TagFilter'
+        maxResults:
+          type: integer
+          description: The total number of items to return in a single page of output.
+          example: 10
+        nextToken:
+          type: string
+          description: A token to start the list. Use this token to get the next set of results.
+          example: ''
     Tag:
       type: object
       required:
@@ -193,17 +238,24 @@ components:
           type: string
           description: A value for a tag key on which to filter.
           example: production
-    ErrorResponse:
+    CreateTagsRequest:
       type: object
+      required:
+      - configurationIds
+      - tags
       properties:
-        message:
-          type: string
-          description: The error message describing what went wrong.
-          example: The specified resource was not found.
-        code:
-          type: string
-          description: The error code.
-          example: ResourceNotFoundException
+        configurationIds:
+          type: array
+          description: A list of configuration items that you want to tag.
+          items:
+            type: string
+          example:
+          - d-SERVER-500456
+        tags:
+          type: array
+          description: Tags that you want to associate with one or more configuration items.
+          items:
+            $ref: '#/components/schemas/Tag'
     DeleteTagsRequest:
       type: object
       required:
@@ -221,22 +273,6 @@ components:
           description: Tags that you want to delete from one or more configuration items.
           items:
             $ref: '#/components/schemas/Tag'
-    DescribeTagsRequest:
-      type: object
-      properties:
-        filters:
-          type: array
-          description: You can filter the list using a key-value format. You can separate these items by using logical operators.
-          items:
-            $ref: '#/components/schemas/TagFilter'
-        maxResults:
-          type: integer
-          description: The total number of items to return in a single page of output.
-          example: 10
-        nextToken:
-          type: string
-          description: A token to start the list. Use this token to get the next set of results.
-          example: ''
     ConfigurationTag:
       type: object
       properties:
@@ -265,53 +301,17 @@ components:
           type: string
           description: The time the configuration tag was created in Coordinated Universal Time (UTC).
           example: '2026-04-19T10:00:00Z'
-    DescribeTagsResponse:
+    ErrorResponse:
       type: object
       properties:
-        tags:
-          type: array
-          description: Depending on the input, this is a list of configuration items tagged with a specific tag, or a list of tags for a specific configuration item.
-          items:
-            $ref: '#/components/schemas/ConfigurationTag'
-        nextToken:
+        message:
           type: string
-          description: The call returns a token. Use this token to get the next set of results.
-          example: ''
-    CreateTagsRequest:
-      type: object
-      required:
-      - configurationIds
-      - tags
-      properties:
-        configurationIds:
-          type: array
-          description: A list of configuration items that you want to tag.
-          items:
-            type: string
-          example:
-          - d-SERVER-500456
-        tags:
-          type: array
-          description: Tags that you want to associate with one or more configuration items.
-          items:
-            $ref: '#/components/schemas/Tag'
-    TagFilter:
-      type: object
-      required:
-      - name
-      - values
-      properties:
-        name:
+          description: The error message describing what went wrong.
+          example: The specified resource was not found.
+        code:
           type: string
-          description: A name of the tag filter.
-          example: tagKey
-        values:
-          type: array
-          description: Values for the tag filter.
-          items:
-            type: string
-          example:
-          - environment
+          description: The error code.
+          example: ResourceNotFoundException
   securitySchemes:
     sigv4:
       type: apiKey
